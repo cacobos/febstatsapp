@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import es.iesvjp.proyecto.model.Jugador;
 import es.iesvjp.proyecto.service.IEquipoService;
+import es.iesvjp.proyecto.service.IJugadorService;
 
 @Controller
 @RequestMapping("/")
@@ -28,7 +29,9 @@ public class MainController {
 	@Autowired
 	@Qualifier("equipoService")
 	private IEquipoService equipoService;
-	
+	@Autowired
+	@Qualifier("jugadorService")
+	private IJugadorService jugadorService;
 
 	
 
@@ -37,12 +40,11 @@ public class MainController {
 		LOG.info("METHOD: inicio -- PARAMS: id: " + idEquipo );
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("equipos", equipoService.listAllEquipo());
-		LOG.info(equipoService.listAllEquipo().size());
 		if(idEquipo==null) {
 			idEquipo=0;
 		}
 		if(idEquipo!=0) {
-			
+			mav.addObject("jugadores", equipoService.getJugadoresEquipo(idEquipo));
 		}else {
 			
 		}

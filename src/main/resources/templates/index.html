@@ -23,11 +23,21 @@
 <body>
 <div>Index</div>
 	<div >
-		<select >
-		<option th:each="equipo : ${equipos}" th:text="${equipo.nombre}">Equipo</option>
+	
+		<form method="get" th:action="@{/(idEquipo=${idEquipo})}">
+		<select th:name="idEquipo"  onchange="this.form.submit()">
+		<option th:each="equipo : ${equipos}" th:text="${equipo.nombre}" th:value="${equipo.id}">Equipo</option>
 		</select>
+		 </form>
 	</div>
-
+<div >
+	
+		<form th:action="@{/}">
+		<select th:name="idJugador"  onchange="this.form.submit()">
+		<option th:each="jugador : ${jugadores}" th:text="${jugador.nombre}" th:value="${jugador.id}">Jugador</option>
+		</select>
+		</form>
+	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import es.iesvjp.proyecto.model.Equipo;
+import es.iesvjp.proyecto.model.Jugador;
 import es.iesvjp.proyecto.repository.IEquipoRepository;
 
 @Service("equipoService")
@@ -38,6 +39,16 @@ public class EquipoService implements IEquipoService {
 		if (equipo != null) {
 			equipoRepository.delete(equipo);
 		}
+	}
+
+	@Override
+	public List<Jugador> getJugadoresEquipo(long id) {
+		Equipo equipo=equipoRepository.findById(id);
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipo.getLineapartidos().size(); i++) {
+			jugadores.add(equipo.getLineapartidos().get(i).getJugador());
+		}
+		return jugadores;
 	}
 
 	
