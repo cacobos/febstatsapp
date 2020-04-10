@@ -10,11 +10,13 @@ import java.sql.Time;
  * 
  */
 @Entity
+@Table(name = "lineapartido")
 @NamedQuery(name="Lineapartido.findAll", query="SELECT l FROM Lineapartido l")
 public class Lineapartido implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	private int asist;

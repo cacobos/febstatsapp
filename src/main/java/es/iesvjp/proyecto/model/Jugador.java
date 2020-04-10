@@ -10,14 +10,25 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name = "jugador")
 @NamedQuery(name="Jugador.findAll", query="SELECT j FROM Jugador j")
 public class Jugador implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	private String url;
 
 	private String nombre;
+	
+	
+	private String urlFoto;
+	
+	private String puesto;
+	
+	private int altura;
 
 	//bi-directional many-to-one association to Lineapartido
 	@OneToMany(mappedBy="jugador")
@@ -63,5 +74,39 @@ public class Jugador implements Serializable {
 
 		return lineapartido;
 	}
+	@Column(name = "urlFoto")
+	public String getUrlFoto() {
+		return urlFoto;
+	}
+
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
+	}
+
+	public String getPuesto() {
+		return puesto;
+	}
+
+	public void setPuesto(String puesto) {
+		this.puesto = puesto;
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public void setAltura(int altura) {
+		this.altura = altura;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	
 
 }

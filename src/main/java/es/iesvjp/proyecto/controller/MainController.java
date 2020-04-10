@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import es.iesvjp.proyecto.model.Equipo;
 import es.iesvjp.proyecto.model.Jugador;
 import es.iesvjp.proyecto.service.IEquipoService;
 import es.iesvjp.proyecto.service.IJugadorService;
@@ -33,33 +34,39 @@ public class MainController {
 	@Qualifier("jugadorService")
 	private IJugadorService jugadorService;
 
-	
-
 	@GetMapping(value = { "", "/", "/index" })
-	private ModelAndView inicio(@RequestParam(name="idEquipo", required = false) Integer idEquipo) {
-		LOG.info("METHOD: inicio -- PARAMS: id: " + idEquipo );
+	private ModelAndView inicioGet(@RequestParam(name = "idEquipo", required = false) Integer idEquipo,
+			@RequestParam(name = "idJugador", required = false) Integer idJugador) {
+		LOG.info("METHOD: inicioGet -- PARAMS: idEquipo: " + idEquipo+" idJugador: " + idJugador );
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("equipos", equipoService.listAllEquipo());
-		if(idEquipo==null) {
-			idEquipo=0;
+		if (idEquipo == null) {
+			idEquipo = 0;
 		}
-		if(idEquipo!=0) {
+		if (idEquipo != 0) {
+			mav.addObject("equipoModel", equipoService.findEquipoById(idEquipo));
 			mav.addObject("jugadores", equipoService.getJugadoresEquipo(idEquipo));
-		}else {
-			
+		} else {
+
 		}
-		LOG.info("METHOD: showProductos -- PARAMS: " + mav.getModel());
+		if (idJugador == null) {
+			idJugador = 0;
+		}
+		if (idJugador != 0) {
+			Jugador j = jugadorService.findJugadorById(idJugador);
+			mav.addObject("jugadorModel", j);
+		}
+		
+		LOG.info("METHOD: inicioGet -- PARAMS: " + mav.getModel());
 		return mav;
 	}
 	/*
-	@GetMapping(value = { "/detail" })
-	private ModelAndView detail(@RequestParam(name = "id", required = true) Integer id, Model model) {
-		LOG.info("METHOD: detail -- PARAMS: id: " + id +" "+  model);
-		Producto producto=productoService.findProductoById(id);
-		ModelAndView mav=new ModelAndView("detail.html");
-		
-		mav.addObject("producto", producto);
-		return mav;
-	}
-	*/
+	 * @GetMapping(value = { "/detail" }) private ModelAndView
+	 * detail(@RequestParam(name = "id", required = true) Integer id, Model model) {
+	 * LOG.info("METHOD: detail -- PARAMS: id: " + id +" "+ model); Producto
+	 * producto=productoService.findProductoById(id); ModelAndView mav=new
+	 * ModelAndView("detail.html");
+	 * 
+	 * mav.addObject("producto", producto); return mav; }
+	 */
 }
