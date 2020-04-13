@@ -13,4 +13,6 @@ public interface ILineaPartidoRepository extends JpaRepository<Lineapartido, Lon
 	public Lineapartido findById(long id);
 	@Query("select l from Lineapartido l")
 	public List<Lineapartido> listAllLineapartido();
+	@Query("select l from Lineapartido l where l.jugador.id=?1 and l.equipo.id=?2")
+	public List<Lineapartido> listLineapartidoJugadorEquipo(long idJugador, long idEquipo);
 }

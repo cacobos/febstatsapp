@@ -2,6 +2,13 @@ package es.iesvjp.proyecto.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+import es.iesvjp.proyecto.service.PartidoService;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -148,4 +155,36 @@ public class Equipo implements Serializable {
 		return partidos2;
 	}
 
+	public List<Partido> getPartidos(){
+		List<Partido> partidos=new ArrayList<Partido>();
+		partidos.addAll(partidos1);
+		partidos.addAll(partidos2);
+		return partidos;
+	}
+	
+	public int getPosesiones() {
+		int posesiones=0;
+		for (int i = 0; i < partidos1.size(); i++) {
+			posesiones+=partidos1.get(i).getPosesionesLocal();
+		}
+		for (int i = 0; i < partidos2.size(); i++) {
+			posesiones+=partidos2.get(i).getPosesionesVisit();
+		}
+		return posesiones;
+	}
+	
+	public int getMinutos() {
+		int minutos=0;
+		for (int i = 0; i < partidos1.size(); i++) {
+			minutos+=partidos1.get(i).getMinutos();
+		}
+		for (int i = 0; i < partidos2.size(); i++) {
+			minutos+=partidos2.get(i).getMinutos();
+		}
+		return minutos;
+	}
+	
+	public double getRitmo() {
+		return (double)getPosesiones()/(double)getMinutos();
+	}
 }

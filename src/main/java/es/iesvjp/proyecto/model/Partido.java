@@ -534,4 +534,99 @@ public class Partido implements Serializable {
 		this.equipo2 = equipo2;
 	}
 
+	public int getFgaLocal() {
+		return t2iLocal+t3iLocal;
+	}
+	
+	public int getFgaVisit() {
+		return t2iVisit+t3iVisit;
+	} 
+	
+	public int getFgmLocal() {
+		return t2aLocal+t3aLocal;
+	}
+	
+	public int getFgmVisit() {
+		return t2aVisit+t3aVisit;
+	} 
+	
+	public double getPosesionesLocal() {
+		return getFgaLocal()-rboLocal+bpLocal+(tliLocal*0.4);
+	}
+	
+	public double getPosesionesVisit() {
+		return getFgaVisit()-rboVisit+bpVisit+(tliVisit*0.4);
+	}
+	
+	public double getRitmoLocal() {
+		return getPosesionesLocal()/getMinutos();
+	}
+	
+	public double getRitmoVisit() {
+		return getPosesionesVisit()/getMinutos();
+	}
+
+	public int getMinutos() {
+		if(prorroga==4) {
+			return 40;
+		}else {
+			return 40+(prorroga-4)*5;
+		}
+	}
+	
+	public double getEfficLocal() {
+		return ptoLocal/getPosesionesLocal()*100;
+	}
+	
+	public double getEfficVisit() {
+		return ptoVisit/getPosesionesVisit()*100;
+	}
+	
+	public double pctgEffTcLocal() {
+		return (getFgmLocal()+0.5*t3aLocal)/getFgaLocal();
+	}
+	
+	public double pctgEffTcLVisit() {
+		return (getFgmVisit()+0.5*t3aLocal)/getFgaVisit();
+	}
+	
+	public double pctgROfLocal() {
+		return (rboLocal/(rboLocal+rbdVisit))*100;
+	}
+	
+	public double pctgROfVisit() {
+		return (rboVisit/(rboVisit+rbdLocal))*100;
+	}
+	
+	public double pctgRDefLocal() {
+		return (rbdLocal/(rbdLocal+rboVisit))*100;
+	}
+	
+	public double pctgRDefVisit() {
+		return (rbdVisit/(rbdVisit+rboLocal))*100;
+	}
+	
+	public double pctgAssLocal() {
+		return asLocal/getPosesionesLocal()*100;
+	}
+	
+	public double pctgAssVisit() {
+		return asVisit/getPosesionesVisit()*100;
+	}
+	
+	public double pctgPerLocal() {
+		return bpLocal/getPosesionesLocal()*100;
+	}
+	
+	public double pctgPerVisit() {
+		return bpVisit/getPosesionesVisit()*100;
+	}
+	
+	public boolean ganaLocal() {
+		return ptoLocal>ptoVisit;
+	}
+	
+	public boolean ganaVisit() {
+		return ptoLocal<ptoVisit;
+	}
 }

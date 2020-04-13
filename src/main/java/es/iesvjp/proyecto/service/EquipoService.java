@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
+import org.springframework.data.jpa.domain.JpaSort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import es.iesvjp.proyecto.model.Equipo;
@@ -18,7 +21,7 @@ public class EquipoService implements IEquipoService {
 
 	@Override
 	public Equipo addEquipo(Equipo equipoModel) {
-		Equipo equipo= equipoRepository.save(equipoModel);
+		Equipo equipo = equipoRepository.save(equipoModel);
 		return equipo;
 	}
 
@@ -43,13 +46,26 @@ public class EquipoService implements IEquipoService {
 
 	@Override
 	public List<Jugador> getJugadoresEquipo(long id) {
-		Equipo equipo=equipoRepository.findById(id);
-		List<Jugador> jugadores=new ArrayList<>();
+		Equipo equipo = equipoRepository.findById(id);
+		List<Jugador> jugadores = new ArrayList<>();
 		for (int i = 0; i < equipo.getLineapartidos().size(); i++) {
-			jugadores.add(equipo.getLineapartidos().get(i).getJugador());
+			if (!jugadores.contains(equipo.getLineapartidos().get(i).getJugador()) && equipo.getLineapartidos().get(i).getJugador().getNombre()!=null) {
+				jugadores.add(equipo.getLineapartidos().get(i).getJugador());
+			}
 		}
 		return jugadores;
 	}
 
-	
+	@Override
+	public List<String> getCompeticiones() {
+		
+		return equipoRepository.getCompeticiones();
+	}
+
+	@Override
+	public List<Equipo> getEquiposCompeticion(String competicion) {
+		// TODO Auto-generated method stub
+		return equipoRepository.getEquiposCompeticion(competicion);
+	}
+
 }
