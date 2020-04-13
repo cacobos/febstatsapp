@@ -89,7 +89,6 @@ public class MainController {
 		LOG.info("METHOD: inicioGet -- PARAMS: idEquipo: " + idEquipo + " idJugador: " + idJugador);
 		ModelAndView mav = new ModelAndView("blank");
 		List<Equipo> equipos=equipoService.getEquiposCompeticion("LIGA LEB ORO");
-		ordenarPorRitmo(equipos);
 		mav.addObject("equipos", equipoService.listAllEquipo());
 		mav.addObject("competiciones", equipoService.getCompeticiones());
 		mav.addObject("equiposOro", equipos);
