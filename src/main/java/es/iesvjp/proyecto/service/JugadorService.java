@@ -40,5 +40,10 @@ public class JugadorService implements IJugadorService {
 		}
 	}
 
+	@Override
+	public List<Jugador> buscarJugador(String like) {
+		return jugadorRepository.buscarJugador(like);
+	}
+
 	
 }

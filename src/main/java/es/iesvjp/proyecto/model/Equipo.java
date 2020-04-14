@@ -187,4 +187,14 @@ public class Equipo implements Serializable {
 	public double getRitmo() {
 		return (double)getPosesiones()/(double)getMinutos();
 	}
+	
+	public List<Jugador> getJugadores(){
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			if(!jugadores.contains(lineapartidos.get(i).getJugador())){
+				jugadores.add(lineapartidos.get(i).getJugador());
+			}
+		}
+		return jugadores;
+	}
 }

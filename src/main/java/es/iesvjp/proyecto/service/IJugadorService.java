@@ -9,4 +9,5 @@ public Jugador addJugador(Jugador equipoModel);
 public List<Jugador> listAllJugador();
 public Jugador findJugadorById(int id);
 public void removeJugador(int id);
+public List<Jugador> buscarJugador(String like);
 }

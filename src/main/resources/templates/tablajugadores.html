@@ -252,55 +252,47 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-<form method="get" th:action="@{/}">
-		<label for="selectEquipo">Elige el equipo de tu jugador</label>
-			<select th:name="idEquipo" onchange="this.form.submit()" class="form-control" id="selectEquipo">
-				<option th:if="${equipoModel != null}" selected
-					th:text="${equipoModel.nombre}" th:value="${equipoModel.id}"></option>
-				<option th:each="equipo : ${equipos}" th:text="${equipo.nombre}"
-					th:value="${equipo.id}">Equipo</option>
-			</select>
-		
-	
-	
+          <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
 
-		<label for="selectJugador">Elige tu jugador</label>
-			<select th:if="${equipoModel != null}" th:name="idJugador" onchange="this.form.submit()" class="form-control" id="selectJugador">
-			<option th:if="${jugadorModel != null}" selected
-					th:text="${jugadorModel.nombre}" th:value="${jugadorModel.id}"></option>
-				<option th:each="jugador : ${jugadores}" th:text="${jugador.nombre}"
-					th:value="${jugador.id}">Jugador</option>
-			</select>
-			</form>
-		</div>
-	
-	<div th:if="${jugadorModel!=null}">
-	<img alt="imagen" src="grafico.png" />
-	<img th:src="*{jugadorModel.urlFoto}" class="rounded mx-auto d-block"/>
-		<table class="table">
-			<thead class="thead-dark">
-				<tr>
-					<th>Local</th>
-					<th>Puntos local</th>
-					<th>Puntos visitante</th>
-					<th>Visitante</th>
-					<th>Puntos jugador</th>
-					<th>Minutos jugador</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="lineaPartido : ${jugadorModel.lineapartidos}">
-					<td th:text="*{lineaPartido.partido.equipo1.nombre}">Local</td>
-					<td th:text="*{lineaPartido.partido.ptoLocal}">Puntos local</td>
-					<td th:text="*{lineaPartido.partido.ptoVisit}">Puntos visitante</td>
-					<td th:text="*{lineaPartido.partido.equipo2.nombre}">Visitante</td>
-					<td th:text="*{lineaPartido.puntos}">Puntos jugador</td>
-					<td th:text="*{lineaPartido.minutos}">Minutos jugador</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 th:text="${equipo.nombre}" class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Puesto</th>
+                      <th>Altura</th>
+                      <th>Foto</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Puesto</th>
+                      <th>Altura</th>
+                      <th>Foto</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr th:each="jugador : ${equipo.getJugadores()}">
+                      <td ><a th:text="${jugador.nombre}" th:href="@{/jugador(id=${jugador.id})}">Tiger Nixon</a></td>
+                      <td th:text="${jugador.puesto}"> System Architect</td>
+                      <td  th:text="${jugador.altura}">Edinburgh</td>
+                      <td ><img th:src="${jugador.urlFoto}" class="img-thumbnail rounded mx-auto d-block" style="max-height: 50px;"/></td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
         </div>
         <!-- /.container-fluid -->
 

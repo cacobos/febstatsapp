@@ -42,8 +42,8 @@
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
+          <i class="fas fa-home"></i>
+          <span>Home</span></a>
       </li>
 
       <!-- Divider -->
@@ -51,39 +51,41 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Interface
+        Mostrar competición
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Components</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLebOro" aria-expanded="true" aria-controls="collapseLebOro">
+          <i class="fas fa-basketball-ball"></i>
+          <span>COMPETICIÓN</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseLebOro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
+            <h6 class="collapse-header">Competiciones:</h6>
+            <a th:each="competicion : ${competiciones}" th:text="*{competicion}" th:href="@{/competicion(id=${1})}" class="collapse-item" href="buttons.html">Buttons</a>
           </div>
         </div>
       </li>
       
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      
       <!-- Heading -->
       <div class="sidebar-heading">
-        Interface
+        Mostrar equipo
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOro" aria-expanded="true" aria-controls="collapseOro">
-          <i class="fas fa-fw fa-cog"></i>
+          <i class="fas fa-basketball-ball"></i>
           <span>LEB ORO</span>
         </a>
         <div id="collapseOro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Equipos LEB ORO</h6>
-            <a th:each="equipoOro : ${equiposOro}" th:text="${#strings.abbreviate(equipoOro.nombre,25)}" class="collapse-item small" href="buttons.html">Buttons</a>
+            <a th:each="equipoOro : ${equiposOro}" th:text="${#strings.abbreviate(equipoOro.nombre,25)}" th:href="@{/equipo(id=${equipoOro.id})}" class="collapse-item small" href="buttons.html">Buttons</a>
             <a class="collapse-item" href="cards.html">Cards</a>
           </div>
         </div>
@@ -92,13 +94,13 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePlata" aria-expanded="true" aria-controls="collapsePlata">
-          <i class="fas fa-fw fa-cog"></i>
+          <i class="fas fa-basketball-ball"></i>
           <span>LEB PLATA</span>
         </a>
         <div id="collapsePlata" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Equipos LEB PLATA</h6>
-            <a th:each="equipoPlata : ${equiposPlata}" th:text="${#strings.abbreviate(equipoPlata.nombre,25)}" class="collapse-item small" href="buttons.html">Buttons</a>
+            <a th:each="equipoPlata : ${equiposPlata}" th:text="${#strings.abbreviate(equipoPlata.nombre,25)}" th:href="@{/equipo(id=${equipoPlata.id})}" class="collapse-item small" href="buttons.html">Buttons</a>
             <a class="collapse-item" href="cards.html">Cards</a>
           </div>
         </div>
@@ -106,59 +108,71 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLF" aria-expanded="true" aria-controls="collapseLF">
-          <i class="fas fa-fw fa-cog"></i>
+          <i class="fas fa-basketball-ball"></i>
           <span>LIGA FEMENINA</span>
         </a>
         <div id="collapseLF" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Equipos LF ENDESA</h6>
-            <a th:each="equipoLF : ${equiposLF}" th:text="${#strings.abbreviate(equipoLF.nombre,25)}" class="collapse-item small" href="buttons.html">Buttons</a>
+            <a th:each="equipoLF : ${equiposLF}" th:text="${#strings.abbreviate(equipoLF.nombre,25)}" th:href="@{/equipo(id=${equipoLF.id})}" class="collapse-item small" href="buttons.html">Buttons</a>
+            <a class="collapse-item" href="cards.html">Cards</a>
+          </div>
+        </div>
+      </li>
+      
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Mostrar jugador
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseJugOro" aria-expanded="true" aria-controls="collapseJugOro">
+          <i class="fas fa-basketball-ball"></i>
+          <span>LEB ORO</span>
+        </a>
+        <div id="collapseJugOro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Equipos LEB ORO</h6>
+            <a th:each="equipoOro : ${equiposOro}" th:text="${#strings.abbreviate(equipoOro.nombre,25)}" th:href="@{/selectplayer(id=${equipoOro.id})}" class="collapse-item small" href="buttons.html">Buttons</a>
             <a class="collapse-item" href="cards.html">Cards</a>
           </div>
         </div>
       </li>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Addons
-      </div>
-
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseJugPlata" aria-expanded="true" aria-controls="collapseJugPlata">
+          <i class="fas fa-basketball-ball"></i>
+          <span>LEB PLATA</span>
         </a>
-        <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseJugPlata" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item active" href="blank.html">Blank Page</a>
+            <h6 class="collapse-header">Equipos LEB PLATA</h6>
+            <a th:each="equipoPlata : ${equiposPlata}" th:text="${#strings.abbreviate(equipoPlata.nombre,25)}" th:href="@{/selectplayer(id=${equipoPlata.id})}" class="collapse-item small" href="buttons.html">Buttons</a>
+            <a class="collapse-item" href="cards.html">Cards</a>
+          </div>
+        </div>
+      </li>
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseJugLF" aria-expanded="true" aria-controls="collapseJugLF">
+          <i class="fas fa-basketball-ball"></i>
+          <span>LIGA FEMENINA</span>
+        </a>
+        <div id="collapseJugLF" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Equipos LF ENDESA</h6>
+            <a th:each="equipoLF : ${equiposLF}" th:text="${#strings.abbreviate(equipoLF.nombre,25)}" th:href="@{/selectplayer(id=${equipoLF.id})}" class="collapse-item small" href="buttons.html">Buttons</a>
+            <a class="collapse-item" href="cards.html">Cards</a>
           </div>
         </div>
       </li>
 
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li>
+      
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -211,7 +225,7 @@
                   <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
+                      <button class="btn btn-primary" type="button" onclick="this.form.submit()">
                         <i class="fas fa-search fa-sm"></i>
                       </button>
                     </div>
@@ -364,63 +378,55 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-          <img alt="imagen" src="grafico.png" />
-<form method="get" th:action="@{/}">
-		<label for="selectEquipo">Elige el equipo de tu jugador</label>
-			<select th:name="idEquipo" onchange="this.form.submit()" class="form-control" id="selectEquipo">
-				<option th:if="${equipoModel != null}" selected
-					th:text="${equipoModel.nombre}" th:value="${equipoModel.id}"></option>
-				<option th:each="equipo : ${equipos}" th:text="${equipo.nombre}"
-					th:value="${equipo.id}">Equipo</option>
-			</select>
-		
-	
-	
+          <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
 
-		<label th:if="${equipoModel != null}"  for="selectJugador">Elige tu jugador</label>
-			<select th:if="${equipoModel != null}" th:name="idJugador" onchange="this.form.submit()" class="form-control" id="selectJugador">
-			<option th:if="${jugadorModel != null}" selected
-					th:text="${jugadorModel.nombre}" th:value="${jugadorModel.id}"></option>
-				<option th:each="jugador : ${jugadores}" th:text="${jugador.nombre}"
-					th:value="${jugador.id}">Jugador</option>
-			</select>
-			</form>
-		</div>
-	
-	<div th:if="${jugadorModel!=null}">
-	<img alt="imagen" src="xy-chart.png" />
-	<img th:src="*{jugadorModel.urlFoto}" class="rounded mx-auto d-block"/>
-		<table class="table">
-			<thead class="thead-dark">
-				<tr>
-					<th>Local</th>
-					<th>Puntos local</th>
-					<th>Puntos visitante</th>
-					<th>Visitante</th>
-					<th>Puntos jugador</th>
-					<th>Minutos jugador</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="lineaPartido : ${jugadorModel.lineapartidos}">
-					<td th:text="*{lineaPartido.partido.equipo1.nombre}">Local</td>
-					<td th:text="*{lineaPartido.partido.ptoLocal}">Puntos local</td>
-					<td th:text="*{lineaPartido.partido.ptoVisit}">Puntos visitante</td>
-					<td th:text="*{lineaPartido.partido.equipo2.nombre}">Visitante</td>
-					<td th:text="*{lineaPartido.puntos}">Puntos jugador</td>
-					<td th:text="*{lineaPartido.minutos}">Minutos jugador</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6  class="m-0 font-weight-bold text-primary">Búsqueda de jugadores</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Puesto</th>
+                      <th>Altura</th>
+                      <th>Foto</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Puesto</th>
+                      <th>Altura</th>
+                      <th>Foto</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr th:each="jugador : ${jugadores}">
+                      <td ><a th:text="${jugador.nombre}" th:href="@{/jugador(id=${jugador.id})}">Tiger Nixon</a></td>
+                      <td th:text="${jugador.puesto}"> System Architect</td>
+                      <td  th:text="${jugador.altura}">Edinburgh</td>
+                      <td ><img th:src="${jugador.urlFoto}" class="img-thumbnail rounded mx-auto d-block" style="max-height: 50px;"/></td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
         </div>
         <!-- /.container-fluid -->
 
       </div>
       <!-- End of Main Content -->
 
-      <!-- Footer -->
+     
+       <!-- Footer -->
       <!--<footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
