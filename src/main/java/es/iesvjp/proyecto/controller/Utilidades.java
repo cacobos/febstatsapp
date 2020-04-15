@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -20,9 +21,10 @@ import org.jfree.data.xy.DefaultXYDataset;
 import org.springframework.util.ResourceUtils;
 
 import es.iesvjp.proyecto.model.Equipo;
+import es.iesvjp.proyecto.model.Partido;
 
 public class Utilidades {
-	private static void ordenarEquiposPorRitmo(List<Equipo> equipos) {
+	public static List<Equipo> ordenarEquiposPorRitmo(List<Equipo> equipos) {
 
 		Collections.sort(equipos, (o1, o2) -> {
 
@@ -38,6 +40,26 @@ public class Utilidades {
 				return s1.compareTo(s2);
 			}
 		});
+		return equipos;
+	}
+	
+	public static List<Partido> ordenarPartidosPorFecha(List<Partido> partidos) {
+
+		Collections.sort(partidos, (o1, o2) -> {
+
+			Date x1 = ((Partido) o1).getFecha();
+			Date x2 = ((Partido) o2).getFecha();
+			int sComp = x1.before(x2)?1:-1;
+
+			if (sComp != 0) {
+				return -sComp;
+			} else {
+				String s1 = ((Partido) o1).getJornada();
+				String s2 = ((Partido) o2).getJornada();
+				return s1.compareTo(s2);
+			}
+		});
+		return partidos;
 	}
 
 	public static File cargarGrafico() throws FileNotFoundException {

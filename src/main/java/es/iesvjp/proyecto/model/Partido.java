@@ -586,40 +586,40 @@ public class Partido implements Serializable {
 		return (getFgmLocal()+0.5*t3aLocal)/getFgaLocal();
 	}
 	
-	public double pctgEffTcLVisit() {
+	public double pctgEffTcVisit() {
 		return (getFgmVisit()+0.5*t3aLocal)/getFgaVisit();
 	}
 	
 	public double pctgROfLocal() {
-		return (rboLocal/(rboLocal+rbdVisit))*100;
+		return ((double)rboLocal/((double)rboLocal+(double)rbdVisit))*100;
 	}
 	
 	public double pctgROfVisit() {
-		return (rboVisit/(rboVisit+rbdLocal))*100;
+		return ((double)rboVisit/((double)rboVisit+(double)rbdLocal))*100;
 	}
 	
 	public double pctgRDefLocal() {
-		return (rbdLocal/(rbdLocal+rboVisit))*100;
+		return ((double)rbdLocal/((double)rbdLocal+(double)rboVisit))*100;
 	}
 	
 	public double pctgRDefVisit() {
-		return (rbdVisit/(rbdVisit+rboLocal))*100;
+		return ((double)rbdVisit/((double)rbdVisit+(double)rboLocal))*100;
 	}
 	
 	public double pctgAssLocal() {
-		return asLocal/getPosesionesLocal()*100;
+		return (double)asLocal/getPosesionesLocal()*100;
 	}
 	
 	public double pctgAssVisit() {
-		return asVisit/getPosesionesVisit()*100;
+		return (double)asVisit/getPosesionesVisit()*100;
 	}
 	
 	public double pctgPerLocal() {
-		return bpLocal/getPosesionesLocal()*100;
+		return (double)bpLocal/getPosesionesLocal()*100;
 	}
 	
 	public double pctgPerVisit() {
-		return bpVisit/getPosesionesVisit()*100;
+		return (double)bpVisit/getPosesionesVisit()*100;
 	}
 	
 	public boolean ganaLocal() {
@@ -628,5 +628,90 @@ public class Partido implements Serializable {
 	
 	public boolean ganaVisit() {
 		return ptoLocal<ptoVisit;
+	}
+	
+	public String getMaxAnotador() {
+		int max=0;
+		String txt="", sep="";
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			if(lineapartidos.get(i).getPuntos()>max) {
+				max=lineapartidos.get(i).getPuntos();
+			}
+		}
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			if(lineapartidos.get(i).getPuntos()==max) {
+				txt+=sep+lineapartidos.get(i).getJugador().getNombre().split(",")[0]+" ("+lineapartidos.get(i).getPuntos()+")";
+				sep=", ";
+			}
+		}
+		return txt;
+	}
+	
+	public String getMaxReboteador() {
+		int max=0;
+		String txt="", sep="";
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			if(lineapartidos.get(i).getRebotes()>max) {
+				max=lineapartidos.get(i).getRebotes();
+			}
+		}
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			if(lineapartidos.get(i).getRebotes()==max) {
+				txt+=sep+lineapartidos.get(i).getJugador().getNombre().split(",")[0]+" ("+lineapartidos.get(i).getRebotes()+")";
+				sep=", ";
+			}
+		}
+		return txt;
+	}
+	
+	public String getMaxAsistente() {
+		int max=0;
+		String txt="", sep="";
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			if(lineapartidos.get(i).getAsist()>max) {
+				max=lineapartidos.get(i).getAsist();
+			}
+		}
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			if(lineapartidos.get(i).getAsist()==max) {
+				txt+=sep+lineapartidos.get(i).getJugador().getNombre().split(",")[0]+" ("+lineapartidos.get(i).getAsist()+")";
+				sep=", ";
+			}
+		}
+		return txt;
+	}
+	
+	public String getMaxVal() {
+		int max=0;
+		String txt="", sep="";
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			if(lineapartidos.get(i).getVal()>max) {
+				max=lineapartidos.get(i).getVal();
+			}
+		}
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			if(lineapartidos.get(i).getVal()==max) {
+				txt+=sep+lineapartidos.get(i).getJugador().getNombre().split(",")[0]+" ("+lineapartidos.get(i).getVal()+")";
+				sep=", ";
+			}
+		}
+		return txt;
+	}
+	
+	public String getMaxMasMenos() {
+		int max=0;
+		String txt="", sep="";
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			if(lineapartidos.get(i).getMasMenos()>max) {
+				max=lineapartidos.get(i).getMasMenos();
+			}
+		}
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			if(lineapartidos.get(i).getMasMenos()==max) {
+				txt+=sep+lineapartidos.get(i).getJugador().getNombre().split(",")[0]+" ("+lineapartidos.get(i).getMasMenos()+")";
+				sep=", ";
+			}
+		}
+		return txt;
 	}
 }

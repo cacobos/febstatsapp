@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Blank</title>
+<title>STATS APP</title>
 
 <!-- Custom fonts for this template-->
 <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -22,6 +22,20 @@
 <!-- Custom styles for this template-->
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
+<!-- Custom fonts for this template -->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+<!-- Custom styles for this page -->
+<link href="vendor/datatables/dataTables.bootstrap4.min.css"
+	rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -30,164 +44,171 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+		<ul
+			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+			<!-- Sidebar - Brand -->
+			<a
+				class="sidebar-brand d-flex align-items-center justify-content-center"
+				href="index">
+				<div class="sidebar-brand-icon rotate-n-15">
+					<i class="fas fa-database"></i>
+				</div>
+				<div class="sidebar-brand-text mx-3">STATS APP</div>
+			</a>
 
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-      </a>
+			<!-- Divider -->
+			<hr class="sidebar-divider">
 
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
+			<!-- Heading -->
+			<div class="sidebar-heading">Mostrar competición</div>
 
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-home"></i>
-          <span>Home</span></a>
-      </li>
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseLebOro"
+				aria-expanded="true" aria-controls="collapseLebOro"> <i
+					class="fas fa-basketball-ball"></i> <span>COMPETICIÓN</span>
+			</a>
+				<div id="collapseLebOro" class="collapse"
+					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Competiciones:</h6>
+						<a th:each="competicion : ${competiciones}"
+							th:text="*{competicion}" th:href="@{/competicion(id=${1})}"
+							class="collapse-item" href="buttons.html">Buttons</a>
+					</div>
+				</div></li>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider">
+			<!-- Divider -->
+			<hr class="sidebar-divider">
 
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Mostrar competición
-      </div>
+			<!-- Heading -->
+			<div class="sidebar-heading">Mostrar equipo</div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLebOro" aria-expanded="true" aria-controls="collapseLebOro">
-          <i class="fas fa-basketball-ball"></i>
-          <span>COMPETICIÓN</span>
-        </a>
-        <div id="collapseLebOro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Competiciones:</h6>
-            <a th:each="competicion : ${competiciones}" th:text="*{competicion}" th:href="@{/competicion(id=${1})}" class="collapse-item" href="buttons.html">Buttons</a>
-          </div>
-        </div>
-      </li>
-      
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-      
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Mostrar equipo
-      </div>
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseOro"
+				aria-expanded="true" aria-controls="collapseOro"> <i
+					class="fas fa-basketball-ball"></i> <span>LEB ORO</span>
+			</a>
+				<div id="collapseOro" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Equipos LEB ORO</h6>
+						<a th:each="equipoOro : ${equiposOro}"
+							th:text="${#strings.abbreviate(equipoOro.nombre,25)}"
+							th:href="@{/equipo(id=${equipoOro.id})}"
+							class="collapse-item small" href="buttons.html">Buttons</a> <a
+							class="collapse-item" href="cards.html">Cards</a>
+					</div>
+				</div></li>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOro" aria-expanded="true" aria-controls="collapseOro">
-          <i class="fas fa-basketball-ball"></i>
-          <span>LEB ORO</span>
-        </a>
-        <div id="collapseOro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Equipos LEB ORO</h6>
-            <a th:each="equipoOro : ${equiposOro}" th:text="${#strings.abbreviate(equipoOro.nombre,25)}" th:href="@{/equipo(id=${equipoOro.id})}" class="collapse-item small" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
-        </div>
-      </li>
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapsePlata"
+				aria-expanded="true" aria-controls="collapsePlata"> <i
+					class="fas fa-basketball-ball"></i> <span>LEB PLATA</span>
+			</a>
+				<div id="collapsePlata" class="collapse"
+					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Equipos LEB PLATA</h6>
+						<a th:each="equipoPlata : ${equiposPlata}"
+							th:text="${#strings.abbreviate(equipoPlata.nombre,25)}"
+							th:href="@{/equipo(id=${equipoPlata.id})}"
+							class="collapse-item small" href="buttons.html">Buttons</a> <a
+							class="collapse-item" href="cards.html">Cards</a>
+					</div>
+				</div></li>
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseLF"
+				aria-expanded="true" aria-controls="collapseLF"> <i
+					class="fas fa-basketball-ball"></i> <span>LIGA FEMENINA</span>
+			</a>
+				<div id="collapseLF" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Equipos LF ENDESA</h6>
+						<a th:each="equipoLF : ${equiposLF}"
+							th:text="${#strings.abbreviate(equipoLF.nombre,25)}"
+							th:href="@{/equipo(id=${equipoLF.id})}"
+							class="collapse-item small" href="buttons.html">Buttons</a> <a
+							class="collapse-item" href="cards.html">Cards</a>
+					</div>
+				</div></li>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePlata" aria-expanded="true" aria-controls="collapsePlata">
-          <i class="fas fa-basketball-ball"></i>
-          <span>LEB PLATA</span>
-        </a>
-        <div id="collapsePlata" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Equipos LEB PLATA</h6>
-            <a th:each="equipoPlata : ${equiposPlata}" th:text="${#strings.abbreviate(equipoPlata.nombre,25)}" th:href="@{/equipo(id=${equipoPlata.id})}" class="collapse-item small" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
-        </div>
-      </li>
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLF" aria-expanded="true" aria-controls="collapseLF">
-          <i class="fas fa-basketball-ball"></i>
-          <span>LIGA FEMENINA</span>
-        </a>
-        <div id="collapseLF" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Equipos LF ENDESA</h6>
-            <a th:each="equipoLF : ${equiposLF}" th:text="${#strings.abbreviate(equipoLF.nombre,25)}" th:href="@{/equipo(id=${equipoLF.id})}" class="collapse-item small" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
-        </div>
-      </li>
-      
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-      
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Mostrar jugador
-      </div>
+			<!-- Divider -->
+			<hr class="sidebar-divider">
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseJugOro" aria-expanded="true" aria-controls="collapseJugOro">
-          <i class="fas fa-basketball-ball"></i>
-          <span>LEB ORO</span>
-        </a>
-        <div id="collapseJugOro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Equipos LEB ORO</h6>
-            <a th:each="equipoOro : ${equiposOro}" th:text="${#strings.abbreviate(equipoOro.nombre,25)}" th:href="@{/selectplayer(id=${equipoOro.id})}" class="collapse-item small" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
-        </div>
-      </li>
+			<!-- Heading -->
+			<div class="sidebar-heading">Mostrar jugador</div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseJugPlata" aria-expanded="true" aria-controls="collapseJugPlata">
-          <i class="fas fa-basketball-ball"></i>
-          <span>LEB PLATA</span>
-        </a>
-        <div id="collapseJugPlata" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Equipos LEB PLATA</h6>
-            <a th:each="equipoPlata : ${equiposPlata}" th:text="${#strings.abbreviate(equipoPlata.nombre,25)}" th:href="@{/selectplayer(id=${equipoPlata.id})}" class="collapse-item small" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
-        </div>
-      </li>
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseJugLF" aria-expanded="true" aria-controls="collapseJugLF">
-          <i class="fas fa-basketball-ball"></i>
-          <span>LIGA FEMENINA</span>
-        </a>
-        <div id="collapseJugLF" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Equipos LF ENDESA</h6>
-            <a th:each="equipoLF : ${equiposLF}" th:text="${#strings.abbreviate(equipoLF.nombre,25)}" th:href="@{/selectplayer(id=${equipoLF.id})}" class="collapse-item small" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
-        </div>
-      </li>
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseJugOro"
+				aria-expanded="true" aria-controls="collapseJugOro"> <i
+					class="fas fa-basketball-ball"></i> <span>LEB ORO</span>
+			</a>
+				<div id="collapseJugOro" class="collapse"
+					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Equipos LEB ORO</h6>
+						<a th:each="equipoOro : ${equiposOro}"
+							th:text="${#strings.abbreviate(equipoOro.nombre,25)}"
+							th:href="@{/selectplayer(id=${equipoOro.id})}"
+							class="collapse-item small" href="buttons.html">Buttons</a> <a
+							class="collapse-item" href="cards.html">Cards</a>
+					</div>
+				</div></li>
 
-      
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseJugPlata"
+				aria-expanded="true" aria-controls="collapseJugPlata"> <i
+					class="fas fa-basketball-ball"></i> <span>LEB PLATA</span>
+			</a>
+				<div id="collapseJugPlata" class="collapse"
+					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Equipos LEB PLATA</h6>
+						<a th:each="equipoPlata : ${equiposPlata}"
+							th:text="${#strings.abbreviate(equipoPlata.nombre,25)}"
+							th:href="@{/selectplayer(id=${equipoPlata.id})}"
+							class="collapse-item small" href="buttons.html">Buttons</a> <a
+							class="collapse-item" href="cards.html">Cards</a>
+					</div>
+				</div></li>
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseJugLF"
+				aria-expanded="true" aria-controls="collapseJugLF"> <i
+					class="fas fa-basketball-ball"></i> <span>LIGA FEMENINA</span>
+			</a>
+				<div id="collapseJugLF" class="collapse"
+					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Equipos LF ENDESA</h6>
+						<a th:each="equipoLF : ${equiposLF}"
+							th:text="${#strings.abbreviate(equipoLF.nombre,25)}"
+							th:href="@{/selectplayer(id=${equipoLF.id})}"
+							class="collapse-item small" href="buttons.html">Buttons</a> <a
+							class="collapse-item" href="cards.html">Cards</a>
+					</div>
+				</div></li>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
 
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
 
-    </ul>
-    <!-- End of Sidebar -->
+			<!-- Divider -->
+			<hr class="sidebar-divider d-none d-md-block">
+
+			<!-- Sidebar Toggler (Sidebar) -->
+			<div class="text-center d-none d-md-inline">
+				<button class="rounded-circle border-0" id="sidebarToggle"></button>
+			</div>
+
+		</ul>
+		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
@@ -196,71 +217,278 @@
 			<div id="content">
 
 				<!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+				<nav
+					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
+					<!-- Sidebar Toggle (Topbar) -->
+					<button id="sidebarToggleTop"
+						class="btn btn-link d-md-none rounded-circle mr-3">
+						<i class="fa fa-bars"></i>
+					</button>
 
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" th:action="@{/buscarJugador}" th:object="${searchJugador}">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"  th:field="*{nombre}">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
+					<!-- Topbar Navbar -->
+					<ul class="navbar-nav ml-auto">
+						<!-- Nav Item - User Information -->
+						<li class="nav-item dropdown no-arrow">
+							<!-- Topbar Search -->
+							<form
+								class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+								th:action="@{/buscarJugador}" th:object="${searchJugador}">
+								<div class="input-group">
+									<input type="text" class="form-control bg-light border-0 small"
+										placeholder="Search for..." aria-label="Search"
+										aria-describedby="basic-addon2" th:field="*{nombre}">
+									<div class="input-group-append">
+										<button class="btn btn-primary" type="submit">
+											<i class="fas fa-search fa-sm"></i>
+										</button>
+									</div>
+								</div>
+							</form>
+						</li>
+					</ul>
 
-         
-
-            <div class="topbar-divider d-none d-sm-block"></div>
-
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
-              </div>
-            </li>
-
-          </ul>
-
-        </nav>
-        <!-- End of Topbar -->
+				</nav>
+				<!-- End of Topbar -->
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">En construcción</h1>
-					<p class="mb-4">
-						Página en construcción
-					</p>
+					<h1 class="h3 mb-2 text-gray-800" th:text="${equipoModel.nombre}">En
+						construcción</h1>
+					<p class="mb-4">Página en construcción</p>
 
+					<!-- Content Row -->
+					<div class="row">
+						<div class="col-xl-6 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered small" width="100%"
+											cellspacing="0">
+											<thead>
+												<tr>
+													<th></th>
+													<th>Media</th>
+													<th>Media local</th>
+													<th>Media visitante</th>
+													<th>Media victorias</th>
+													<th>Media derrotas</th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<th></th>
+													<th>Media</th>
+													<th>Media local</th>
+													<th>Media visitante</th>
+													<th>Media victorias</th>
+													<th>Media derrotas</th>
+												</tr>
+											</tfoot>
+											<tbody>
+												<tr>
+													<th>Puntos por partido</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartido(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoLocal(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoVisit(), 1, 2)}" >Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoDerrotas(), 1, 2)}" >System Architect</td>
+												</tr>
+												<tr>
+													<th>Puntos recibidos por partido</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRival(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRivalLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRivalVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRivalVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRivalDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>Rebotes ofensivos</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getROf(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getROfLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getROfVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getROfVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getROfDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>Rebotes defensivos</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRDef(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRDefLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRDefVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRDefVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRDefDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>Eficiencia rival</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDef(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>Net rating</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRating(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>% efectivo TC</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTc(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>% efectivo TC rival</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRival(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<hr>
+									Styling for the donut chart can be found in the file.
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-6 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered small" width="100%"
+											cellspacing="0">
+											<thead>
+												<tr>
+													<th></th>
+													<th>Media</th>
+													<th>Media local</th>
+													<th>Media visitante</th>
+													<th>Media victorias</th>
+													<th>Media derrotas</th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<th></th>
+													<th>Media</th>
+													<th>Media local</th>
+													<th>Media visitante</th>
+													<th>Media victorias</th>
+													<th>Media derrotas</th>
+												</tr>
+											</tfoot>
+											<tbody>												
+												<tr>
+													<th>Ritmo</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRitmo(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRitmoLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRitmoVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRitmoVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRitmoDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>Eficiencia</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffOf(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffOfLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffOfVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffOfVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffOfDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>Eficiencia rival</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDef(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>Net rating</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRating(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>% efectivo TC</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTc(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>% efectivo TC rival</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRival(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>% rebote OF</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROf(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>% rebote OF rival</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfRival(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfRivalLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfRivalVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfRivalVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfRivalDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>% rebote Def</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDef(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>% rebote Def rival</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefRival(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefRivalLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefRivalVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefRivalVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefRivalDerrotas(), 1, 2)}">System Architect</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<hr>
+									Styling for the donut chart can be found in the file.
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					<!-- End of Content Row -->
 					<!-- Content Row -->
 					<div class="row">
 						<div class="col-xl-4 col-lg-5">
@@ -275,11 +503,11 @@
                     <canvas id="myPieChart"></canvas>
                   </div>-->
 									<hr>
-									Styling for the donut chart can be found in the
-									
-									file.
+									Styling for the donut chart can be found in the file.
 								</div>
 							</div>
+						</div>
+						<div class="col-xl-8 col-lg-5">
 							<div class="card shadow mb-4">
 								<!-- Card Header - Dropdown -->
 								<div class="card-header py-3">
@@ -291,53 +519,95 @@
                     <canvas id="myPieChart"></canvas>
                   </div>-->
 									<hr>
-									Styling for the donut chart can be found in the
-									
-									file.
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-8 col-lg-7">
-
-							<!-- Area Chart -->
-							<div class="card shadow mb-4">
-								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
-								</div>
-								<div class="card-body">
-									<!--<div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
-                  </div>
-                    -->
-									<hr>
-									Styling for the area chart can be found in the
-									
-									file.
-								</div>
-							</div>
-
-							<!-- Bar Chart -->
-							<div class="card shadow mb-4">
-								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
-								</div>
-								<div class="card-body">
-									<!-- <div class="chart-bar">
-                    <canvas id="myBarChart"></canvas>
-                  </div> -->
-									<hr>
-									Styling for the bar chart can be found in the
-									
-									file.
+									Styling for the donut chart can be found in the file.
 								</div>
 							</div>
 
 						</div>
-						
-						<!-- Donut Chart -->
 
 					</div>
+					<!-- End of Content Row -->
+					<!-- Content Row -->
+					<div class="row">
+						<div class="col-xl-12 col-lg-5">
+							<!-- Card -->
 
+							<!-- DataTales Example -->
+							<div class="card shadow mb-4">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Partidos del
+										equipo</h6>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered small" id="dataTable"
+											width="100%" cellspacing="0">
+											<thead>
+												<tr>
+													<th>Fecha</th>
+													<th>Local</th>
+													<th>Ptos local</th>
+													<th>Ptos visitante</th>
+													<th>Visitante</th>
+													<th>Jornada</th>
+													<th>Competición</th>
+													<th>Max anotador</th>
+													<th>Max reboteador</th>
+													<th>Max asistente</th>
+													<th>Max valorado</th>
+													<th>Mejor +/-</th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<th>Fecha</th>
+													<th>Local</th>
+													<th>Ptos local</th>
+													<th>Ptos visitante</th>
+													<th>Visitante</th>
+													<th>Jornada</th>
+													<th>Competición</th>
+													<th>Max anotador</th>
+													<th>Max reboteador</th>
+													<th>Max asistente</th>
+													<th>Max valorado</th>
+													<th>Mejor +/-</th>
+												</tr>
+											</tfoot>
+											<tbody class="small">
+
+												<tr th:each="partido : ${equipoModel.getPartidos()}">
+													<td class="small" th:text="${partido.fecha}">>Tiger
+														Nixon</td>
+													<td th:text="${partido.equipo1.nombre}">>Tiger Nixon</td>
+													<td th:text="${partido.ptoLocal}">Edinburgh</td>
+													<td th:text="${partido.ptoVisit}">Foto</td>
+													<td th:text="${partido.equipo2.nombre}">System
+														Architect</td>
+													<td th:text="${partido.jornada}">System Architect</td>
+													<td th:text="${#strings.substring(partido.fase,0,4)}">System
+														Architect</td>
+													<td class="small" th:text="${partido.getMaxAnotador()}">System
+														Architect</td>
+													<td class="small" th:text="${partido.getMaxReboteador()}">System
+														Architect</td>
+													<td class="small" th:text="${partido.getMaxAsistente()}">System
+														Architect</td>
+													<td class="small" th:text="${partido.getMaxVal()}">System
+														Architect</td>
+													<td class="small" th:text="${partido.getMaxMasMenos()}">System
+														Architect</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					<!-- End of Content Row -->
 				</div>
 				<!-- /.container-fluid -->
 
@@ -346,13 +616,13 @@
 
 
 			<!-- Footer -->
-			<!--<footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
-          </div>
-        </div>
-      </footer>-->
+			<footer class="sticky-footer bg-white">
+				<div class="container my-auto">
+					<div class="copyright text-center my-auto">
+						<span>Copyright &copy; Your Website 2019</span>
+					</div>
+				</div>
+			</footer>
 			<!-- End of Footer -->
 
 		</div>
@@ -398,6 +668,13 @@
 
 	<!-- Custom scripts for all pages-->
 	<script src="/js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+	<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="/js/demo/datatables-demo.js"></script>
 
 </body>
 

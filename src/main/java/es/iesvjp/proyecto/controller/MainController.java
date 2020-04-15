@@ -92,9 +92,9 @@ public class MainController {
 		LOG.info("METHOD: inicioGet -- PARAMS: texto: " + searchJugador.getNombre());
 		List<Jugador> jugadores=jugadorService.buscarJugador(searchJugador.getNombre());
 		ModelAndView mav = new ModelAndView("buscarJugador");
-		while (jugadores.size()>20) {
+		/*while (jugadores.size()>20) {
 			jugadores.remove(20);
-		}
+		}*/
 		mav.addObject("equipos", equipoService.listAllEquipo());
 		mav.addObject("competiciones", equipoService.getCompeticiones());
 		mav.addObject("equiposOro", equipoService.getEquiposCompeticion("LIGA LEB ORO"));
@@ -147,7 +147,6 @@ public class MainController {
 		mav.addObject("equiposOro", equipoService.getEquiposCompeticion("LIGA LEB ORO"));
 		mav.addObject("equiposPlata", equipoService.getEquiposCompeticion("LIGA LEB PLATA"));
 		mav.addObject("equiposLF", equipoService.getEquiposCompeticion("LF ENDESA"));
-		//mav.addObject("jugadores", equipoService.getJugadoresEquipo(id));
 		mav.addObject("equipo", equipoService.findEquipoById(id));	
 		mav.addObject("searchJugador", new Jugador());
 

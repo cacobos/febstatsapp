@@ -55,7 +55,7 @@ public class EquipoController {
 	@GetMapping(value = { "", "/"})
 	private ModelAndView inicioGet(@RequestParam(name = "id", required = true) Integer id) {
 		LOG.info("METHOD: inicioGet -- PARAMS: idEquipo: " + id);
-		ModelAndView mav = new ModelAndView("jugador");
+		ModelAndView mav = new ModelAndView("equipo");
 		mav.addObject("equipos", equipoService.listAllEquipo());
 		mav.addObject("competiciones", equipoService.getCompeticiones());
 		mav.addObject("equiposOro", equipoService.getEquiposCompeticion("LIGA LEB ORO"));

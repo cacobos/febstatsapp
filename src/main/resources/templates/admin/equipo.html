@@ -22,16 +22,6 @@
 <!-- Custom styles for this template-->
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
- <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this page -->
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
@@ -236,63 +226,11 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800" th:text="${jugadorModel.nombre}">En construcción</h1>
-					<p class="mb-4">Datos de <span th:text="${jugadorModel.nombre}"></span></p>
+					<h1 class="h3 mb-2 text-gray-800">En construcción</h1>
+					<p class="mb-4">
+						Página en construcción
+					</p>
 
-					<!-- Content Row -->
-					<div class="row">
-						<div class="col-xl-2 col-lg-5">
-							<div class="card shadow mb-4">
-								<!-- Card Header - Dropdown -->
-								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
-								</div>
-								<!-- Card Body -->
-								<div class="card-body">
-								<img th:src="${not (#strings.isEmpty(jugadorModel.urlFoto))} ? ${jugadorModel.urlFoto} : 'http://placehold.it/48x48'"
-												class="img-thumbnail rounded mx-auto d-block" style="max-height: 200px;"/>
-									
-									<hr>
-									Styling for the donut chart can be found in the file.
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-5">
-							<div class="card shadow mb-4">
-								<!-- Card Header - Dropdown -->
-								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
-								</div>
-								<!-- Card Body -->
-								<div class="card-body">
-									
-                   <img src="grafico.png" class="img-thumbnail rounded mx-auto d-block"/>
-                  
-									<hr>
-									Styling for the donut chart can be found in the file.
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-6 col-lg-5">
-							<div class="card shadow mb-4">
-								<!-- Card Header - Dropdown -->
-								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
-								</div>
-								<!-- Card Body -->
-								<div class="card-body">
-									<!-- <div class="chart-pie pt-4">
-                    <canvas id="myPieChart"></canvas>
-                  </div>-->
-									<hr>
-									Styling for the donut chart can be found in the file.
-								</div>
-							</div>
-
-						</div>
-
-					</div>
-					<!-- End of Content Row -->
 					<!-- Content Row -->
 					<div class="row">
 						<div class="col-xl-4 col-lg-5">
@@ -307,11 +245,11 @@
                     <canvas id="myPieChart"></canvas>
                   </div>-->
 									<hr>
-									Styling for the donut chart can be found in the file.
+									Styling for the donut chart can be found in the
+									
+									file.
 								</div>
 							</div>
-						</div>
-						<div class="col-xl-8 col-lg-5">
 							<div class="card shadow mb-4">
 								<!-- Card Header - Dropdown -->
 								<div class="card-header py-3">
@@ -323,65 +261,55 @@
                     <canvas id="myPieChart"></canvas>
                   </div>-->
 									<hr>
-									Styling for the donut chart can be found in the file.
+									Styling for the donut chart can be found in the
+									
+									file.
 								</div>
 							</div>
-
 						</div>
+						<div class="col-xl-8 col-lg-7">
 
-					</div>
-					<!-- End of Content Row -->
-					<!-- Content Row -->
-					<div class="row">
-						<div class="col-xl-12 col-lg-5">
-							<!-- Card -->
-
-							<!-- DataTales Example -->
+							<!-- Area Chart -->
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">DataTables
-										Example</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
 								</div>
 								<div class="card-body">
-									<div class="table-responsive">
-										<table class="table table-bordered" id="dataTable"
-											width="100%" cellspacing="0">
-											<thead>
-												<tr>
-													<th>Nombre</th>
-													<th>Puesto</th>
-													<th>Altura</th>
-													<th>Foto</th>
-												</tr>
-											</thead>
-											<tfoot>
-												<tr>
-													<th>Nombre</th>
-													<th>Puesto</th>
-													<th>Altura</th>
-													<th>Foto</th>
-												</tr>
-											</tfoot>
-											<tbody>
+									<!--<div class="chart-area">
+                    <canvas id="myAreaChart"></canvas>
+                  </div>
+                    -->
+									<hr>
+									Styling for the area chart can be found in the
+									
+									file.
+								</div>
+							</div>
 
-												<tr>
-													<td>>Tiger Nixon</td>
-													<td>System Architect</td>
-													<td>Edinburgh</td>
-													<td>Foto</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+							<!-- Bar Chart -->
+							<div class="card shadow mb-4">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+								</div>
+								<div class="card-body">
+									<!-- <div class="chart-bar">
+                    <canvas id="myBarChart"></canvas>
+                  </div> -->
+									<hr>
+									Styling for the bar chart can be found in the
+									
+									file.
 								</div>
 							</div>
 
 						</div>
-					
+						
+						<!-- Donut Chart -->
+
+					</div>
+
 				</div>
-				<!-- End of Content Row -->
-			</div>
-			<!-- /.container-fluid -->
+				<!-- /.container-fluid -->
 
 			</div>
 			<!-- End of Main Content -->
@@ -440,13 +368,6 @@
 
 	<!-- Custom scripts for all pages-->
 	<script src="/js/sb-admin-2.min.js"></script>
-	
-	<!-- Page level plugins -->
-  <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="/js/demo/datatables-demo.js"></script>
 
 </body>
 

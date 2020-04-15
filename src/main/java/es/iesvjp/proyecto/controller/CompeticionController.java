@@ -65,12 +65,15 @@ public class CompeticionController {
 		switch (id) {
 		case 1:
 			mav.addObject("equiposLiga", equipoService.getEquiposCompeticion("LIGA LEB ORO"));
+			mav.addObject("competicion", "LIGA LEB ORO");
 			break;
 		case 2:
 			mav.addObject("equiposLiga", equipoService.getEquiposCompeticion("LIGA LEB PLATA"));
+			mav.addObject("competicion", "LIGA LEB PLATA");
 			break;
 		case 3:
 			mav.addObject("equiposLiga", equipoService.getEquiposCompeticion("LF ENDESA"));
+			mav.addObject("competicion", "LF ENDESA");
 			break;
 		default:
 			break;
