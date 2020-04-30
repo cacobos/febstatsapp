@@ -9,7 +9,7 @@ import java.sql.Time;
  * 
  */
 @Entity
-@Table(name = "lineapartido")
+@Table(name = "Lineapartido")
 @NamedQuery(name = "Lineapartido.findAll", query = "SELECT l FROM Lineapartido l")
 public class Lineapartido implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -251,5 +251,13 @@ public class Lineapartido implements Serializable {
 			return partido.ganaLocal();
 		}
 		return partido.ganaVisit();
+	}
+	
+	public String getRival() {
+		if(isLocal()) {
+			return partido.getEquipo2().getNombre();
+		}else {
+			return partido.getEquipo1().getNombre();
+		}
 	}
 }

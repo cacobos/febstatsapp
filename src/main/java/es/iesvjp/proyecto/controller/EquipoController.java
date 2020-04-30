@@ -61,7 +61,9 @@ public class EquipoController {
 		mav.addObject("equiposOro", equipoService.getEquiposCompeticion("LIGA LEB ORO"));
 		mav.addObject("equiposPlata", equipoService.getEquiposCompeticion("LIGA LEB PLATA"));
 		mav.addObject("equiposLF", equipoService.getEquiposCompeticion("LF ENDESA"));
-		mav.addObject("equipoModel", equipoService.findEquipoById(id));
+		Equipo e=equipoService.findEquipoById(id);
+		mav.addObject("equipoModel", e);
+		Utilidades.dibujarGraficoRBDResultado(e);
 		mav.addObject("searchJugador", new Jugador());
 		LOG.info("METHOD: inicioGet -- PARAMS: " + mav.getModel());
 		return mav;

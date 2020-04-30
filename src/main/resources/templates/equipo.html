@@ -74,7 +74,7 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Competiciones:</h6>
 						<a th:each="competicion : ${competiciones}"
-							th:text="*{competicion}" th:href="@{/competicion(id=${1})}"
+							th:text="*{competicion}" th:href="@{/competicion(id=${competicion})}"
 							class="collapse-item" href="buttons.html">Buttons</a>
 					</div>
 				</div></li>
@@ -257,7 +257,7 @@
 					<!-- Page Heading -->
 					<h1 class="h3 mb-2 text-gray-800" th:text="${equipoModel.nombre}">En
 						construcción</h1>
-					<p class="mb-4">Página en construcción</p>
+					<p class="mb-4"></p>
 
 					<!-- Content Row -->
 					<div class="row">
@@ -265,7 +265,7 @@
 							<div class="card shadow mb-4">
 								<!-- Card Header - Dropdown -->
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Estadísticas tradicionales</h6>
 								</div>
 								<!-- Card Body -->
 								<div class="card-body">
@@ -326,42 +326,50 @@
 													<td th:text="${#numbers.formatDecimal(equipoModel.getRDefDerrotas(), 1, 2)}">System Architect</td>
 												</tr>
 												<tr>
-													<th>Eficiencia rival</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDef(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefDerrotas(), 1, 2)}">System Architect</td>
+													<th>Asistencias por partido</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartido(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartidoLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartidoVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartidoVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartidoDerrotas(), 1, 2)}">System Architect</td>
 												</tr>
 												<tr>
-													<th>Net rating</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRating(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingDerrotas(), 1, 2)}">System Architect</td>
+													<th>Balones perdidos por partido</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartido(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartidoLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartidoVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartidoVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartidoDerrotas(), 1, 2)}">System Architect</td>
 												</tr>
 												<tr>
-													<th>% efectivo TC</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTc(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcDerrotas(), 1, 2)}">System Architect</td>
+													<th>% T2</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT2(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT2Local(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT2Visit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT2Victorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT2Derrotas(), 1, 2)}">System Architect</td>
 												</tr>
 												<tr>
-													<th>% efectivo TC rival</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRival(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalDerrotas(), 1, 2)}">System Architect</td>
+													<th>% T3</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT3(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT3Local(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT3Visit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT3Victorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT3Derrotas(), 1, 2)}">System Architect</td>
+												</tr>
+												<tr>
+													<th>% TL</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgTl(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgTlLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgTlVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgTlVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgTlDerrotas(), 1, 2)}">System Architect</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 									<hr>
-									Styling for the donut chart can be found in the file.
+									
 								</div>
 							</div>
 						</div>
@@ -369,7 +377,7 @@
 							<div class="card shadow mb-4">
 								<!-- Card Header - Dropdown -->
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Analytics</h6>
 								</div>
 								<!-- Card Body -->
 								<div class="card-body">
@@ -422,12 +430,12 @@
 													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefDerrotas(), 1, 2)}">System Architect</td>
 												</tr>
 												<tr>
-													<th>Net rating</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRating(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetRatingDerrotas(), 1, 2)}">System Architect</td>
+													<th>Eficiencia neta</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetEff(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetEffLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetEffVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetEffVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getNetEffDerrotas(), 1, 2)}">System Architect</td>
 												</tr>
 												<tr>
 													<th>% efectivo TC</th>
@@ -452,15 +460,7 @@
 													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfVisit(), 1, 2)}">Edinburgh</td>
 													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfVictorias(), 1, 2)}">Foto</td>
 													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfDerrotas(), 1, 2)}">System Architect</td>
-												</tr>
-												<tr>
-													<th>% rebote OF rival</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfRival(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfRivalLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfRivalVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfRivalVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfRivalDerrotas(), 1, 2)}">System Architect</td>
-												</tr>
+												</tr>												
 												<tr>
 													<th>% rebote Def</th>
 													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDef(), 1, 2)}" >Tiger Nixon</td>
@@ -470,18 +470,18 @@
 													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefDerrotas(), 1, 2)}">System Architect</td>
 												</tr>
 												<tr>
-													<th>% rebote Def rival</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefRival(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefRivalLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefRivalVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefRivalVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefRivalDerrotas(), 1, 2)}">System Architect</td>
+													<th>Ratio pérdidas</th>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidas(), 1, 2)}" >Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidasLocal(), 1, 2)}">Tiger Nixon</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidasVisit(), 1, 2)}">Edinburgh</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidasVictorias(), 1, 2)}">Foto</td>
+													<td th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidasDerrotas(), 1, 2)}">System Architect</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 									<hr>
-									Styling for the donut chart can be found in the file.
+									
 								</div>
 							</div>
 
@@ -490,34 +490,30 @@
 					</div>
 					<!-- End of Content Row -->
 					<!-- Content Row -->
-					<div class="row">
-						<div class="col-xl-4 col-lg-5">
+					<!--  <div class="row">
+						<div class="col-xl-6 col-lg-5">
 							<div class="card shadow mb-4">
-								<!-- Card Header - Dropdown -->
+								
 								<div class="card-header py-3">
 									<h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
 								</div>
-								<!-- Card Body -->
+								
 								<div class="card-body">
-									<!-- <div class="chart-pie pt-4">
-                    <canvas id="myPieChart"></canvas>
-                  </div>-->
+									<img alt="" src="grafico.png">
 									<hr>
 									Styling for the donut chart can be found in the file.
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-8 col-lg-5">
+						<div class="col-xl-6 col-lg-5">
 							<div class="card shadow mb-4">
-								<!-- Card Header - Dropdown -->
+								
 								<div class="card-header py-3">
 									<h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
 								</div>
-								<!-- Card Body -->
+								
 								<div class="card-body">
-									<!-- <div class="chart-pie pt-4">
-                    <canvas id="myPieChart"></canvas>
-                  </div>-->
+									
 									<hr>
 									Styling for the donut chart can be found in the file.
 								</div>
@@ -525,7 +521,7 @@
 
 						</div>
 
-					</div>
+					</div>-->
 					<!-- End of Content Row -->
 					<!-- Content Row -->
 					<div class="row">

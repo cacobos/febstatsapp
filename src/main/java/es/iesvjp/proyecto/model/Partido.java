@@ -11,7 +11,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name = "partido")
+@Table(name = "Partido")
 @NamedQuery(name="Partido.findAll", query="SELECT p FROM Partido p")
 public class Partido implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -551,19 +551,19 @@ public class Partido implements Serializable {
 	} 
 	
 	public double getPosesionesLocal() {
-		return getFgaLocal()-rboLocal+bpLocal+(tliLocal*0.4);
+		return (double)getFgaLocal()-(double)rboLocal+(double)bpLocal+((double)tliLocal*0.4);
 	}
 	
 	public double getPosesionesVisit() {
-		return getFgaVisit()-rboVisit+bpVisit+(tliVisit*0.4);
+		return (double)getFgaVisit()-(double)rboVisit+(double)bpVisit+((double)tliVisit*0.4);
 	}
 	
 	public double getRitmoLocal() {
-		return getPosesionesLocal()/getMinutos();
+		return (double)getPosesionesLocal()/(double)getMinutos();
 	}
 	
 	public double getRitmoVisit() {
-		return getPosesionesVisit()/getMinutos();
+		return (double)getPosesionesVisit()/(double)getMinutos();
 	}
 
 	public int getMinutos() {
@@ -575,19 +575,19 @@ public class Partido implements Serializable {
 	}
 	
 	public double getEfficLocal() {
-		return ptoLocal/getPosesionesLocal()*100;
+		return (double)ptoLocal/(double)getPosesionesLocal()*100;
 	}
 	
 	public double getEfficVisit() {
-		return ptoVisit/getPosesionesVisit()*100;
+		return (double)ptoVisit/(double)getPosesionesVisit()*100;
 	}
 	
 	public double pctgEffTcLocal() {
-		return (getFgmLocal()+0.5*t3aLocal)/getFgaLocal();
+		return ((double)getFgmLocal()+0.5*(double)t3aLocal)/(double)getFgaLocal();
 	}
 	
 	public double pctgEffTcVisit() {
-		return (getFgmVisit()+0.5*t3aLocal)/getFgaVisit();
+		return ((double)getFgmVisit()+0.5*(double)t3aLocal)/(double)getFgaVisit();
 	}
 	
 	public double pctgROfLocal() {
@@ -713,5 +713,9 @@ public class Partido implements Serializable {
 			}
 		}
 		return txt;
+	}	
+	
+	public int getValorResultado() {
+		return ptoLocal-ptoVisit;
 	}
 }

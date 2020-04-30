@@ -52,8 +52,8 @@ public class CompeticionController {
 	@Qualifier("jugadorService")
 	private IJugadorService jugadorService;
 
-	@GetMapping(value = { "", "/"})
-	private ModelAndView inicioGet(@RequestParam(name = "id", required = true) Integer id) {
+	@GetMapping(value = { "", "/" })
+	private ModelAndView inicioGet(@RequestParam(name = "id", required = true) String id) {
 		LOG.info("METHOD: inicioGet -- PARAMS: idEquipo: " + id);
 		ModelAndView mav = new ModelAndView("competicion");
 		mav.addObject("equipos", equipoService.listAllEquipo());
@@ -62,31 +62,10 @@ public class CompeticionController {
 		mav.addObject("equiposPlata", equipoService.getEquiposCompeticion("LIGA LEB PLATA"));
 		mav.addObject("equiposLF", equipoService.getEquiposCompeticion("LF ENDESA"));
 		mav.addObject("searchJugador", new Jugador());
-		switch (id) {
-		case 1:
-			mav.addObject("equiposLiga", equipoService.getEquiposCompeticion("LIGA LEB ORO"));
-			mav.addObject("competicion", "LIGA LEB ORO");
-			break;
-		case 2:
-			mav.addObject("equiposLiga", equipoService.getEquiposCompeticion("LIGA LEB PLATA"));
-			mav.addObject("competicion", "LIGA LEB PLATA");
-			break;
-		case 3:
-			mav.addObject("equiposLiga", equipoService.getEquiposCompeticion("LF ENDESA"));
-			mav.addObject("competicion", "LF ENDESA");
-			break;
-		default:
-			break;
-		}
+		mav.addObject("competicion", id);
+		mav.addObject("equiposLiga", equipoService.getEquiposCompeticion(id));
 		LOG.info("METHOD: inicioGet -- PARAMS: " + mav.getModel());
 		return mav;
 	}
 
-	
-
-	
-
-	
-
-	
 }

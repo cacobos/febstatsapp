@@ -60,7 +60,7 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Competiciones:</h6>
 						<a th:each="competicion : ${competiciones}"
-							th:text="*{competicion}" th:href="@{/competicion(id=${1})}"
+							th:text="*{competicion}" th:href="@{/competicion(id=${competicion})}"
 							class="collapse-item" href="buttons.html">Buttons</a>
 					</div>
 				</div></li>

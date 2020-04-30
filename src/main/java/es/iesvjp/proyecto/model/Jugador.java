@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name = "jugador")
+@Table(name = "Jugador")
 @NamedQuery(name="Jugador.findAll", query="SELECT j FROM Jugador j")
 public class Jugador implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -107,6 +107,188 @@ public class Jugador implements Serializable {
 		this.url = url;
 	}
 	
+	private double getMinutos() {
+		double minutos=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			minutos+=lineapartidos.get(i).getMinutos().toLocalTime().getMinute()*60;
+			minutos+=lineapartidos.get(i).getMinutos().toLocalTime().getSecond();
+		}
+		return minutos/60;
+	}
 	
+	public double getMinutosPorPartido() {
+		return getMinutos()/(double)lineapartidos.size();
+	}
+	
+	private double getPuntos() {
+		double puntos=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			puntos+=lineapartidos.get(i).getPuntos();
+		}
+		return puntos;
+	}
+	
+	public double getPuntosPorPartido() {
+		return getPuntos()/(double)lineapartidos.size();
+	}
+	
+	public double getPuntosPorMinuto() {
+		return getPuntos()/getMinutos()*40;
+	}
+	
+	public double getPuntosPorTiro2() {
+		double tiros=0, puntos=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			tiros+=lineapartidos.get(i).getT2i();
+			puntos+=lineapartidos.get(i).getPuntos();
+		}
+		return puntos/tiros;
+	}
+	
+	public double getPuntosPorTiro3() {
+		double tiros=0, puntos=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			tiros+=lineapartidos.get(i).getT3i();
+			puntos+=lineapartidos.get(i).getPuntos();
+		}
+		return puntos/tiros;
+	}
+	
+	private double getTirosCampo() {
+		double tiros=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			tiros+=lineapartidos.get(i).getT3i();
+			tiros+=lineapartidos.get(i).getT2i();
+		}
+		return tiros;
+	}
+	
+	public double getPuntosPorTiro() {
+		return getPuntos()/getTirosCampo();
+	}
+	
+	private double getRebOf() {
+		double rebotes=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			rebotes+=lineapartidos.get(i).getRbo();			
+		}
+		return rebotes;
+	}
+	
+	private double getRebDef() {
+		double rebotes=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			rebotes+=lineapartidos.get(i).getRbd();			
+		}
+		return rebotes;
+	}
+	
+	private double getRebotes() {
+		double rebotes=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			rebotes+=lineapartidos.get(i).getRbd();	
+			rebotes+=lineapartidos.get(i).getRbo();	
+		}
+		return rebotes;
+	}
+	
+	public double getRebotesPorMinuto() {
+		return getRebotes()/getMinutos()*40;
+	}
+	
+	public double getRebotesOfPorMinuto() {
+		return getRebOf()/getMinutos()*40;
+	}
+	
+	public double getRebotesDefPorMinuto() {
+		return getRebDef()/getMinutos()*40;
+	}
+	
+	public double getTirosPorMinuto() {
+		return getTirosCampo()/getMinutos()*40;
+	}
+	
+	public double getTiros2PorMinuto() {
+		return getTiros2()/getMinutos()*40;
+	}
+	
+	private double getTiros2() {
+		double tiros=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			tiros+=lineapartidos.get(i).getT2i();
+		}
+		return tiros;
+	}
 
+	public double getTiros3PorMinuto() {
+		return getTiros3()/getMinutos()*40;
+	}
+	
+	private double getTiros3() {
+		double tiros=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			tiros+=lineapartidos.get(i).getT3i();
+		}
+		return tiros;
+	}
+
+	public double getRebOfPorPartido() {
+		return getRebOf()/lineapartidos.size();
+	}
+	
+	public double getRebDefPorPartido() {
+		return getRebDef()/lineapartidos.size();
+	}
+	
+	public double getRebotesPorPartido() {
+		return getRebotes()/lineapartidos.size();
+	}
+	
+	public double getPctgT2() {
+		double t2a=0, t2i=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			t2a+=lineapartidos.get(i).getT2a();
+			t2i+=lineapartidos.get(i).getT2i();
+		}
+		return t2a/t2i*100;
+	}
+	
+	public double getPctgT3() {
+		double t3a=0, t3i=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			t3a+=lineapartidos.get(i).getT3a();
+			t3i+=lineapartidos.get(i).getT3i();
+		}
+		return t3a/t3i*100;
+	}
+
+	public double getPctgTl() {
+		double tla=0, tli=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			tla+=lineapartidos.get(i).getTla();
+			tli+=lineapartidos.get(i).getTli();
+		}
+		System.out.println(tla + " / "+ tli + " * 100");
+		return tla/tli*100;
+	}
+	
+	public double getAsistenciasPorPartido() {
+		double asis=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			asis+=lineapartidos.get(i).getAsist();
+		}
+		return asis/lineapartidos.size();
+	}
+	
+	public double getFaltasRecibidasPorMinuto() {
+		double faltas=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			faltas+=lineapartidos.get(i).getFr();
+		}
+		return faltas/getMinutos()*40;
+	}
+	
+	public String getNombreEquipo() {
+		return lineapartidos.size()>0?lineapartidos.get(0).getEquipo().getNombre():"";
+	}
 }
