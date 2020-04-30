@@ -287,6 +287,16 @@ public class Jugador implements Serializable {
 		}
 		return faltas/getMinutos()*40;
 	}
+	public double getPctgEfTC() {
+		double t2a=0, t3a=0, t3i=0, t2i=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			t2a+=lineapartidos.get(i).getT2a();
+			t2i+=lineapartidos.get(i).getT2i();
+			t3a+=lineapartidos.get(i).getT3a();
+			t3i+=lineapartidos.get(i).getT3i();
+		}
+		return (t2a+t3a*1.5)/(t2i+t3i);
+	}
 	
 	public String getNombreEquipo() {
 		return lineapartidos.size()>0?lineapartidos.get(0).getEquipo().getNombre():"";

@@ -74,7 +74,8 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Competiciones:</h6>
 						<a th:each="competicion : ${competiciones}"
-							th:text="*{competicion}" th:href="@{/competicion(id=${competicion})}"
+							th:text="*{competicion}"
+							th:href="@{/competicion(id=${competicion})}"
 							class="collapse-item" href="buttons.html">Buttons</a>
 					</div>
 				</div></li>
@@ -258,14 +259,265 @@
 					<h1 class="h3 mb-2 text-gray-800" th:text="${equipoModel.nombre}">En
 						construcción</h1>
 					<p class="mb-4"></p>
+					<div class="row">
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Jugador más
+										utilizado</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(equipoModel.getJugadorMasMinutos().getUrlFoto()))} ? ${equipoModel.getJugadorMasMinutos().getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a
+													th:text="${equipoModel.getJugadorMasMinutos().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getJugadorMasMinutos().id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(equipoModel.getJugadorMasMinutos().getMinutosPorPartido(), 1, 2)}"></span>
+												minutos por partido
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Máximo
+										anotador</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(equipoModel.getJugadorMaxPtosPartido().getUrlFoto()))} ? ${equipoModel.getJugadorMaxPtosPartido().getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a
+													th:text="${equipoModel.getJugadorMaxPtosPartido().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getJugadorMaxPtosPartido().id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(equipoModel.getJugadorMaxPtosPartido().getPuntosPorPartido(), 1, 2)}"></span>
+												puntos por partido
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Máximo
+										reboteador</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(equipoModel.getMaximoReboteador().getUrlFoto()))} ? ${equipoModel.getMaximoReboteador().getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a
+													th:text="${equipoModel.getMaximoReboteador().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getMaximoReboteador().id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(equipoModel.getMaximoReboteador().getRebotesPorPartido(), 1, 2)}"></span>
+												rebotes por partido
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Máximo
+										asistente</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(equipoModel.getMaximoAsistente().getUrlFoto()))} ? ${equipoModel.getMaximoAsistente().getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a th:text="${equipoModel.getMaximoAsistente().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getMaximoAsistente().id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(equipoModel.getMaximoAsistente().getAsistenciasPorPartido(), 1, 2)}"></span>
+												asistencias por partido
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
+
+					<div class="row">
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Máximo
+										productor</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(equipoModel.getMaximoAnotador().getUrlFoto()))} ? ${equipoModel.getMaximoAnotador().getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a th:text="${equipoModel.getMaximoAnotador().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getMaximoAnotador().id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(equipoModel.getMaximoAnotador().getPuntosPorMinuto(), 1, 2)}"></span>
+												puntos por 40 minutos
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Más
+										eficiente</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(equipoModel.getJugadorMasEficiente().getUrlFoto()))} ? ${equipoModel.getJugadorMasEficiente().getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a
+													th:text="${equipoModel.getJugadorMasEficiente().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getJugadorMasEficiente().id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(equipoModel.getJugadorMasEficiente().getPuntosPorTiro(), 1, 2)}"></span>
+												puntos por tiro
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Mayor porcentaje efectivo TC</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(equipoModel.getJugadorMejorPctgEf().getUrlFoto()))} ? ${equipoModel.getJugadorMejorPctgEf().getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a
+													th:text="${equipoModel.getJugadorMejorPctgEf().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getJugadorMejorPctgEf().id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(equipoModel.getJugadorMejorPctgEf().getPctgEfTC(), 1, 2)}"></span>
+												% efectivo en TC
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Jugador con
+										más consumo</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(equipoModel.getJugadorMasConsumo().getUrlFoto()))} ? ${equipoModel.getJugadorMasConsumo().getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a
+													th:text="${equipoModel.getJugadorMasConsumo().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getJugadorMasConsumo().id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(equipoModel.getJugadorMasConsumo().getTirosPorMinuto(), 1, 2)}"></span>
+												tiros por 40 minutos
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 					<!-- Content Row -->
 					<div class="row">
 						<div class="col-xl-6 col-lg-5">
 							<div class="card shadow mb-4">
 								<!-- Card Header - Dropdown -->
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Estadísticas tradicionales</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Estadísticas
+										tradicionales</h6>
 								</div>
 								<!-- Card Body -->
 								<div class="card-body">
@@ -295,81 +547,153 @@
 											<tbody>
 												<tr>
 													<th>Puntos por partido</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartido(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoLocal(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoVisit(), 1, 2)}" >Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoDerrotas(), 1, 2)}" >System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartido(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>Puntos recibidos por partido</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRival(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRivalLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRivalVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRivalVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRivalDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRival(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRivalLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRivalVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRivalVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPuntosPorPartidoRivalDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>Rebotes ofensivos</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getROf(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getROfLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getROfVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getROfVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getROfDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getROf(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getROfLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getROfVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getROfVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getROfDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>Rebotes defensivos</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRDef(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRDefLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRDefVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRDefVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRDefDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRDef(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRDefLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRDefVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRDefVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRDefDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>Asistencias por partido</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartido(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartidoLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartidoVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartidoVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartidoDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartido(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartidoLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartidoVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartidoVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getAsistenciasPorPartidoDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>Balones perdidos por partido</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartido(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartidoLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartidoVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartidoVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartidoDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartido(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartidoLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartidoVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartidoVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPerdidasPorPartidoDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>% T2</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT2(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT2Local(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT2Visit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT2Victorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT2Derrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgT2(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgT2Local(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgT2Visit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgT2Victorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgT2Derrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>% T3</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT3(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT3Local(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT3Visit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT3Victorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgT3Derrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgT3(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgT3Local(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgT3Visit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgT3Victorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgT3Derrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>% TL</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgTl(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgTlLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgTlVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgTlVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgTlDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgTl(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgTlLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgTlVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgTlVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgTlDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 									<hr>
-									
+
 								</div>
 							</div>
 						</div>
@@ -404,84 +728,156 @@
 													<th>Media derrotas</th>
 												</tr>
 											</tfoot>
-											<tbody>												
+											<tbody>
 												<tr>
 													<th>Ritmo</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRitmo(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRitmoLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRitmoVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRitmoVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRitmoDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRitmo(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRitmoLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRitmoVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRitmoVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRitmoDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>Eficiencia</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffOf(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffOfLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffOfVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffOfVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffOfDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffOf(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffOfLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffOfVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffOfVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffOfDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>Eficiencia rival</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDef(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffDefDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffDef(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffDefLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffDefVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffDefVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffDefDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>Eficiencia neta</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetEff(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetEffLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetEffVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetEffVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getNetEffDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getNetEff(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getNetEffLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getNetEffVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getNetEffVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getNetEffDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>% efectivo TC</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTc(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffTc(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffTcLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffTcVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffTcVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffTcDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>% efectivo TC rival</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRival(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffTcRival(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getEffTcRivalDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>% rebote OF</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROf(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgROfDerrotas(), 1, 2)}">System Architect</td>
-												</tr>												
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgROf(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgROfLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgROfVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgROfVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgROfDerrotas(), 1, 2)}">System
+														Architect</td>
+												</tr>
 												<tr>
 													<th>% rebote Def</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDef(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgRDef(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getPctgRDefDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 												<tr>
 													<th>Ratio pérdidas</th>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidas(), 1, 2)}" >Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidasLocal(), 1, 2)}">Tiger Nixon</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidasVisit(), 1, 2)}">Edinburgh</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidasVictorias(), 1, 2)}">Foto</td>
-													<td th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidasDerrotas(), 1, 2)}">System Architect</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidas(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidasLocal(), 1, 2)}">Tiger
+														Nixon</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidasVisit(), 1, 2)}">Edinburgh</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidasVictorias(), 1, 2)}">Foto</td>
+													<td
+														th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidasDerrotas(), 1, 2)}">System
+														Architect</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 									<hr>
-									
+
 								</div>
 							</div>
 
@@ -671,7 +1067,6 @@
 
 	<!-- Page level custom scripts -->
 	<script src="/js/demo/datatables-demo.js"></script>
-
 </body>
 
 </html>

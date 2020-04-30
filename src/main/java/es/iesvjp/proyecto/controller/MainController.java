@@ -90,7 +90,7 @@ public class MainController {
 		    @ModelAttribute("searchJugador") Jugador searchJugador,
 		    BindingResult result) {
 		LOG.info("METHOD: inicioGet -- PARAMS: texto: " + searchJugador.getNombre());
-		List<Jugador> jugadores=jugadorService.buscarJugador(searchJugador.getNombre());
+		List<Jugador> jugadores=jugadorService.buscarJugador(searchJugador.getNombre().toUpperCase());
 		ModelAndView mav = new ModelAndView("buscarJugador");
 		/*while (jugadores.size()>20) {
 			jugadores.remove(20);

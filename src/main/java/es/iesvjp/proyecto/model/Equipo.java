@@ -2003,7 +2003,7 @@ public class Equipo implements Serializable {
 	public Jugador getJugadorMasMinutos() {
 		double max = 0;
 		for (int i = 0; i < getJugadores().size(); i++) {
-			if(getJugadores().get(i).getMinutosPorPartido()>max) {
+			if(getJugadores().get(i).getMinutosPorPartido()>max && getJugadores().get(i).getMinutosPorPartido()>10) {
 				max=getJugadores().get(i).getMinutosPorPartido();
 			}
 		}
@@ -2014,11 +2014,26 @@ public class Equipo implements Serializable {
 		}
 		return null;
 	}
-
-	public Jugador getMaximoanotador() {
+	
+	public Jugador getJugadorMaxPtosPartido() {
 		double max = 0;
 		for (int i = 0; i < getJugadores().size(); i++) {
-			if(getJugadores().get(i).getPuntosPorMinuto()>max) {
+			if(getJugadores().get(i).getPuntosPorPartido()>max && getJugadores().get(i).getMinutosPorPartido()>10) {
+				max=getJugadores().get(i).getPuntosPorPartido();
+			}
+		}
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if(getJugadores().get(i).getPuntosPorPartido()==max) {
+				return getJugadores().get(i);
+			}
+		}
+		return null;
+	}
+
+	public Jugador getMaximoAnotador() {
+		double max = 0;
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if(getJugadores().get(i).getPuntosPorMinuto()>max && getJugadores().get(i).getMinutosPorPartido()>10) {
 				max=getJugadores().get(i).getPuntosPorMinuto();
 			}
 		}
@@ -2030,10 +2045,41 @@ public class Equipo implements Serializable {
 		return null;
 	}
 	
+	public Jugador getJugadorMasEficiente() {
+		double max = 0;
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if(getJugadores().get(i).getPuntosPorTiro()>max && getJugadores().get(i).getMinutosPorPartido()>10) {
+				max=getJugadores().get(i).getPuntosPorTiro();
+			}
+		}
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if(getJugadores().get(i).getPuntosPorTiro()==max) {
+				return getJugadores().get(i);
+			}
+		}
+		return null;
+	}
+	
+	public Jugador getJugadorMejorPctgEf() {
+		double max = 0;
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if(getJugadores().get(i).getPctgEfTC()>max && getJugadores().get(i).getMinutosPorPartido()>10) {
+				max=getJugadores().get(i).getPctgEfTC();
+			}
+		}
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if(getJugadores().get(i).getPctgEfTC()==max) {
+				return getJugadores().get(i);
+			}
+		}
+		return null;
+	}
+	
+	
 	public Jugador getJugadorMasEficienteT2() {
 		double max = 0;
 		for (int i = 0; i < getJugadores().size(); i++) {
-			if(getJugadores().get(i).getPuntosPorTiro2()>max) {
+			if(getJugadores().get(i).getPuntosPorTiro2()>max && getJugadores().get(i).getMinutosPorPartido()>10) {
 				max=getJugadores().get(i).getPuntosPorTiro2();
 			}
 		}
@@ -2048,7 +2094,7 @@ public class Equipo implements Serializable {
 	public Jugador getJugadorMasEficienteT3() {
 		double max = 0;
 		for (int i = 0; i < getJugadores().size(); i++) {
-			if(getJugadores().get(i).getPuntosPorTiro3()>max) {
+			if(getJugadores().get(i).getPuntosPorTiro3()>max && getJugadores().get(i).getMinutosPorPartido()>10) {
 				max=getJugadores().get(i).getPuntosPorTiro3();
 			}
 		}
@@ -2063,7 +2109,7 @@ public class Equipo implements Serializable {
 	public Jugador getJugadorMasConsumo() {
 		double max = 0;
 		for (int i = 0; i < getJugadores().size(); i++) {
-			if(getJugadores().get(i).getTirosPorMinuto()>max) {
+			if(getJugadores().get(i).getTirosPorMinuto()>max && getJugadores().get(i).getMinutosPorPartido()>10) {
 				max=getJugadores().get(i).getTirosPorMinuto();
 			}
 		}
@@ -2078,12 +2124,26 @@ public class Equipo implements Serializable {
 	public Jugador getMaximoReboteador() {
 		double max = 0;
 		for (int i = 0; i < getJugadores().size(); i++) {
-			if(getJugadores().get(i).getRebotesPorMinuto()>max) {
-				max=getJugadores().get(i).getRebotesPorMinuto();
+			if(getJugadores().get(i).getRebotesPorPartido()>max && getJugadores().get(i).getMinutosPorPartido()>10) {
+				max=getJugadores().get(i).getRebotesPorPartido();
 			}
 		}
 		for (int i = 0; i < getJugadores().size(); i++) {
-			if(getJugadores().get(i).getRebotesPorMinuto()==max) {
+			if(getJugadores().get(i).getRebotesPorPartido()==max) {
+				return getJugadores().get(i);
+			}
+		}
+		return null;
+	}
+	public Jugador getMaximoAsistente() {
+		double max = 0;
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if(getJugadores().get(i).getAsistenciasPorPartido()>max && getJugadores().get(i).getMinutosPorPartido()>10) {
+				max=getJugadores().get(i).getAsistenciasPorPartido();
+			}
+		}
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if(getJugadores().get(i).getAsistenciasPorPartido()==max) {
 				return getJugadores().get(i);
 			}
 		}
