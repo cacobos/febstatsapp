@@ -99,8 +99,7 @@
 						<a th:each="equipoOro : ${equiposOro}"
 							th:text="${#strings.abbreviate(equipoOro.nombre,25)}"
 							th:href="@{/equipo(id=${equipoOro.id})}"
-							class="collapse-item small" href="buttons.html">Buttons</a> <a
-							class="collapse-item" href="cards.html">Cards</a>
+							class="collapse-item small" href="buttons.html">Buttons</a>
 					</div>
 				</div></li>
 
@@ -117,8 +116,7 @@
 						<a th:each="equipoPlata : ${equiposPlata}"
 							th:text="${#strings.abbreviate(equipoPlata.nombre,25)}"
 							th:href="@{/equipo(id=${equipoPlata.id})}"
-							class="collapse-item small" href="buttons.html">Buttons</a> <a
-							class="collapse-item" href="cards.html">Cards</a>
+							class="collapse-item small" href="buttons.html">Buttons</a> 
 					</div>
 				</div></li>
 			<!-- Nav Item - Pages Collapse Menu -->
@@ -134,8 +132,7 @@
 						<a th:each="equipoLF : ${equiposLF}"
 							th:text="${#strings.abbreviate(equipoLF.nombre,25)}"
 							th:href="@{/equipo(id=${equipoLF.id})}"
-							class="collapse-item small" href="buttons.html">Buttons</a> <a
-							class="collapse-item" href="cards.html">Cards</a>
+							class="collapse-item small" href="buttons.html">Buttons</a> 
 					</div>
 				</div></li>
 
@@ -158,8 +155,7 @@
 						<a th:each="equipoOro : ${equiposOro}"
 							th:text="${#strings.abbreviate(equipoOro.nombre,25)}"
 							th:href="@{/selectplayer(id=${equipoOro.id})}"
-							class="collapse-item small" href="buttons.html">Buttons</a> <a
-							class="collapse-item" href="cards.html">Cards</a>
+							class="collapse-item small" href="buttons.html">Buttons</a> 
 					</div>
 				</div></li>
 
@@ -176,8 +172,7 @@
 						<a th:each="equipoPlata : ${equiposPlata}"
 							th:text="${#strings.abbreviate(equipoPlata.nombre,25)}"
 							th:href="@{/selectplayer(id=${equipoPlata.id})}"
-							class="collapse-item small" href="buttons.html">Buttons</a> <a
-							class="collapse-item" href="cards.html">Cards</a>
+							class="collapse-item small" href="buttons.html">Buttons</a> 
 					</div>
 				</div></li>
 			<!-- Nav Item - Pages Collapse Menu -->
@@ -193,8 +188,7 @@
 						<a th:each="equipoLF : ${equiposLF}"
 							th:text="${#strings.abbreviate(equipoLF.nombre,25)}"
 							th:href="@{/selectplayer(id=${equipoLF.id})}"
-							class="collapse-item small" href="buttons.html">Buttons</a> <a
-							class="collapse-item" href="cards.html">Cards</a>
+							class="collapse-item small" href="buttons.html">Buttons</a> 
 					</div>
 				</div></li>
 
@@ -858,7 +852,7 @@
 														Architect</td>
 												</tr>
 												<tr>
-													<th>Ratio pérdidas</th>
+													<th>Pérdidas por 100 pos</th>
 													<td
 														th:text="${#numbers.formatDecimal(equipoModel.getRatioPerdidas(), 1, 2)}">Tiger
 														Nixon</td>

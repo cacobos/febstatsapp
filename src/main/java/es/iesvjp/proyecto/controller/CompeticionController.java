@@ -63,7 +63,17 @@ public class CompeticionController {
 		mav.addObject("equiposLF", equipoService.getEquiposCompeticion("LF ENDESA"));
 		mav.addObject("searchJugador", new Jugador());
 		mav.addObject("competicion", id);
-		mav.addObject("equiposLiga", equipoService.getEquiposCompeticion(id));
+		List<Equipo> equiposLiga= equipoService.getEquiposCompeticion(id);
+		mav.addObject("jugadorMasUtilizado",Utilidades.getJugadorMasMinutos(equiposLiga) );
+		mav.addObject("maximoAnotador",Utilidades.getMaximoAnotador(equiposLiga) );
+		mav.addObject("maximoReboteador",Utilidades.getMaximoReboteador(equiposLiga) );
+		mav.addObject("maximoAsistente",Utilidades.getMaximoAsistente(equiposLiga) );
+		mav.addObject("maximoProductor",Utilidades.getMaximoAnotador(equiposLiga) );
+		mav.addObject("maximoEficiente",Utilidades.getJugadorMasEficiente(equiposLiga) );
+		mav.addObject("maximoPctgEffTc",Utilidades.getJugadorMejorPctgEf(equiposLiga) );
+		mav.addObject("maximoConsumo",Utilidades.getJugadorMasConsumo(equiposLiga) );
+		mav.addObject("equiposLiga",equiposLiga);
+		
 		LOG.info("METHOD: inicioGet -- PARAMS: " + mav.getModel());
 		return mav;
 	}

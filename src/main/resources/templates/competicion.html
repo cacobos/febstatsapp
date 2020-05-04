@@ -76,7 +76,8 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Competiciones:</h6>
 						<a th:each="competicion : ${competiciones}"
-							th:text="*{competicion}" th:href="@{/competicion(id=${competicion})}"
+							th:text="*{competicion}"
+							th:href="@{/competicion(id=${competicion})}"
 							class="collapse-item" href="buttons.html">Buttons</a>
 					</div>
 				</div></li>
@@ -287,7 +288,258 @@
 							</div>
 						</div>
 					</div> -->
+					<div class="row">
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Jugador más
+										utilizado</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(jugadorMasUtilizado.getUrlFoto()))} ? ${jugadorMasUtilizado.getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a
+													th:text="${jugadorMasUtilizado.getNombre()}"
+													th:href="@{/jugador(id=${jugadorMasUtilizado.id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(jugadorMasUtilizado.getMinutosPorPartido(), 1, 2)}"></span>
+												minutos por partido
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Máximo
+										anotador</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(maximoAnotador.getUrlFoto()))} ? ${maximoAnotador.getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a
+													th:text="${maximoAnotador.getNombre()}"
+													th:href="@{/jugador(id=${maximoAnotador.id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(maximoAnotador.getPuntosPorPartido(), 1, 2)}"></span>
+												puntos por partido
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Máximo
+										reboteador</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(maximoReboteador.getUrlFoto()))} ? ${maximoReboteador.getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a
+													th:text="${maximoReboteador.getNombre()}"
+													th:href="@{/jugador(id=${maximoReboteador.id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(maximoReboteador.getRebotesPorPartido(), 1, 2)}"></span>
+												rebotes por partido
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Máximo
+										asistente</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(maximoAsistente.getUrlFoto()))} ? ${maximoAsistente.getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a th:text="${maximoAsistente.getNombre()}"
+													th:href="@{/jugador(id=${maximoAsistente.id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(maximoAsistente.getAsistenciasPorPartido(), 1, 2)}"></span>
+												asistencias por partido
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
+
+					<div class="row">
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Máximo
+										productor</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(maximoProductor.getUrlFoto()))} ? ${maximoProductor.getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a th:text="${maximoProductor.getNombre()}"
+													th:href="@{/jugador(id=${maximoProductor.id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(maximoProductor.getPuntosPorMinuto(), 1, 2)}"></span>
+												puntos por 40 minutos
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Más
+										eficiente</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(maximoEficiente.getUrlFoto()))} ? ${maximoEficiente.getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a
+													th:text="${maximoEficiente.getNombre()}"
+													th:href="@{/jugador(id=${maximoEficiente.id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(maximoEficiente.getPuntosPorTiro(), 1, 2)}"></span>
+												puntos por tiro
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Mayor
+										porcentaje efectivo TC</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(maximoPctgEffTc.getUrlFoto()))} ? ${maximoPctgEffTc.getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a
+													th:text="${maximoPctgEffTc.getNombre()}"
+													th:href="@{/jugador(id=${maximoPctgEffTc.id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(maximoPctgEffTc.getPctgEfTC(), 1, 2)}"></span>
+												% efectivo en TC
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Jugador con
+										más consumo</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col no-gutters align-items-center">
+											<img class="img-thumbnail rounded mx-auto d-block"
+												th:src="${not (#strings.isEmpty(maximoConsumo.getUrlFoto()))} ? ${maximoConsumo.getUrlFoto()} : 'http://placehold.it/48x48'"
+												style="height: 150px;" />
+										</div>
+										<div class="col">
+											<div>
+												<a
+													th:text="${maximoConsumo.getNombre()}"
+													th:href="@{/jugador(id=${maximoConsumo.id})}"></a>
+											</div>
+											<div class="">
+												<span
+													th:text="${#numbers.formatDecimal(maximoConsumo.getTirosPorMinuto(), 1, 2)}"></span>
+												tiros por 40 minutos
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div class="row">
 						<!-- Tabla -->
 						<div class="col-xl-12 col-lg-7">

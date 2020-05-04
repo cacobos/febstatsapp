@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -230,5 +231,206 @@ public class Utilidades {
 			retVal += valores1[i] * valores2[i];
 		}
 		return retVal / valores1.length;
+	}
+	
+	
+
+	public static Jugador getJugadorMasMinutos(List<Equipo> equipos) {
+		double max = 0;
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipos.size(); i++) {
+			jugadores.add(equipos.get(i).getJugadorMasMinutos());
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getMinutosPorPartido()>max && jugadores.get(i).getMinutosPorPartido()>10) {
+				max=jugadores.get(i).getMinutosPorPartido();
+			}
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getMinutosPorPartido()==max) {
+				return jugadores.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public static Jugador getJugadorMaxPtosPartido(List<Equipo> equipos) {
+		double max = 0;
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipos.size(); i++) {
+			jugadores.add(equipos.get(i).getJugadorMaxPtosPartido());
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getPuntosPorPartido()>max && jugadores.get(i).getMinutosPorPartido()>10) {
+				max=jugadores.get(i).getPuntosPorPartido();
+			}
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getPuntosPorPartido()==max) {
+				return jugadores.get(i);
+			}
+		}
+		return null;
+	}
+
+	public static Jugador getMaximoAnotador(List<Equipo> equipos) {
+		double max = 0;
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipos.size(); i++) {
+			jugadores.add(equipos.get(i).getMaximoAnotador());
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getPuntosPorMinuto()>max && jugadores.get(i).getMinutosPorPartido()>10) {
+				max=jugadores.get(i).getPuntosPorMinuto();
+			}
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getPuntosPorMinuto()==max) {
+				return jugadores.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public static Jugador getJugadorMasEficiente(List<Equipo> equipos) {
+		double max = 0;
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipos.size(); i++) {
+			jugadores.add(equipos.get(i).getJugadorMasEficiente());
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getPuntosPorTiro()>max && jugadores.get(i).getMinutosPorPartido()>15) {
+				max=jugadores.get(i).getPuntosPorTiro();
+			}
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getPuntosPorTiro()==max && jugadores.get(i).getMinutosPorPartido()>15) {
+				return jugadores.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public static Jugador getJugadorMejorPctgEf(List<Equipo> equipos) {
+		double max = 0;
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipos.size(); i++) {
+			jugadores.add(equipos.get(i).getJugadorMejorPctgEf());
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getPctgEfTC()>max && jugadores.get(i).getMinutosPorPartido()>15) {
+				max=jugadores.get(i).getPctgEfTC();
+			}
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getPctgEfTC()==max && jugadores.get(i).getMinutosPorPartido()>15) {
+				System.out.println("Minutos por partido " + jugadores.get(i).getMinutosPorPartido());
+				return jugadores.get(i);
+			}
+		}
+		return null;
+	}
+	
+	
+	public static Jugador getJugadorMasEficienteT2(List<Equipo> equipos) {
+		double max = 0;
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipos.size(); i++) {
+			jugadores.add(equipos.get(i).getJugadorMasEficienteT2());
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getPuntosPorTiro2()>max && jugadores.get(i).getMinutosPorPartido()>10) {
+				max=jugadores.get(i).getPuntosPorTiro2();
+			}
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getPuntosPorTiro2()==max) {
+				return jugadores.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public static Jugador getJugadorMasEficienteT3(List<Equipo> equipos) {
+		double max = 0;
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipos.size(); i++) {
+			jugadores.add(equipos.get(i).getJugadorMasEficienteT2());
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getPuntosPorTiro3()>max && jugadores.get(i).getMinutosPorPartido()>10) {
+				max=jugadores.get(i).getPuntosPorTiro3();
+			}
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getPuntosPorTiro3()==max) {
+				return jugadores.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public static Jugador getJugadorMasConsumo(List<Equipo> equipos) {
+		double max = 0;
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipos.size(); i++) {
+			jugadores.add(equipos.get(i).getJugadorMasConsumo());
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getTirosPorMinuto()>max && jugadores.get(i).getMinutosPorPartido()>10) {
+				max=jugadores.get(i).getTirosPorMinuto();
+			}
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getTirosPorMinuto()==max) {
+				return jugadores.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public static Jugador getMaximoReboteador(List<Equipo> equipos) {
+		double max = 0;
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipos.size(); i++) {
+			jugadores.add(equipos.get(i).getMaximoReboteador());
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getRebotesPorPartido()>max && jugadores.get(i).getMinutosPorPartido()>10) {
+				max=jugadores.get(i).getRebotesPorPartido();
+			}
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getRebotesPorPartido()==max) {
+				return jugadores.get(i);
+			}
+		}
+		return null;
+	}
+	public static Jugador getMaximoAsistente(List<Equipo> equipos) {
+		double max = 0;
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipos.size(); i++) {
+			jugadores.add(equipos.get(i).getMaximoAsistente());
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getAsistenciasPorPartido()>max && jugadores.get(i).getMinutosPorPartido()>10) {
+				max=jugadores.get(i).getAsistenciasPorPartido();
+			}
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getAsistenciasPorPartido()==max) {
+				return jugadores.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public static List<Jugador> getJugadores(List<Equipo> equipos){
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipos.size(); i++) {
+			jugadores.addAll(equipos.get(i).getJugadores());
+		}
+		return jugadores;
 	}
 }

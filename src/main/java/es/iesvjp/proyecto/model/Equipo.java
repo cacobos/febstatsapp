@@ -17,7 +17,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name = "Equipo")
+@Table(name = "equipo")
 @NamedQuery(name = "Equipo.findAll", query = "SELECT e FROM Equipo e")
 public class Equipo implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -114,7 +114,7 @@ public class Equipo implements Serializable {
 	public List<Partido> getPartidos1() {
 		List<Partido> devolver=new ArrayList<>();
 		for (int i = 0; i < partidos1.size(); i++) {
-			if(partidos1.get(i).getLineapartidos().size()>0) {
+			if(partidos1.get(i).getLineapartidos().size()>0 &&(partidos1.get(i).ganaLocal() || partidos1.get(i).ganaVisit())) {
 				devolver.add(partidos1.get(i));
 			}
 		}
@@ -142,7 +142,7 @@ public class Equipo implements Serializable {
 	public List<Partido> getPartidos2() {
 		List<Partido> devolver=new ArrayList<>();
 		for (int i = 0; i < partidos2.size(); i++) {
-			if(partidos2.get(i).getLineapartidos().size()>0) {
+			if(partidos2.get(i).getLineapartidos().size()>0&&(partidos2.get(i).ganaLocal() || partidos2.get(i).ganaVisit())) {
 				devolver.add(partidos2.get(i));
 			}
 		}
@@ -169,21 +169,21 @@ public class Equipo implements Serializable {
 
 	public List<Partido> getPartidos() {
 		List<Partido> partidos = new ArrayList<Partido>();
-		partidos.addAll(partidos1);
-		partidos.addAll(partidos2);
+		partidos.addAll(getPartidos1());
+		partidos.addAll(getPartidos2());
 		return partidos;
 	}
 
 	public List<Partido> getVictorias() {
 		List<Partido> victorias = new ArrayList<>();
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				victorias.add(partidos1.get(i));
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				victorias.add(getPartidos1().get(i));
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				victorias.add(partidos2.get(i));
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				victorias.add(getPartidos2().get(i));
 			}
 		}
 		return victorias;
@@ -191,14 +191,14 @@ public class Equipo implements Serializable {
 
 	public List<Partido> getDerrotas() {
 		List<Partido> derrotas = new ArrayList<>();
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				derrotas.add(partidos1.get(i));
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				derrotas.add(getPartidos1().get(i));
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				derrotas.add(partidos2.get(i));
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				derrotas.add(getPartidos2().get(i));
 			}
 		}
 		return derrotas;
@@ -206,41 +206,41 @@ public class Equipo implements Serializable {
 
 	public int getPosesiones() {
 		int posesiones = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			posesiones += partidos1.get(i).getPosesionesLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			posesiones += getPartidos1().get(i).getPosesionesLocal();
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			posesiones += partidos2.get(i).getPosesionesVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			posesiones += getPartidos2().get(i).getPosesionesVisit();
 		}
 		return posesiones;
 	}
 
 	public int getPosesionesLocal() {
 		int posesiones = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			posesiones += partidos1.get(i).getPosesionesLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			posesiones += getPartidos1().get(i).getPosesionesLocal();
 		}
 		return posesiones;
 	}
 
 	public int getPosesionesVisit() {
 		int posesiones = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			posesiones += partidos2.get(i).getPosesionesVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			posesiones += getPartidos2().get(i).getPosesionesVisit();
 		}
 		return posesiones;
 	}
 
 	public int getPosesionesVictorias() {
 		int posesiones = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				posesiones += partidos1.get(i).getPosesionesLocal();
+		for (int i = 0; i <getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				posesiones += getPartidos1().get(i).getPosesionesLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				posesiones += partidos2.get(i).getPosesionesVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				posesiones += getPartidos2().get(i).getPosesionesVisit();
 			}
 		}
 		return posesiones;
@@ -248,14 +248,14 @@ public class Equipo implements Serializable {
 
 	public int getPosesionesDerrotas() {
 		int posesiones = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				posesiones += partidos1.get(i).getPosesionesLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				posesiones += getPartidos1().get(i).getPosesionesLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				posesiones += partidos2.get(i).getPosesionesVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				posesiones += getPartidos2().get(i).getPosesionesVisit();
 			}
 		}
 		return posesiones;
@@ -263,41 +263,41 @@ public class Equipo implements Serializable {
 
 	public int getPosesionesRival() {
 		int posesiones = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			posesiones += partidos1.get(i).getPosesionesVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			posesiones += getPartidos1().get(i).getPosesionesVisit();
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			posesiones += partidos2.get(i).getPosesionesLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			posesiones += getPartidos2().get(i).getPosesionesLocal();
 		}
 		return posesiones;
 	}
 
 	public int getPosesionesRivalLocal() {
 		int posesiones = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			posesiones += partidos1.get(i).getPosesionesVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			posesiones += getPartidos1().get(i).getPosesionesVisit();
 		}
 		return posesiones;
 	}
 
 	public int getPosesionesRivalVisit() {
 		int posesiones = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			posesiones += partidos2.get(i).getPosesionesLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			posesiones += getPartidos2().get(i).getPosesionesLocal();
 		}
 		return posesiones;
 	}
 
 	public int getPosesionesRivalVictorias() {
 		int posesiones = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				posesiones += partidos1.get(i).getPosesionesVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				posesiones += getPartidos1().get(i).getPosesionesVisit();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				posesiones += partidos2.get(i).getPosesionesLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				posesiones += getPartidos2().get(i).getPosesionesLocal();
 			}
 		}
 		return posesiones;
@@ -305,14 +305,14 @@ public class Equipo implements Serializable {
 
 	public int getPosesionesRivalDerrotas() {
 		int posesiones = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				posesiones += partidos1.get(i).getPosesionesVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				posesiones += getPartidos1().get(i).getPosesionesVisit();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				posesiones += partidos2.get(i).getPosesionesLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				posesiones += getPartidos2().get(i).getPosesionesLocal();
 			}
 		}
 		return posesiones;
@@ -320,41 +320,41 @@ public class Equipo implements Serializable {
 
 	public int getMinutos() {
 		int minutos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			minutos += partidos1.get(i).getMinutos();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			minutos += getPartidos1().get(i).getMinutos();
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			minutos += partidos2.get(i).getMinutos();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			minutos += getPartidos2().get(i).getMinutos();
 		}
 		return minutos;
 	}
 
 	public int getMinutosLocal() {
 		int minutos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			minutos += partidos1.get(i).getMinutos();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			minutos += getPartidos1().get(i).getMinutos();
 		}
 		return minutos;
 	}
 
 	public int getMinutosVisit() {
 		int minutos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			minutos += partidos2.get(i).getMinutos();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			minutos += getPartidos2().get(i).getMinutos();
 		}
 		return minutos;
 	}
 
 	public int getMinutosVictorias() {
 		int minutos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				minutos += partidos1.get(i).getMinutos();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				minutos += getPartidos1().get(i).getMinutos();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				minutos += partidos2.get(i).getMinutos();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				minutos += getPartidos2().get(i).getMinutos();
 			}
 		}
 		return minutos;
@@ -362,14 +362,14 @@ public class Equipo implements Serializable {
 
 	public int getMinutosDerrotas() {
 		int minutos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				minutos += partidos1.get(i).getMinutos();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				minutos += getPartidos1().get(i).getMinutos();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				minutos += partidos2.get(i).getMinutos();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				minutos += getPartidos2().get(i).getMinutos();
 			}
 		}
 		return minutos;
@@ -397,41 +397,41 @@ public class Equipo implements Serializable {
 
 	public int getPuntos() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getPtoLocal();
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getPtoVisit();
 		}
 		return puntos;
 	}
 
 	public int getPuntosLocal() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getPtoLocal();
 		}
 		return puntos;
 	}
 
 	public int getPuntosVisit() {
 		int puntos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getPtoVisit();
 		}
 		return puntos;
 	}
 
 	public int getPuntosVictorias() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				puntos += partidos1.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getPtoLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				puntos += partidos2.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getPtoVisit();
 			}
 		}
 		return puntos;
@@ -439,14 +439,14 @@ public class Equipo implements Serializable {
 
 	public int getPuntosDerrotas() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				puntos += partidos1.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getPtoLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				puntos += partidos2.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getPtoVisit();
 			}
 		}
 		return puntos;
@@ -455,12 +455,12 @@ public class Equipo implements Serializable {
 	public double getPuntosPorPartido() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getPtoLocal();
 			partidos++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getPtoVisit();
 			partidos++;
 		}
 		return (double) puntos / (double) partidos;
@@ -469,8 +469,8 @@ public class Equipo implements Serializable {
 	public double getPuntosPorPartidoLocal() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getPtoLocal();
 			partidos++;
 		}
 		return (double) puntos / (double) partidos;
@@ -479,8 +479,8 @@ public class Equipo implements Serializable {
 	public double getPuntosPorPartidoVisit() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getPtoVisit();
 			partidos++;
 		}
 		return (double) puntos / (double) partidos;
@@ -489,15 +489,15 @@ public class Equipo implements Serializable {
 	public double getPuntosPorPartidoVictorias() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				puntos += partidos1.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getPtoLocal();
 				partidos++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				puntos += partidos2.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getPtoVisit();
 				partidos++;
 			}
 		}
@@ -507,15 +507,15 @@ public class Equipo implements Serializable {
 	public double getPuntosPorPartidoDerrotas() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				puntos += partidos1.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getPtoLocal();
 				partidos++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				puntos += partidos2.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getPtoVisit();
 				partidos++;
 			}
 		}
@@ -525,12 +525,12 @@ public class Equipo implements Serializable {
 	public double getPuntosPorPartidoRival() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getPtoVisit();
 			partidos++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getPtoLocal();
 			partidos++;
 		}
 		return (double) puntos / (double) partidos;
@@ -539,8 +539,8 @@ public class Equipo implements Serializable {
 	public double getPuntosPorPartidoRivalLocal() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getPtoVisit();
 			partidos++;
 		}
 		return (double) puntos / (double) partidos;
@@ -549,8 +549,8 @@ public class Equipo implements Serializable {
 	public double getPuntosPorPartidoRivalVisit() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getPtoLocal();
 			partidos++;
 		}
 		return (double) puntos / (double) partidos;
@@ -559,15 +559,15 @@ public class Equipo implements Serializable {
 	public double getPuntosPorPartidoRivalVictorias() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				puntos += partidos1.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getPtoVisit();
 				partidos++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				puntos += partidos2.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getPtoLocal();
 				partidos++;
 			}
 		}
@@ -577,15 +577,15 @@ public class Equipo implements Serializable {
 	public double getPuntosPorPartidoRivalDerrotas() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				puntos += partidos1.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getPtoVisit();
 				partidos++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				puntos += partidos2.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getPtoLocal();
 				partidos++;
 			}
 		}
@@ -594,41 +594,41 @@ public class Equipo implements Serializable {
 
 	public int getPuntosRival() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getPtoVisit();
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getPtoLocal();
 		}
 		return puntos;
 	}
 
 	public int getPuntosRivalLocal() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getPtoVisit();
 		}
 		return puntos;
 	}
 
 	public int getPuntosRivalVisit() {
 		int puntos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getPtoLocal();
 		}
 		return puntos;
 	}
 
 	public int getPuntosRivalVictorias() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				puntos += partidos1.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getPtoVisit();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				puntos += partidos2.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getPtoLocal();
 			}
 		}
 		return puntos;
@@ -636,14 +636,14 @@ public class Equipo implements Serializable {
 
 	public int getPuntosRivalDerrotas() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				puntos += partidos1.get(i).getPtoVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getPtoVisit();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				puntos += partidos2.get(i).getPtoLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getPtoLocal();
 			}
 		}
 		return puntos;
@@ -712,12 +712,12 @@ public class Equipo implements Serializable {
 	public double getEffTc() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).pctgEffTcLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).pctgEffTcLocal();
 			total++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).pctgEffTcVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).pctgEffTcVisit();
 			total++;
 		}
 		return pct / total * 100;
@@ -726,8 +726,8 @@ public class Equipo implements Serializable {
 	public double getEffTcLocal() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).pctgEffTcLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).pctgEffTcLocal();
 			total++;
 		}
 		return pct / total * 100;
@@ -736,8 +736,8 @@ public class Equipo implements Serializable {
 	public double getEffTcVisit() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).pctgEffTcVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).pctgEffTcVisit();
 			total++;
 		}
 		return pct / total * 100;
@@ -746,15 +746,15 @@ public class Equipo implements Serializable {
 	public double getEffTcVictorias() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				pct += partidos1.get(i).pctgEffTcLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				pct += getPartidos1().get(i).pctgEffTcLocal();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				pct += partidos2.get(i).pctgEffTcVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				pct += getPartidos2().get(i).pctgEffTcVisit();
 				total++;
 			}
 		}
@@ -764,15 +764,15 @@ public class Equipo implements Serializable {
 	public double getEffTcDerrotas() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				pct += partidos1.get(i).pctgEffTcLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				pct += getPartidos1().get(i).pctgEffTcLocal();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				pct += partidos2.get(i).pctgEffTcVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				pct += getPartidos2().get(i).pctgEffTcVisit();
 				total++;
 			}
 		}
@@ -782,12 +782,12 @@ public class Equipo implements Serializable {
 	public double getEffTcRival() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).pctgEffTcVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).pctgEffTcVisit();
 			total++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).pctgEffTcLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).pctgEffTcLocal();
 			total++;
 		}
 		return pct / total * 100;
@@ -796,8 +796,8 @@ public class Equipo implements Serializable {
 	public double getEffTcRivalLocal() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).pctgEffTcVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).pctgEffTcVisit();
 			total++;
 		}
 		return pct / total * 100;
@@ -806,8 +806,8 @@ public class Equipo implements Serializable {
 	public double getEffTcRivalVisit() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).pctgEffTcLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).pctgEffTcLocal();
 			total++;
 		}
 		return pct / total * 100;
@@ -816,15 +816,15 @@ public class Equipo implements Serializable {
 	public double getEffTcRivalVictorias() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				pct += partidos1.get(i).pctgEffTcVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				pct += getPartidos1().get(i).pctgEffTcVisit();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				pct += partidos2.get(i).pctgEffTcLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				pct += getPartidos2().get(i).pctgEffTcLocal();
 				total++;
 			}
 		}
@@ -834,15 +834,15 @@ public class Equipo implements Serializable {
 	public double getEffTcRivalDerrotas() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				pct += partidos1.get(i).pctgEffTcVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				pct += getPartidos1().get(i).pctgEffTcVisit();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				pct += partidos2.get(i).pctgEffTcLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				pct += getPartidos2().get(i).pctgEffTcLocal();
 				total++;
 			}
 		}
@@ -852,12 +852,12 @@ public class Equipo implements Serializable {
 	public double getPctgROf() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).pctgROfLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).pctgROfLocal();
 			total++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).pctgROfVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).pctgROfVisit();
 			total++;
 		}
 		return pct / total;
@@ -866,8 +866,8 @@ public class Equipo implements Serializable {
 	public double getPctgROfLocal() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).pctgROfLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).pctgROfLocal();
 			total++;
 		}
 		return pct / total;
@@ -876,8 +876,8 @@ public class Equipo implements Serializable {
 	public double getPctgROfVisit() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).pctgROfVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).pctgROfVisit();
 			total++;
 		}
 		return pct / total;
@@ -886,15 +886,15 @@ public class Equipo implements Serializable {
 	public double getPctgROfVictorias() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				pct += partidos1.get(i).pctgROfLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				pct += getPartidos1().get(i).pctgROfLocal();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				pct += partidos2.get(i).pctgROfVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				pct += getPartidos2().get(i).pctgROfVisit();
 				total++;
 			}
 		}
@@ -904,15 +904,15 @@ public class Equipo implements Serializable {
 	public double getPctgROfDerrotas() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				pct += partidos1.get(i).pctgROfLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				pct += getPartidos1().get(i).pctgROfLocal();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				pct += partidos2.get(i).pctgROfVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				pct += getPartidos2().get(i).pctgROfVisit();
 				total++;
 			}
 		}
@@ -922,12 +922,12 @@ public class Equipo implements Serializable {
 	public double getPctgROfRival() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).pctgROfVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).pctgROfVisit();
 			total++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).pctgROfLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).pctgROfLocal();
 			total++;
 		}
 		return pct / total;
@@ -936,8 +936,8 @@ public class Equipo implements Serializable {
 	public double getPctgROfRivalLocal() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).pctgROfVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).pctgROfVisit();
 			total++;
 		}
 		return pct / total;
@@ -946,8 +946,8 @@ public class Equipo implements Serializable {
 	public double getPctgROfRivalVisit() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).pctgROfLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).pctgROfLocal();
 			total++;
 		}
 		return pct / total;
@@ -956,15 +956,15 @@ public class Equipo implements Serializable {
 	public double getPctgROfRivalVictorias() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				pct += partidos1.get(i).pctgROfVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				pct += getPartidos1().get(i).pctgROfVisit();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				pct += partidos2.get(i).pctgROfLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				pct += getPartidos2().get(i).pctgROfLocal();
 				total++;
 			}
 		}
@@ -974,15 +974,15 @@ public class Equipo implements Serializable {
 	public double getPctgROfRivalDerrotas() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				pct += partidos1.get(i).pctgROfVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				pct += getPartidos1().get(i).pctgROfVisit();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				pct += partidos2.get(i).pctgROfLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				pct += getPartidos2().get(i).pctgROfLocal();
 				total++;
 			}
 		}
@@ -992,12 +992,12 @@ public class Equipo implements Serializable {
 	public double getPctgRDef() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).pctgRDefLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).pctgRDefLocal();
 			total++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).pctgRDefVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).pctgRDefVisit();
 			total++;
 		}
 		return pct / total;
@@ -1006,8 +1006,8 @@ public class Equipo implements Serializable {
 	public double getPctgRDefLocal() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).pctgRDefLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).pctgRDefLocal();
 			total++;
 		}
 		return pct / total;
@@ -1016,8 +1016,8 @@ public class Equipo implements Serializable {
 	public double getPctgRDefVisit() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).pctgRDefVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).pctgRDefVisit();
 			total++;
 		}
 		return pct / total;
@@ -1026,15 +1026,15 @@ public class Equipo implements Serializable {
 	public double getPctgRDefVictorias() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				pct += partidos1.get(i).pctgRDefLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				pct += getPartidos1().get(i).pctgRDefLocal();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				pct += partidos2.get(i).pctgRDefVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				pct += getPartidos2().get(i).pctgRDefVisit();
 				total++;
 			}
 		}
@@ -1044,15 +1044,15 @@ public class Equipo implements Serializable {
 	public double getPctgRDefDerrotas() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				pct += partidos1.get(i).pctgRDefLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				pct += getPartidos1().get(i).pctgRDefLocal();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				pct += partidos2.get(i).pctgRDefVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				pct += getPartidos2().get(i).pctgRDefVisit();
 				total++;
 			}
 		}
@@ -1062,12 +1062,12 @@ public class Equipo implements Serializable {
 	public double getPctgRDefRival() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).pctgRDefVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).pctgRDefVisit();
 			total++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).pctgRDefLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).pctgRDefLocal();
 			total++;
 		}
 		return pct / total;
@@ -1076,8 +1076,8 @@ public class Equipo implements Serializable {
 	public double getPctgRDefRivalLocal() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).pctgRDefVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).pctgRDefVisit();
 			total++;
 		}
 		return pct / total;
@@ -1086,8 +1086,8 @@ public class Equipo implements Serializable {
 	public double getPctgRDefRivalVisit() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).pctgRDefLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).pctgRDefLocal();
 			total++;
 		}
 		return pct / total;
@@ -1096,15 +1096,15 @@ public class Equipo implements Serializable {
 	public double getPctgRDefRivalVictorias() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				pct += partidos1.get(i).pctgRDefVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				pct += getPartidos1().get(i).pctgRDefVisit();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				pct += partidos2.get(i).pctgRDefLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				pct += getPartidos2().get(i).pctgRDefLocal();
 				total++;
 			}
 		}
@@ -1114,15 +1114,15 @@ public class Equipo implements Serializable {
 	public double getPctgRDefRivalDerrotas() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				pct += partidos1.get(i).pctgRDefVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				pct += getPartidos1().get(i).pctgRDefVisit();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				pct += partidos2.get(i).pctgRDefLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				pct += getPartidos2().get(i).pctgRDefLocal();
 				total++;
 			}
 		}
@@ -1132,12 +1132,12 @@ public class Equipo implements Serializable {
 	public double getROf() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).getRboLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).getRboLocal();
 			total++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).getRboVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).getRboVisit();
 			total++;
 		}
 		return (double) pct / (double) total;
@@ -1146,8 +1146,8 @@ public class Equipo implements Serializable {
 	public double getROfLocal() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).getRboLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).getRboLocal();
 			total++;
 		}
 		return pct / total;
@@ -1156,8 +1156,8 @@ public class Equipo implements Serializable {
 	public double getROfVisit() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).getRboVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).getRboVisit();
 			total++;
 		}
 		return pct / total;
@@ -1166,15 +1166,15 @@ public class Equipo implements Serializable {
 	public double getROfVictorias() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				pct += partidos1.get(i).getRboLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				pct += getPartidos1().get(i).getRboLocal();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				pct += partidos2.get(i).getRboVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				pct += getPartidos2().get(i).getRboVisit();
 				total++;
 			}
 		}
@@ -1184,15 +1184,15 @@ public class Equipo implements Serializable {
 	public double getROfDerrotas() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				pct += partidos1.get(i).getRboLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				pct += getPartidos1().get(i).getRboLocal();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				pct += partidos2.get(i).getRboVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				pct += getPartidos2().get(i).getRboVisit();
 				total++;
 			}
 		}
@@ -1202,12 +1202,12 @@ public class Equipo implements Serializable {
 	public double getROfRival() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).getRboVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).getRboVisit();
 			total++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).getRboLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).getRboLocal();
 			total++;
 		}
 		return pct / total;
@@ -1216,8 +1216,8 @@ public class Equipo implements Serializable {
 	public double getROfRivalLocal() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).getRboVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).getRboVisit();
 			total++;
 		}
 		return pct / total;
@@ -1226,8 +1226,8 @@ public class Equipo implements Serializable {
 	public double getROfRivalVisit() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).getRboLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).getRboLocal();
 			total++;
 		}
 		return pct / total;
@@ -1236,15 +1236,15 @@ public class Equipo implements Serializable {
 	public double getROfRivalVictorias() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				pct += partidos1.get(i).getRboVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				pct += getPartidos1().get(i).getRboVisit();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				pct += partidos2.get(i).getRboLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				pct += getPartidos2().get(i).getRboLocal();
 				total++;
 			}
 		}
@@ -1254,15 +1254,15 @@ public class Equipo implements Serializable {
 	public double getROfRivalDerrotas() {
 		double total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				pct += partidos1.get(i).getRboVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				pct += getPartidos1().get(i).getRboVisit();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				pct += partidos2.get(i).pctgROfLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				pct += getPartidos2().get(i).pctgROfLocal();
 				total++;
 			}
 		}
@@ -1272,12 +1272,12 @@ public class Equipo implements Serializable {
 	public double getRDef() {
 		int total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).getRbdLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).getRbdLocal();
 			total++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).getRbdVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).getRbdVisit();
 			total++;
 		}
 		return pct / total;
@@ -1286,8 +1286,8 @@ public class Equipo implements Serializable {
 	public double getRDefLocal() {
 		int total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).getRbdLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).getRbdLocal();
 			total++;
 		}
 		return pct / total;
@@ -1296,8 +1296,8 @@ public class Equipo implements Serializable {
 	public double getRDefVisit() {
 		int total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).getRbdVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).getRbdVisit();
 			total++;
 		}
 		return pct / total;
@@ -1306,15 +1306,15 @@ public class Equipo implements Serializable {
 	public double getRDefVictorias() {
 		int total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				pct += partidos1.get(i).getRbdLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				pct += getPartidos1().get(i).getRbdLocal();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				pct += partidos2.get(i).getRbdVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				pct += getPartidos2().get(i).getRbdVisit();
 				total++;
 			}
 		}
@@ -1324,15 +1324,15 @@ public class Equipo implements Serializable {
 	public double getRDefDerrotas() {
 		int total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				pct += partidos1.get(i).getRbdLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				pct += getPartidos1().get(i).getRbdLocal();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				pct += partidos2.get(i).getRbdVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				pct += getPartidos2().get(i).getRbdVisit();
 				total++;
 			}
 		}
@@ -1342,12 +1342,12 @@ public class Equipo implements Serializable {
 	public double getRDefRival() {
 		int total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).getRbdVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).getRbdVisit();
 			total++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).getRbdLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).getRbdLocal();
 			total++;
 		}
 		return pct / total;
@@ -1356,8 +1356,8 @@ public class Equipo implements Serializable {
 	public double getRDefRivalLocal() {
 		int total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			pct += partidos1.get(i).getRbdVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			pct += getPartidos1().get(i).getRbdVisit();
 			total++;
 		}
 		return pct / total;
@@ -1366,8 +1366,8 @@ public class Equipo implements Serializable {
 	public double getRDefRivalVisit() {
 		int total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			pct += partidos2.get(i).getRbdLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			pct += getPartidos2().get(i).getRbdLocal();
 			total++;
 		}
 		return pct / total;
@@ -1376,15 +1376,15 @@ public class Equipo implements Serializable {
 	public double getRDefRivalVictorias() {
 		int total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				pct += partidos1.get(i).getRbdVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				pct += getPartidos1().get(i).getRbdVisit();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				pct += partidos2.get(i).getRbdLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				pct += getPartidos2().get(i).getRbdLocal();
 				total++;
 			}
 		}
@@ -1394,15 +1394,15 @@ public class Equipo implements Serializable {
 	public double getRDefRivalDerrotas() {
 		int total = 0;
 		double pct = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				pct += partidos1.get(i).getRbdVisit();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				pct += getPartidos1().get(i).getRbdVisit();
 				total++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				pct += partidos2.get(i).getRbdLocal();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				pct += getPartidos2().get(i).getRbdLocal();
 				total++;
 			}
 		}
@@ -1412,12 +1412,12 @@ public class Equipo implements Serializable {
 	public double getAsistenciasPorPartido() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getAsLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getAsLocal();
 			partidos++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getAsVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getAsVisit();
 			partidos++;
 		}
 		return (double) puntos / (double) partidos;
@@ -1426,8 +1426,8 @@ public class Equipo implements Serializable {
 	public double getAsistenciasPorPartidoLocal() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getAsLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getAsLocal();
 			partidos++;
 		}
 		return (double) puntos / (double) partidos;
@@ -1436,8 +1436,8 @@ public class Equipo implements Serializable {
 	public double getAsistenciasPorPartidoVisit() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getAsVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getAsVisit();
 			partidos++;
 		}
 		return (double) puntos / (double) partidos;
@@ -1446,15 +1446,15 @@ public class Equipo implements Serializable {
 	public double getAsistenciasPorPartidoVictorias() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				puntos += partidos1.get(i).getAsLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getAsLocal();
 				partidos++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				puntos += partidos2.get(i).getAsVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getAsVisit();
 				partidos++;
 			}
 		}
@@ -1464,15 +1464,15 @@ public class Equipo implements Serializable {
 	public double getAsistenciasPorPartidoDerrotas() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				puntos += partidos1.get(i).getAsLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getAsLocal();
 				partidos++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				puntos += partidos2.get(i).getAsVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getAsVisit();
 				partidos++;
 			}
 		}
@@ -1482,12 +1482,12 @@ public class Equipo implements Serializable {
 	public double getPerdidasPorPartido() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getBpLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getBpLocal();
 			partidos++;
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getBpVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getBpVisit();
 			partidos++;
 		}
 		return (double) puntos / (double) partidos;
@@ -1496,8 +1496,8 @@ public class Equipo implements Serializable {
 	public double getPerdidasPorPartidoLocal() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getBpLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getBpLocal();
 			partidos++;
 		}
 		return (double) puntos / (double) partidos;
@@ -1506,8 +1506,8 @@ public class Equipo implements Serializable {
 	public double getPerdidasPorPartidoVisit() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getBpVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getBpVisit();
 			partidos++;
 		}
 		return (double) puntos / (double) partidos;
@@ -1516,15 +1516,15 @@ public class Equipo implements Serializable {
 	public double getPerdidasPorPartidoVictorias() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				puntos += partidos1.get(i).getBpLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getBpLocal();
 				partidos++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				puntos += partidos2.get(i).getBpVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getBpVisit();
 				partidos++;
 			}
 		}
@@ -1534,15 +1534,15 @@ public class Equipo implements Serializable {
 	public double getPerdidasPorPartidoDerrotas() {
 		int puntos = 0;
 		int partidos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				puntos += partidos1.get(i).getBpLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getBpLocal();
 				partidos++;
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				puntos += partidos2.get(i).getBpVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getBpVisit();
 				partidos++;
 			}
 		}
@@ -1551,41 +1551,41 @@ public class Equipo implements Serializable {
 
 	public int getT2a() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getT2aLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getT2aLocal();
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getT2aVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getT2aVisit();
 		}
 		return puntos;
 	}
 
 	public int getT2aLocal() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getT2aLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getT2aLocal();
 		}
 		return puntos;
 	}
 
 	public int getT2aVisit() {
 		int puntos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getT2aVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getT2aVisit();
 		}
 		return puntos;
 	}
 
 	public int getT2aVictorias() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				puntos += partidos1.get(i).getT2aLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getT2aLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				puntos += partidos2.get(i).getT2aVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getT2aVisit();
 			}
 		}
 		return puntos;
@@ -1593,14 +1593,14 @@ public class Equipo implements Serializable {
 
 	public int getT2aDerrotas() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				puntos += partidos1.get(i).getT2aLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getT2aLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				puntos += partidos2.get(i).getT2aVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getT2aVisit();
 			}
 		}
 		return puntos;
@@ -1608,41 +1608,41 @@ public class Equipo implements Serializable {
 
 	public int getT2i() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getT2iLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getT2iLocal();
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getT2iVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getT2iVisit();
 		}
 		return puntos;
 	}
 
 	public int getT2iLocal() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getT2iLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getT2iLocal();
 		}
 		return puntos;
 	}
 
 	public int getT2iVisit() {
 		int puntos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getT2iVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getT2iVisit();
 		}
 		return puntos;
 	}
 
 	public int getT2iVictorias() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				puntos += partidos1.get(i).getT2iLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getT2iLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				puntos += partidos2.get(i).getT2iVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getT2iVisit();
 			}
 		}
 		return puntos;
@@ -1650,14 +1650,14 @@ public class Equipo implements Serializable {
 
 	public int getT2iDerrotas() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				puntos += partidos1.get(i).getT2iLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getT2iLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				puntos += partidos2.get(i).getT2iVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getT2iVisit();
 			}
 		}
 		return puntos;
@@ -1665,41 +1665,41 @@ public class Equipo implements Serializable {
 
 	public int getT3a() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getT3aLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getT3aLocal();
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getT3aVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getT3aVisit();
 		}
 		return puntos;
 	}
 
 	public int getT3aLocal() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getT3aLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getT3aLocal();
 		}
 		return puntos;
 	}
 
 	public int getT3aVisit() {
 		int puntos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getT3aVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getT3aVisit();
 		}
 		return puntos;
 	}
 
 	public int getT3aVictorias() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				puntos += partidos1.get(i).getT3aLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getT3aLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				puntos += partidos2.get(i).getT3aVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getT3aVisit();
 			}
 		}
 		return puntos;
@@ -1707,14 +1707,14 @@ public class Equipo implements Serializable {
 
 	public int getT3aDerrotas() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				puntos += partidos1.get(i).getT3aLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getT3aLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				puntos += partidos2.get(i).getT3aVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getT3aVisit();
 			}
 		}
 		return puntos;
@@ -1722,41 +1722,41 @@ public class Equipo implements Serializable {
 
 	public int getT3i() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getT3iLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getT3iLocal();
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getT3iVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getT3iVisit();
 		}
 		return puntos;
 	}
 
 	public int getT3iLocal() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getT3iLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getT3iLocal();
 		}
 		return puntos;
 	}
 
 	public int getT3iVisit() {
 		int puntos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getT3iVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getT3iVisit();
 		}
 		return puntos;
 	}
 
 	public int getT3iVictorias() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				puntos += partidos1.get(i).getT3iLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getT3iLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				puntos += partidos2.get(i).getT3iVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getT3iVisit();
 			}
 		}
 		return puntos;
@@ -1764,14 +1764,14 @@ public class Equipo implements Serializable {
 
 	public int getT3iDerrotas() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				puntos += partidos1.get(i).getT3iLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getT3iLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				puntos += partidos2.get(i).getT3iVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getT3iVisit();
 			}
 		}
 		return puntos;
@@ -1779,41 +1779,41 @@ public class Equipo implements Serializable {
 
 	public int getTla() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getTlaLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getTlaLocal();
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getTlaVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getTlaVisit();
 		}
 		return puntos;
 	}
 
 	public int getTlaLocal() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getTlaLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getTlaLocal();
 		}
 		return puntos;
 	}
 
 	public int getTlaVisit() {
 		int puntos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getTlaVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getTlaVisit();
 		}
 		return puntos;
 	}
 
 	public int getTlaVictorias() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				puntos += partidos1.get(i).getTlaLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getTlaLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				puntos += partidos2.get(i).getTlaVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getTlaVisit();
 			}
 		}
 		return puntos;
@@ -1821,14 +1821,14 @@ public class Equipo implements Serializable {
 
 	public int getTlaDerrotas() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				puntos += partidos1.get(i).getTlaLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getTlaLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				puntos += partidos2.get(i).getTlaVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getTlaVisit();
 			}
 		}
 		return puntos;
@@ -1836,41 +1836,41 @@ public class Equipo implements Serializable {
 
 	public int getTli() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getTliLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getTliLocal();
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getTliVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getTliVisit();
 		}
 		return puntos;
 	}
 
 	public int getTliLocal() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			puntos += partidos1.get(i).getTliLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getTliLocal();
 		}
 		return puntos;
 	}
 
 	public int getTliVisit() {
 		int puntos = 0;
-		for (int i = 0; i < partidos2.size(); i++) {
-			puntos += partidos2.get(i).getTliVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getTliVisit();
 		}
 		return puntos;
 	}
 
 	public int getTliVictorias() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaLocal()) {
-				puntos += partidos1.get(i).getTliLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getTliLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaVisit()) {
-				puntos += partidos2.get(i).getTliVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getTliVisit();
 			}
 		}
 		return puntos;
@@ -1878,14 +1878,62 @@ public class Equipo implements Serializable {
 
 	public int getTliDerrotas() {
 		int puntos = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			if (partidos1.get(i).ganaVisit()) {
-				puntos += partidos1.get(i).getTliLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getTliLocal();
 			}
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			if (partidos2.get(i).ganaLocal()) {
-				puntos += partidos2.get(i).getTliVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getTliVisit();
+			}
+		}
+		return puntos;
+	}
+	
+	
+
+	public int getPerdidasLocal() {
+		int puntos = 0;
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			puntos += getPartidos1().get(i).getBpLocal();
+		}
+		return puntos;
+	}
+
+	public int getPerdidasVisit() {
+		int puntos = 0;
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			puntos += getPartidos2().get(i).getBpVisit();
+		}
+		return puntos;
+	}
+
+	public int getPerdidasVictorias() {
+		int puntos = 0;
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaLocal()) {
+				puntos += getPartidos1().get(i).getBpLocal();
+			}
+		}
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaVisit()) {
+				puntos += getPartidos2().get(i).getBpVisit();
+			}
+		}
+		return puntos;
+	}
+
+	public int getPerdidasDerrotas() {
+		int puntos = 0;
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			if (getPartidos1().get(i).ganaVisit()) {
+				puntos += getPartidos1().get(i).getBpLocal();
+			}
+		}
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			if (getPartidos2().get(i).ganaLocal()) {
+				puntos += getPartidos2().get(i).getBpVisit();
 			}
 		}
 		return puntos;
@@ -1953,11 +2001,11 @@ public class Equipo implements Serializable {
 
 	public double getPerdidas() {
 		double per = 0;
-		for (int i = 0; i < partidos1.size(); i++) {
-			per += partidos1.get(i).getBpLocal();
+		for (int i = 0; i < getPartidos1().size(); i++) {
+			per += getPartidos1().get(i).getBpLocal();
 		}
-		for (int i = 0; i < partidos2.size(); i++) {
-			per += partidos2.get(i).getBpVisit();
+		for (int i = 0; i < getPartidos2().size(); i++) {
+			per += getPartidos2().get(i).getBpVisit();
 		}
 		return per;
 	}
@@ -1967,27 +2015,27 @@ public class Equipo implements Serializable {
 	}
 
 	public double getRatioPerdidas() {
-		return getPerdidasPorPartido() / (getT2i() + getT3i() + 0.44 * getTli() + getPerdidasPorPartido());
+		return getPerdidas()*100 / (getT2i() + getT3i() + 0.44 * getTli() + getPerdidas());
 	}
 
 	public double getRatioPerdidasLocal() {
-		return getPerdidasPorPartidoLocal()
-				/ (getT2iLocal() + getT3iLocal() + 0.44 * getTliLocal() + getPerdidasPorPartidoLocal());
+		return getPerdidasLocal()*100
+				/ (getT2iLocal() + getT3iLocal() + 0.44 * getTliLocal() + getPerdidasLocal());
 	}
 
 	public double getRatioPerdidasVisit() {
-		return getPerdidasPorPartidoVisit()
-				/ (getT2iVisit() + getT3iVisit() + 0.44 * getTliVisit() + getPerdidasPorPartidoVisit());
+		return getPerdidasVisit()*100
+				/ (getT2iVisit() + getT3iVisit() + 0.44 * getTliVisit() + getPerdidasVisit());
 	}
 
 	public double getRatioPerdidasVictorias() {
-		return getPerdidasPorPartidoVictorias()
-				/ (getT2iVictorias() + getT3iVictorias() + 0.44 * getTliVictorias() + getPerdidasPorPartidoVictorias());
+		return getPerdidasVictorias()*100
+				/ (getT2iVictorias() + getT3iVictorias() + 0.44 * getTliVictorias() + getPerdidasVictorias());
 	}
 
 	public double getRatioPerdidasDerrotas() {
-		return getPerdidasPorPartidoDerrotas()
-				/ (getT2iDerrotas() + getT3iDerrotas() + 0.44 * getTliDerrotas() + getPerdidasPorPartidoDerrotas());
+		return getPerdidasDerrotas()*100
+				/ (getT2iDerrotas() + getT3iDerrotas() + 0.44 * getTliDerrotas() + getPerdidasDerrotas());
 	}
 
 	public List<Jugador> getJugadores() {
@@ -2003,7 +2051,7 @@ public class Equipo implements Serializable {
 	public Jugador getJugadorMasMinutos() {
 		double max = 0;
 		for (int i = 0; i < getJugadores().size(); i++) {
-			if(getJugadores().get(i).getMinutosPorPartido()>max && getJugadores().get(i).getMinutosPorPartido()>10) {
+			if(getJugadores().get(i).getMinutosPorPartido()>max && getJugadores().get(i).getMinutosPorPartido()>15) {
 				max=getJugadores().get(i).getMinutosPorPartido();
 			}
 		}

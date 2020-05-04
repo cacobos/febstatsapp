@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name = "Jugador")
+@Table(name = "jugador")
 @NamedQuery(name="Jugador.findAll", query="SELECT j FROM Jugador j")
 public class Jugador implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -140,7 +140,7 @@ public class Jugador implements Serializable {
 		double tiros=0, puntos=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
 			tiros+=lineapartidos.get(i).getT2i();
-			puntos+=lineapartidos.get(i).getPuntos();
+			puntos+=lineapartidos.get(i).getT2a()*2;
 		}
 		return puntos/tiros;
 	}
@@ -149,7 +149,7 @@ public class Jugador implements Serializable {
 		double tiros=0, puntos=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
 			tiros+=lineapartidos.get(i).getT3i();
-			puntos+=lineapartidos.get(i).getPuntos();
+			puntos+=lineapartidos.get(i).getT3a()*3;
 		}
 		return puntos/tiros;
 	}
@@ -164,7 +164,14 @@ public class Jugador implements Serializable {
 	}
 	
 	public double getPuntosPorTiro() {
-		return getPuntos()/getTirosCampo();
+		double tiros=0, puntos=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			tiros+=lineapartidos.get(i).getT2i();
+			tiros+=lineapartidos.get(i).getT3i();
+			puntos+=lineapartidos.get(i).getT3a()*3;
+			puntos+=lineapartidos.get(i).getT2a()*2;
+		}
+		return puntos/tiros;
 	}
 	
 	private double getRebOf() {
@@ -295,7 +302,7 @@ public class Jugador implements Serializable {
 			t3a+=lineapartidos.get(i).getT3a();
 			t3i+=lineapartidos.get(i).getT3i();
 		}
-		return (t2a+t3a*1.5)/(t2i+t3i);
+		return (t2a+t3a*1.5)/(t2i+t3i)*100;
 	}
 	
 	public String getNombreEquipo() {
