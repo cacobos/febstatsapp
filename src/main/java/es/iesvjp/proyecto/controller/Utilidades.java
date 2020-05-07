@@ -165,27 +165,10 @@ public class Utilidades {
 			
 		}
 		dataset.addSeries("firefox",
-				datos);
-		/*dataset.addSeries("ie", new double[][] { { 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017 },
-				{ 67.7, 63.1, 60.2, 50.6, 41.1, 31.8, 27.6, 20.4, 17.3, 12.3, 8.1 } });
-		dataset.addSeries("chrome", new double[][] { { 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017 },
-				{ 0.2, 6.4, 14.6, 25.3, 30.1, 34.3, 43.2, 47.3, 58.4 } });
-
-		XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-		renderer.setSeriesPaint(0, Color.ORANGE);
-		renderer.setSeriesPaint(1, Color.BLUE);
-		renderer.setSeriesPaint(2, Color.GREEN);
-		renderer.setSeriesStroke(0, new BasicStroke(2));
-		renderer.setSeriesStroke(1, new BasicStroke(2));
-		renderer.setSeriesStroke(2, new BasicStroke(2));*/
+				datos);		
 
 		JFreeChart grafico=ChartFactory.createScatterPlot("Relación % rebote defensivo - resultado", "% rbd", "Resultado", dataset);
-		//JFreeChart chart = ChartFactory.createXYLineChart("Título del gráfico", "Year", "Quota", dataset);
-		//chart.getXYPlot().getRangeAxis().setRange(0, 100);
-		//((NumberAxis) chart.getXYPlot().getRangeAxis()).setNumberFormatOverride(new DecimalFormat("#'%'"));
-		//chart.getXYPlot().setRenderer(renderer);
-
-		//BufferedImage image = chart.createBufferedImage(600, 400);
+		
 		BufferedImage image = grafico.createBufferedImage(600, 400);
 		try {
 			ImageIO.write(image, "png", Utilidades.cargarGrafico());
@@ -259,7 +242,11 @@ public class Utilidades {
 		return retVal / valores1.length;
 	}
 	
-	
+	/**
+	 * Método que devuelve el jugador con más minutos por partido de una lista de objetos Jugador
+	 * @param equipos
+	 * @return
+	 */
 
 	public static Jugador getJugadorMasMinutos(List<Equipo> equipos) {
 		double max = 0;
@@ -279,7 +266,11 @@ public class Utilidades {
 		}
 		return null;
 	}
-	
+	/**
+	 * Método que devuelve el jugador con más puntos por partido de una lista de objetos Jugador
+	 * @param equipos
+	 * @return
+	 */
 	public static Jugador getJugadorMaxPtosPartido(List<Equipo> equipos) {
 		double max = 0;
 		List<Jugador> jugadores=new ArrayList<>();
@@ -298,7 +289,11 @@ public class Utilidades {
 		}
 		return null;
 	}
-
+	/**
+	 * Método que devuelve el jugador con más puntos por minuto de una lista de objetos Jugador
+	 * @param equipos
+	 * @return
+	 */
 	public static Jugador getMaximoAnotador(List<Equipo> equipos) {
 		double max = 0;
 		List<Jugador> jugadores=new ArrayList<>();
@@ -317,7 +312,11 @@ public class Utilidades {
 		}
 		return null;
 	}
-	
+	/**
+	 * Método que devuelve el jugador con más puntos por tiro de una lista de objetos Jugador
+	 * @param equipos
+	 * @return
+	 */
 	public static Jugador getJugadorMasEficiente(List<Equipo> equipos) {
 		double max = 0;
 		List<Jugador> jugadores=new ArrayList<>();
@@ -336,7 +335,11 @@ public class Utilidades {
 		}
 		return null;
 	}
-	
+	/**
+	 * Método que devuelve el jugador con porcentaje efectivo en tiros de campo de una lista de objetos Jugador
+	 * @param equipos
+	 * @return
+	 */
 	public static Jugador getJugadorMejorPctgEf(List<Equipo> equipos) {
 		double max = 0;
 		List<Jugador> jugadores=new ArrayList<>();
@@ -357,7 +360,11 @@ public class Utilidades {
 		return null;
 	}
 	
-	
+	/**
+	 * Método que devuelve el jugador con más puntos por tiro de 2 de una lista de objetos Jugador
+	 * @param equipos
+	 * @return
+	 */
 	public static Jugador getJugadorMasEficienteT2(List<Equipo> equipos) {
 		double max = 0;
 		List<Jugador> jugadores=new ArrayList<>();
@@ -376,7 +383,11 @@ public class Utilidades {
 		}
 		return null;
 	}
-	
+	/**
+	 * Método que devuelve el jugador con más puntos por tiro de 3 de una lista de objetos Jugador
+	 * @param equipos
+	 * @return
+	 */
 	public static Jugador getJugadorMasEficienteT3(List<Equipo> equipos) {
 		double max = 0;
 		List<Jugador> jugadores=new ArrayList<>();
@@ -395,7 +406,11 @@ public class Utilidades {
 		}
 		return null;
 	}
-	
+	/**
+	 * Método que devuelve el jugador con más tiros por minuto de una lista de objetos Jugador
+	 * @param equipos
+	 * @return
+	 */
 	public static Jugador getJugadorMasConsumo(List<Equipo> equipos) {
 		double max = 0;
 		List<Jugador> jugadores=new ArrayList<>();
@@ -414,44 +429,80 @@ public class Utilidades {
 		}
 		return null;
 	}
-	
+	/**
+	 * Método que devuelve el jugador con más rebotes por minuto de una lista de objetos Jugador
+	 * @param equipos
+	 * @return
+	 */
 	public static Jugador getMaximoReboteador(List<Equipo> equipos) {
 		double max = 0;
 		List<Jugador> jugadores=new ArrayList<>();
 		for (int i = 0; i < equipos.size(); i++) {
-			jugadores.add(equipos.get(i).getMaximoReboteador());
+			jugadores.add(equipos.get(i).getMaximoReboteadorPorMinuto());
 		}
 		for (int i = 0; i < jugadores.size(); i++) {
-			if(jugadores.get(i).getRebotesPorPartido()>max && jugadores.get(i).getMinutosPorPartido()>10) {
-				max=jugadores.get(i).getRebotesPorPartido();
+			if(jugadores.get(i).getRebotesPorMinuto()>max && jugadores.get(i).getMinutosPorPartido()>10) {
+				max=jugadores.get(i).getRebotesPorMinuto();
 			}
 		}
 		for (int i = 0; i < jugadores.size(); i++) {
-			if(jugadores.get(i).getRebotesPorPartido()==max) {
+			if(jugadores.get(i).getRebotesPorMinuto()==max) {
 				return jugadores.get(i);
 			}
 		}
 		return null;
 	}
+	/**
+	 * Método que devuelve el jugador con más asistencias por minutode una lista de objetos Jugador
+	 * @param equipos
+	 * @return
+	 */
+	public static Jugador getMasRentable(List<Equipo> equipos) {
+		double max = -200;
+		List<Jugador> jugadores=new ArrayList<>();
+		for (int i = 0; i < equipos.size(); i++) {
+			jugadores.add(equipos.get(i).getMasRentable());
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getMasMenosPorMinuto()>max && jugadores.get(i).getMinutosPorPartido()>5) {
+				max=jugadores.get(i).getMasMenosPorMinuto();
+			}
+		}
+		for (int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).getMasMenosPorMinuto()==max) {
+				return jugadores.get(i);
+			}
+		}
+		return null;
+	}
+	/**
+	 * Método que devuelve el jugador con más asistencias por partido de una lista de objetos Jugador
+	 * @param equipos
+	 * @return
+	 */
 	public static Jugador getMaximoAsistente(List<Equipo> equipos) {
 		double max = 0;
 		List<Jugador> jugadores=new ArrayList<>();
 		for (int i = 0; i < equipos.size(); i++) {
-			jugadores.add(equipos.get(i).getMaximoAsistente());
+			jugadores.add(equipos.get(i).getMaximoAsistentePorMinuto());
 		}
 		for (int i = 0; i < jugadores.size(); i++) {
-			if(jugadores.get(i).getAsistenciasPorPartido()>max && jugadores.get(i).getMinutosPorPartido()>10) {
-				max=jugadores.get(i).getAsistenciasPorPartido();
+			if(jugadores.get(i).getAsistenciasPorMinuto()>max && jugadores.get(i).getMinutosPorPartido()>10) {
+				max=jugadores.get(i).getAsistenciasPorMinuto();
 			}
 		}
 		for (int i = 0; i < jugadores.size(); i++) {
-			if(jugadores.get(i).getAsistenciasPorPartido()==max) {
+			if(jugadores.get(i).getAsistenciasPorMinuto()==max) {
 				return jugadores.get(i);
 			}
 		}
 		return null;
 	}
-	
+	/**
+	 * Método que devuelve el una lista de jugadores que contiene todos los jugadores de una lista de equipos
+	 * @param equipos
+	 * @return
+	 */
 	public static List<Jugador> getJugadores(List<Equipo> equipos){
 		List<Jugador> jugadores=new ArrayList<>();
 		for (int i = 0; i < equipos.size(); i++) {

@@ -118,7 +118,7 @@ public class Jugador implements Serializable {
 			minutos+=lineapartidos.get(i).getMinutos().toLocalTime().getMinute()*60;
 			minutos+=lineapartidos.get(i).getMinutos().toLocalTime().getSecond();
 		}
-		return minutos/60;
+		return minutos/(double)60;
 	}
 	/**
 	 * Método que devuelve el número de minutos por partido del jugador del jugador
@@ -412,4 +412,22 @@ public class Jugador implements Serializable {
 	public String getNombreEquipo() {
 		return lineapartidos.size()>0?lineapartidos.get(0).getEquipo().getNombre():"";
 	}
+
+	public double getAsistenciasPorMinuto() {
+		double as=0, seg=0;
+		for (int i = 0; i < getLineapartidos().size(); i++) {
+			as+=getLineapartidos().get(i).getAsist();
+		}
+		return as/getMinutos()*40;
+	}
+
+	public double getMasMenosPorMinuto() {
+		double masMenos=0, seg=0;
+		for (int i = 0; i < getLineapartidos().size(); i++) {
+			masMenos+=getLineapartidos().get(i).getMasMenos();
+		}
+		return masMenos/getMinutos()*40;
+	}
+	
+	
 }

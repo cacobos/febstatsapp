@@ -3213,4 +3213,52 @@ public class Equipo implements Serializable {
 		}
 		return null;
 	}
+	
+	public Jugador getMaximoAsistentePorMinuto() {
+		double max = 0;
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if (getJugadores().get(i).getAsistenciasPorMinuto() > max
+					&& getJugadores().get(i).getMinutosPorPartido() > 10) {
+				max = getJugadores().get(i).getAsistenciasPorMinuto();
+			}
+		}
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if (getJugadores().get(i).getAsistenciasPorMinuto() == max) {
+				return getJugadores().get(i);
+			}
+		}
+		return null;
+	}
+	
+	public Jugador getMaximoReboteadorPorMinuto() {
+		double max = 0;
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if (getJugadores().get(i).getRebotesPorMinuto() > max
+					&& getJugadores().get(i).getMinutosPorPartido() > 10) {
+				max = getJugadores().get(i).getRebotesPorMinuto();
+			}
+		}
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if (getJugadores().get(i).getRebotesPorMinuto() == max) {
+				return getJugadores().get(i);
+			}
+		}
+		return null;
+	}
+	
+	public Jugador getMasRentable() {
+		double max = -200;
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if (getJugadores().get(i).getMasMenosPorMinuto() > max
+					&& getJugadores().get(i).getMinutosPorPartido() > 5) {
+				max = getJugadores().get(i).getMasMenosPorMinuto();
+			}
+		}
+		for (int i = 0; i < getJugadores().size(); i++) {
+			if (getJugadores().get(i).getMasMenosPorMinuto() == max) {
+				return getJugadores().get(i);
+			}
+		}
+		return null;
+	}
 }

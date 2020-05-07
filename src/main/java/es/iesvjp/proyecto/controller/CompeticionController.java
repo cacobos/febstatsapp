@@ -65,7 +65,7 @@ public class CompeticionController {
 		mav.addObject("competicion", id);
 		List<Equipo> equiposLiga= equipoService.getEquiposCompeticion(id);
 		mav.addObject("jugadorMasUtilizado",Utilidades.getJugadorMasMinutos(equiposLiga) );
-		mav.addObject("maximoAnotador",Utilidades.getJugadorMaxPtosPartido(equiposLiga) );
+		mav.addObject("masRentable",Utilidades.getMasRentable(equiposLiga) );
 		mav.addObject("maximoReboteador",Utilidades.getMaximoReboteador(equiposLiga) );
 		mav.addObject("maximoAsistente",Utilidades.getMaximoAsistente(equiposLiga) );
 		mav.addObject("maximoProductor",Utilidades.getMaximoAnotador(equiposLiga) );

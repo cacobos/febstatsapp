@@ -300,27 +300,26 @@
 							<div class="card shadow mb-4">
 								<!-- Card Header - Dropdown -->
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Máximo
-										anotador</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Mas rentable</h6>
 								</div>
 								<!-- Card Body -->
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">
 										<div class="col no-gutters align-items-center">
 											<img class="img-thumbnail rounded mx-auto d-block"
-												th:src="${not (#strings.isEmpty(equipoModel.getJugadorMaxPtosPartido().getUrlFoto()))} ? ${equipoModel.getJugadorMaxPtosPartido().getUrlFoto()} : 'http://placehold.it/48x48'"
+												th:src="${not (#strings.isEmpty(equipoModel.getMasRentable().getUrlFoto()))} ? ${equipoModel.getMasRentable().getUrlFoto()} : 'http://placehold.it/48x48'"
 												style="height: 150px;" />
 										</div>
 										<div class="col">
 											<div>
 												<a
-													th:text="${equipoModel.getJugadorMaxPtosPartido().getNombre()}"
-													th:href="@{/jugador(id=${equipoModel.getJugadorMaxPtosPartido().id})}"></a>
+													th:text="${equipoModel.getMasRentable().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getMasRentable().id})}"></a>
 											</div>
 											<div class="">
 												<span
-													th:text="${#numbers.formatDecimal(equipoModel.getJugadorMaxPtosPartido().getPuntosPorPartido(), 1, 2)}"></span>
-												puntos por partido
+													th:text="${#numbers.formatDecimal(equipoModel.getMasRentable().getMasMenosPorMinuto(), 1, 2)}"></span>
+												puntos de ventaja por 40 minutos
 											</div>
 										</div>
 									</div>
@@ -339,19 +338,19 @@
 									<div class="row no-gutters align-items-center">
 										<div class="col no-gutters align-items-center">
 											<img class="img-thumbnail rounded mx-auto d-block"
-												th:src="${not (#strings.isEmpty(equipoModel.getMaximoReboteador().getUrlFoto()))} ? ${equipoModel.getMaximoReboteador().getUrlFoto()} : 'http://placehold.it/48x48'"
+												th:src="${not (#strings.isEmpty(equipoModel.getMaximoReboteadorPorMinuto().getUrlFoto()))} ? ${equipoModel.getMaximoReboteadorPorMinuto().getUrlFoto()} : 'http://placehold.it/48x48'"
 												style="height: 150px;" />
 										</div>
 										<div class="col">
 											<div>
 												<a
-													th:text="${equipoModel.getMaximoReboteador().getNombre()}"
-													th:href="@{/jugador(id=${equipoModel.getMaximoReboteador().id})}"></a>
+													th:text="${equipoModel.getMaximoReboteadorPorMinuto().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getMaximoReboteadorPorMinuto().id})}"></a>
 											</div>
 											<div class="">
 												<span
-													th:text="${#numbers.formatDecimal(equipoModel.getMaximoReboteador().getRebotesPorPartido(), 1, 2)}"></span>
-												rebotes por partido
+													th:text="${#numbers.formatDecimal(equipoModel.getMaximoReboteadorPorMinuto().getRebotesPorMinuto(), 1, 2)}"></span>
+												rebotes por 40 minutos
 											</div>
 										</div>
 									</div>
@@ -370,18 +369,18 @@
 									<div class="row no-gutters align-items-center">
 										<div class="col no-gutters align-items-center">
 											<img class="img-thumbnail rounded mx-auto d-block"
-												th:src="${not (#strings.isEmpty(equipoModel.getMaximoAsistente().getUrlFoto()))} ? ${equipoModel.getMaximoAsistente().getUrlFoto()} : 'http://placehold.it/48x48'"
+												th:src="${not (#strings.isEmpty(equipoModel.getMaximoAsistentePorMinuto().getUrlFoto()))} ? ${equipoModel.getMaximoAsistentePorMinuto().getUrlFoto()} : 'http://placehold.it/48x48'"
 												style="height: 150px;" />
 										</div>
 										<div class="col">
 											<div>
-												<a th:text="${equipoModel.getMaximoAsistente().getNombre()}"
-													th:href="@{/jugador(id=${equipoModel.getMaximoAsistente().id})}"></a>
+												<a th:text="${equipoModel.getMaximoAsistentePorMinuto().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getMaximoAsistentePorMinuto().id})}"></a>
 											</div>
 											<div class="">
 												<span
-													th:text="${#numbers.formatDecimal(equipoModel.getMaximoAsistente().getAsistenciasPorPartido(), 1, 2)}"></span>
-												asistencias por partido
+													th:text="${#numbers.formatDecimal(equipoModel.getMaximoAsistentePorMinuto().getAsistenciasPorMinuto(), 1, 2)}"></span>
+												asistencias por 40 minutos
 											</div>
 										</div>
 									</div>

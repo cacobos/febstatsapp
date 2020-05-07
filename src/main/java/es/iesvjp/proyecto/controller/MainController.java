@@ -40,6 +40,14 @@ import es.iesvjp.proyecto.model.Jugador;
 import es.iesvjp.proyecto.service.IEquipoService;
 import es.iesvjp.proyecto.service.IJugadorService;
 
+/**
+ * Clase Controller que gestiona el controlador principal y que mostrará los
+ * recursos de la página principal, la de búsqueda de jugador y la de
+ * diccionario
+ * 
+ * @author Carlos Cobos
+ *
+ */
 @Controller
 @RequestMapping("/")
 public class MainController {
@@ -53,10 +61,16 @@ public class MainController {
 	@Qualifier("jugadorService")
 	private IJugadorService jugadorService;
 
+	/**
+	 * Método que gestiona el controlador de la página principal
+	 * 
+	 * @param idEquipo
+	 * @param idJugador
+	 * @return
+	 */
 	@GetMapping(value = { "", "/", "/index" })
-	private ModelAndView inicioGet(@RequestParam(name = "idEquipo", required = false) Integer idEquipo,
-			@RequestParam(name = "idJugador", required = false) Integer idJugador) {
-		LOG.info("METHOD: inicioGet -- PARAMS: idEquipo: " + idEquipo + " idJugador: " + idJugador);
+	private ModelAndView inicioGet() {
+		LOG.info("METHOD: inicioGet ");
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("equipos", equipoService.listAllEquipo());
 		mav.addObject("competiciones", equipoService.getCompeticiones());
@@ -64,31 +78,19 @@ public class MainController {
 		mav.addObject("equiposPlata", equipoService.getEquiposCompeticion("LIGA LEB PLATA"));
 		mav.addObject("equiposLF", equipoService.getEquiposCompeticion("LF ENDESA"));
 		mav.addObject("searchJugador", new Jugador());
-		if (idEquipo == null) {
-			idEquipo = 0;
-		}
-		if (idEquipo != 0) {
-			mav.addObject("equipoModel", equipoService.findEquipoById(idEquipo));
-			mav.addObject("jugadores", equipoService.getJugadoresEquipo(idEquipo));
-		} else {
-
-		}
-		if (idJugador == null) {
-			idJugador = 0;
-		}
-		if (idJugador != 0) {
-			Jugador j = jugadorService.findJugadorById(idJugador);
-			mav.addObject("jugadorModel", j);
-		}
-
 		LOG.info("METHOD: inicioGet -- PARAMS: " + mav.getModel());
 		return mav;
 	}
-	
+
+	/**
+	 * Método que gestiona el controlador de la página dediccionario
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping(value = "/diccionario")
-	private ModelAndView diccionario(@RequestParam(name = "idEquipo", required = false) Integer idEquipo,
-			@RequestParam(name = "idJugador", required = false) Integer idJugador) {
-		LOG.info("METHOD: inicioGet -- PARAMS: idEquipo: " + idEquipo + " idJugador: " + idJugador);
+	private ModelAndView diccionario() {
+		LOG.info("METHOD: diccionario");
 		ModelAndView mav = new ModelAndView("diccionario");
 		mav.addObject("equipos", equipoService.listAllEquipo());
 		mav.addObject("competiciones", equipoService.getCompeticiones());
@@ -96,37 +98,27 @@ public class MainController {
 		mav.addObject("equiposPlata", equipoService.getEquiposCompeticion("LIGA LEB PLATA"));
 		mav.addObject("equiposLF", equipoService.getEquiposCompeticion("LF ENDESA"));
 		mav.addObject("searchJugador", new Jugador());
-		if (idEquipo == null) {
-			idEquipo = 0;
-		}
-		if (idEquipo != 0) {
-			mav.addObject("equipoModel", equipoService.findEquipoById(idEquipo));
-			mav.addObject("jugadores", equipoService.getJugadoresEquipo(idEquipo));
-		} else {
-
-		}
-		if (idJugador == null) {
-			idJugador = 0;
-		}
-		if (idJugador != 0) {
-			Jugador j = jugadorService.findJugadorById(idJugador);
-			mav.addObject("jugadorModel", j);
-		}
 
 		LOG.info("METHOD: inicioGet -- PARAMS: " + mav.getModel());
 		return mav;
 	}
-	
-	@GetMapping(value = "/buscarJugador" )
-	private ModelAndView buscarJugador(Model model,
-		    @ModelAttribute("searchJugador") Jugador searchJugador,
-		    BindingResult result) {
-		LOG.info("METHOD: inicioGet -- PARAMS: texto: " + searchJugador.getNombre());
-		List<Jugador> jugadores=jugadorService.buscarJugador(searchJugador.getNombre().toUpperCase());
+
+	/**
+	 * Método que gestiona el controlador de la página de búsqueda de un jugador.
+	 * Recibe el un jugador vacío cuyo nombre es el texto de búsqueda
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@GetMapping(value = "/buscarJugador")
+	private ModelAndView buscarJugador(Model model, @ModelAttribute("searchJugador") Jugador searchJugador,
+			BindingResult result) {
+		LOG.info("METHOD: buscarJugador-- PARAMS: texto: " + searchJugador.getNombre());
+		List<Jugador> jugadores = jugadorService.buscarJugador(searchJugador.getNombre().toUpperCase());
 		ModelAndView mav = new ModelAndView("buscarJugador");
-		/*while (jugadores.size()>20) {
-			jugadores.remove(20);
-		}*/
+		/*
+		 * while (jugadores.size()>20) { jugadores.remove(20); }
+		 */
 		mav.addObject("equipos", equipoService.listAllEquipo());
 		mav.addObject("competiciones", equipoService.getCompeticiones());
 		mav.addObject("equiposOro", equipoService.getEquiposCompeticion("LIGA LEB ORO"));
@@ -139,39 +131,15 @@ public class MainController {
 		return mav;
 	}
 
-	@GetMapping(value = "/plantilla")
-	private ModelAndView plantillaGet(@RequestParam(name = "idEquipo", required = false) Integer idEquipo,
-			@RequestParam(name = "idJugador", required = false) Integer idJugador) {
-		LOG.info("METHOD: inicioGet -- PARAMS: idEquipo: " + idEquipo + " idJugador: " + idJugador);
-		ModelAndView mav = new ModelAndView("blank");
-		List<Equipo> equipos=equipoService.getEquiposCompeticion("LIGA LEB ORO");		
-		mav.addObject("equipos", equipoService.listAllEquipo());
-		mav.addObject("competiciones", equipoService.getCompeticiones());
-		mav.addObject("equiposOro", equipos);
-		mav.addObject("equiposPlata", equipoService.getEquiposCompeticion("LIGA LEB PLATA"));
-		mav.addObject("equiposLF", equipoService.getEquiposCompeticion("LF ENDESA"));
-		if (idEquipo == null) {
-			idEquipo = 0;
-		}
-		if (idEquipo != 0) {
-			mav.addObject("equipoModel", equipoService.findEquipoById(idEquipo));
-			mav.addObject("jugadores", equipoService.getJugadoresEquipo(idEquipo));
-		} else {
-
-		}
-		if (idJugador == null) {
-			idJugador = 0;
-		}
-		if (idJugador != 0) {
-			Jugador j = jugadorService.findJugadorById(idJugador);
-			mav.addObject("jugadorModel", j);
-		}
-		LOG.info("METHOD: inicioGet -- PARAMS: " + mav.getModel());
-		return mav;
-	}
-	
+	/**
+	 * Método que gestiona el controlador de la página de selección de un jugador.
+	 * Recibe el id del equipo y muestra sus jugadores
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping(value = { "/selectplayer" })
-	private ModelAndView selectJugador(@RequestParam(name = "id", required = true) Integer id)	 {
+	private ModelAndView selectJugador(@RequestParam(name = "id", required = true) Integer id) {
 		LOG.info("METHOD: inicioGet -- PARAMS: idEquipo: " + id);
 		ModelAndView mav = new ModelAndView("tablajugadores");
 		mav.addObject("equipos", equipoService.listAllEquipo());
@@ -179,7 +147,7 @@ public class MainController {
 		mav.addObject("equiposOro", equipoService.getEquiposCompeticion("LIGA LEB ORO"));
 		mav.addObject("equiposPlata", equipoService.getEquiposCompeticion("LIGA LEB PLATA"));
 		mav.addObject("equiposLF", equipoService.getEquiposCompeticion("LF ENDESA"));
-		mav.addObject("equipo", equipoService.findEquipoById(id));	
+		mav.addObject("equipo", equipoService.findEquipoById(id));
 		mav.addObject("searchJugador", new Jugador());
 
 		LOG.info("METHOD: inicioGet -- PARAMS: " + mav.getModel());
