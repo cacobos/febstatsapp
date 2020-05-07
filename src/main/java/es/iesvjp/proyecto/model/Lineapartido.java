@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.sql.Time;
 
 /**
- * The persistent class for the lineapartido database table.
+ * Clase modelo para las líneas de cada partido de la base de datos
  * 
  */
 @Entity
@@ -241,11 +241,18 @@ public class Lineapartido implements Serializable {
 	public int getRebotes() {
 		return rbo + rbd;
 	}
-
+/**
+ * Método que indica si la lineapartido corresponde al equipo local
+ * @return
+ */
 	public boolean isLocal() {
-		return partido.getEquipo1() == equipo;
+		return partido.getEquipo1() == equipo;		
 	}
 
+	/**
+	 * Método que indica si la lineapartido corresponde al equipo ganador del partido
+	 * @return
+	 */
 	public boolean isGanador() {
 		if (isLocal()) {
 			return partido.ganaLocal();
@@ -253,6 +260,10 @@ public class Lineapartido implements Serializable {
 		return partido.ganaVisit();
 	}
 	
+	/**
+	 * Método que devuelve el nombre del equipo rival
+	 * @return
+	 */
 	public String getRival() {
 		if(isLocal()) {
 			return partido.getEquipo2().getNombre();

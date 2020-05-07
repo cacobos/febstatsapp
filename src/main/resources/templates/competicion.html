@@ -55,7 +55,7 @@
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-database"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3">STATS APP</div>
+				<div class="sidebar-brand-text mx-3">BASKET STATS</div>
 			</a>
 
 
@@ -199,7 +199,15 @@
 							class="collapse-item" href="cards.html">Cards</a>
 					</div>
 				</div></li>
+			<hr class="sidebar-divider">
 
+			<!-- Heading -->
+			<div class="sidebar-heading">Otros</div>
+
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link" href="/diccionario">
+					<i class="fas fa-basketball-ball"></i> <span>DICCIONARIO</span>
+			</a></li>
 
 
 			<!-- Divider -->
@@ -239,7 +247,7 @@
 								th:action="@{/buscarJugador}" th:object="${searchJugador}">
 								<div class="input-group">
 									<input type="text" class="form-control bg-light border-0 small"
-										placeholder="Search for..." aria-label="Search"
+										placeholder="Buscar jugador por nombre..." aria-label="Search"
 										aria-describedby="basic-addon2" th:field="*{nombre}">
 									<div class="input-group-append">
 										<button class="btn btn-primary" type="submit">
@@ -262,32 +270,7 @@
 						construcción</h1>
 					<p class="mb-4">Datos de la competición</p>
 
-					<!-- Content Row -->
-					<!-- <div class="row">
-						<div class="col-xl-6 col-lg-5">
-							<div class="card shadow mb-4">
-								
-								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
-								</div>
-								<div class="card-body">
-									<hr>
-									Styling for the donut chart can be found in the file.
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-6 col-lg-5">
-							<div class="card shadow mb-4">
-								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
-								</div>
-								<div class="card-body">
-									<hr>
-									Styling for the donut chart can be found in the file.
-								</div>
-							</div>
-						</div>
-					</div> -->
+
 					<div class="row">
 						<div class="col-xl-3 col-lg-5">
 							<div class="card shadow mb-4">
@@ -306,9 +289,9 @@
 										</div>
 										<div class="col">
 											<div>
-												<a
-													th:text="${jugadorMasUtilizado.getNombre()}"
+												<a th:text="${jugadorMasUtilizado.getNombre()}"
 													th:href="@{/jugador(id=${jugadorMasUtilizado.id})}"></a>
+												<div th:text="${jugadorMasUtilizado.getNombreEquipo()}"></div>
 											</div>
 											<div class="">
 												<span
@@ -337,9 +320,9 @@
 										</div>
 										<div class="col">
 											<div>
-												<a
-													th:text="${maximoAnotador.getNombre()}"
+												<a th:text="${maximoAnotador.getNombre()}"
 													th:href="@{/jugador(id=${maximoAnotador.id})}"></a>
+												<div th:text="${maximoAnotador.getNombreEquipo()}"></div>
 											</div>
 											<div class="">
 												<span
@@ -368,9 +351,9 @@
 										</div>
 										<div class="col">
 											<div>
-												<a
-													th:text="${maximoReboteador.getNombre()}"
+												<a th:text="${maximoReboteador.getNombre()}"
 													th:href="@{/jugador(id=${maximoReboteador.id})}"></a>
+												<div th:text="${maximoReboteador.getNombreEquipo()}"></div>
 											</div>
 											<div class="">
 												<span
@@ -401,6 +384,7 @@
 											<div>
 												<a th:text="${maximoAsistente.getNombre()}"
 													th:href="@{/jugador(id=${maximoAsistente.id})}"></a>
+												<div th:text="${maximoAsistente.getNombreEquipo()}"></div>
 											</div>
 											<div class="">
 												<span
@@ -435,6 +419,7 @@
 											<div>
 												<a th:text="${maximoProductor.getNombre()}"
 													th:href="@{/jugador(id=${maximoProductor.id})}"></a>
+												<div th:text="${maximoProductor.getNombreEquipo()}"></div>
 											</div>
 											<div class="">
 												<span
@@ -450,8 +435,8 @@
 							<div class="card shadow mb-4">
 								<!-- Card Header - Dropdown -->
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Más
-										eficiente</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Más puntos
+										por tiro de 2</h6>
 								</div>
 								<!-- Card Body -->
 								<div class="card-body">
@@ -463,14 +448,14 @@
 										</div>
 										<div class="col">
 											<div>
-												<a
-													th:text="${maximoEficiente.getNombre()}"
+												<a th:text="${maximoEficiente.getNombre()}"
 													th:href="@{/jugador(id=${maximoEficiente.id})}"></a>
+												<div th:text="${maximoEficiente.getNombreEquipo()}"></div>
 											</div>
 											<div class="">
 												<span
-													th:text="${#numbers.formatDecimal(maximoEficiente.getPuntosPorTiro(), 1, 2)}"></span>
-												puntos por tiro
+													th:text="${#numbers.formatDecimal(maximoEficiente.getPuntosPorTiro2(), 1, 2)}"></span>
+												puntos por tiro de 2
 											</div>
 										</div>
 									</div>
@@ -481,8 +466,8 @@
 							<div class="card shadow mb-4">
 								<!-- Card Header - Dropdown -->
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Mayor
-										porcentaje efectivo TC</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Más puntos
+										por tiro de 3</h6>
 								</div>
 								<!-- Card Body -->
 								<div class="card-body">
@@ -494,14 +479,14 @@
 										</div>
 										<div class="col">
 											<div>
-												<a
-													th:text="${maximoPctgEffTc.getNombre()}"
+												<a th:text="${maximoPctgEffTc.getNombre()}"
 													th:href="@{/jugador(id=${maximoPctgEffTc.id})}"></a>
+												<div th:text="${maximoPctgEffTc.getNombreEquipo()}"></div>
 											</div>
 											<div class="">
 												<span
-													th:text="${#numbers.formatDecimal(maximoPctgEffTc.getPctgEfTC(), 1, 2)}"></span>
-												% efectivo en TC
+													th:text="${#numbers.formatDecimal(maximoPctgEffTc.getPuntosPorTiro3(), 1, 2)}"></span>
+												puntos por tiro de 3
 											</div>
 										</div>
 									</div>
@@ -525,9 +510,9 @@
 										</div>
 										<div class="col">
 											<div>
-												<a
-													th:text="${maximoConsumo.getNombre()}"
+												<a th:text="${maximoConsumo.getNombre()}"
 													th:href="@{/jugador(id=${maximoConsumo.id})}"></a>
+												<div th:text="${maximoConsumo.getNombreEquipo()}"></div>
 											</div>
 											<div class="">
 												<span
@@ -546,8 +531,8 @@
 							<!-- DataTales Example -->
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">DataTables
-										Example</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Datos de los
+										equipos</h6>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -619,7 +604,7 @@
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Your Website 2019</span>
+						<span>Copyright &copy; BASKET STATS 2020</span>
 					</div>
 				</div>
 			</footer>

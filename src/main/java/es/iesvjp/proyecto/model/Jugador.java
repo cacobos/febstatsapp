@@ -6,8 +6,10 @@ import java.util.List;
 
 
 /**
- * The persistent class for the jugador database table.
+ * Clase que gestiona la persistencia de la tabla jugador
  * 
+ * @author Carlos Cobos
+ *
  */
 @Entity
 @Table(name = "jugador")
@@ -106,7 +108,10 @@ public class Jugador implements Serializable {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
+	/**
+	 * Método que devuelve el número de minutos del jugador
+	 * @return
+	 */
 	private double getMinutos() {
 		double minutos=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -115,11 +120,17 @@ public class Jugador implements Serializable {
 		}
 		return minutos/60;
 	}
-	
+	/**
+	 * Método que devuelve el número de minutos por partido del jugador del jugador
+	 * @return
+	 */
 	public double getMinutosPorPartido() {
 		return getMinutos()/(double)lineapartidos.size();
 	}
-	
+	/**
+	 * Método que devuelve el número de puntos del jugador
+	 * @return
+	 */
 	private double getPuntos() {
 		double puntos=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -127,15 +138,24 @@ public class Jugador implements Serializable {
 		}
 		return puntos;
 	}
-	
+	/**
+	 * Método que devuelve el número de puntos por partido del jugador
+	 * @return
+	 */
 	public double getPuntosPorPartido() {
 		return getPuntos()/(double)lineapartidos.size();
 	}
-	
+	/**
+	 * Método que devuelve el número de puntos por minuto del jugador
+	 * @return
+	 */
 	public double getPuntosPorMinuto() {
 		return getPuntos()/getMinutos()*40;
 	}
-	
+	/**
+	 * Método que devuelve el número de puntos por tiro de 2 del jugador
+	 * @return
+	 */
 	public double getPuntosPorTiro2() {
 		double tiros=0, puntos=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -144,7 +164,10 @@ public class Jugador implements Serializable {
 		}
 		return puntos/tiros;
 	}
-	
+	/**
+	 * Método que devuelve el número de puntos por tiro de 3 del jugador
+	 * @return
+	 */
 	public double getPuntosPorTiro3() {
 		double tiros=0, puntos=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -153,7 +176,10 @@ public class Jugador implements Serializable {
 		}
 		return puntos/tiros;
 	}
-	
+	/**
+	 * Método que devuelve el número de tiros de campo del jugador
+	 * @return
+	 */
 	private double getTirosCampo() {
 		double tiros=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -162,7 +188,10 @@ public class Jugador implements Serializable {
 		}
 		return tiros;
 	}
-	
+	/**
+	 * Método que devuelve el número de puntos por tiro de campo del jugador
+	 * @return
+	 */
 	public double getPuntosPorTiro() {
 		double tiros=0, puntos=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -173,7 +202,10 @@ public class Jugador implements Serializable {
 		}
 		return puntos/tiros;
 	}
-	
+	/**
+	 * Método que devuelve el número de rebotes ofensivos del jugador
+	 * @return
+	 */
 	private double getRebOf() {
 		double rebotes=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -181,7 +213,10 @@ public class Jugador implements Serializable {
 		}
 		return rebotes;
 	}
-	
+	/**
+	 * Método que devuelve el número de rebotes defensivos del jugador
+	 * @return
+	 */
 	private double getRebDef() {
 		double rebotes=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -189,7 +224,10 @@ public class Jugador implements Serializable {
 		}
 		return rebotes;
 	}
-	
+	/**
+	 * Método que devuelve el número de rebotes del jugador
+	 * @return
+	 */
 	private double getRebotes() {
 		double rebotes=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -198,27 +236,45 @@ public class Jugador implements Serializable {
 		}
 		return rebotes;
 	}
-	
+	/**
+	 * Método que devuelve el número de rebotes por 40 minutos del jugador
+	 * @return
+	 */
 	public double getRebotesPorMinuto() {
 		return getRebotes()/getMinutos()*40;
 	}
-	
+	/**
+	 * Método que devuelve el número de rebotes ofensivos por 40 minutos del jugador
+	 * @return
+	 */
 	public double getRebotesOfPorMinuto() {
 		return getRebOf()/getMinutos()*40;
 	}
-	
+	/**
+	 * Método que devuelve el número de rebotes defensivos por 40 minutos del jugador
+	 * @return
+	 */
 	public double getRebotesDefPorMinuto() {
 		return getRebDef()/getMinutos()*40;
 	}
-	
+	/**
+	 * Método que devuelve el número de tiros de campo por 40 minutos del jugador
+	 * @return
+	 */
 	public double getTirosPorMinuto() {
 		return getTirosCampo()/getMinutos()*40;
 	}
-	
+	/**
+	 * Método que devuelve el número de tiros de 2 por 40 minutos del jugador
+	 * @return
+	 */
 	public double getTiros2PorMinuto() {
 		return getTiros2()/getMinutos()*40;
 	}
-	
+	/**
+	 * Método que devuelve el número de tiros de 2 del jugador
+	 * @return
+	 */
 	private double getTiros2() {
 		double tiros=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -226,11 +282,17 @@ public class Jugador implements Serializable {
 		}
 		return tiros;
 	}
-
+	/**
+	 * Método que devuelve el número de tiros de 3 por 40 minutos del jugador
+	 * @return
+	 */
 	public double getTiros3PorMinuto() {
 		return getTiros3()/getMinutos()*40;
 	}
-	
+	/**
+	 * Método que devuelve el número de tiros de 3 del jugador
+	 * @return
+	 */
 	private double getTiros3() {
 		double tiros=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -238,19 +300,31 @@ public class Jugador implements Serializable {
 		}
 		return tiros;
 	}
-
+	/**
+	 * Método que devuelve el número de rebotes ofensivos por partido del jugador
+	 * @return
+	 */
 	public double getRebOfPorPartido() {
 		return getRebOf()/lineapartidos.size();
 	}
-	
+	/**
+	 * Método que devuelve el número de rebotes defensivos por partido del jugador
+	 * @return
+	 */
 	public double getRebDefPorPartido() {
 		return getRebDef()/lineapartidos.size();
 	}
-	
+	/**
+	 * Método que devuelve el número de rebotes por partido del jugador
+	 * @return
+	 */
 	public double getRebotesPorPartido() {
 		return getRebotes()/lineapartidos.size();
 	}
-	
+	/**
+	 * Método que devuelve el porcentaje en tiros de 2 del jugador
+	 * @return
+	 */
 	public double getPctgT2() {
 		double t2a=0, t2i=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -259,7 +333,10 @@ public class Jugador implements Serializable {
 		}
 		return t2a/t2i*100;
 	}
-	
+	/**
+	 * Método que devuelve el porcentaje en tiros de 3 del jugador
+	 * @return
+	 */
 	public double getPctgT3() {
 		double t3a=0, t3i=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -268,7 +345,10 @@ public class Jugador implements Serializable {
 		}
 		return t3a/t3i*100;
 	}
-
+	/**
+	 * Método que devuelve el porcentaje en tiros libres del jugador
+	 * @return
+	 */
 	public double getPctgTl() {
 		double tla=0, tli=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -278,7 +358,10 @@ public class Jugador implements Serializable {
 		System.out.println(tla + " / "+ tli + " * 100");
 		return tla/tli*100;
 	}
-	
+	/**
+	 * Método que devuelve el número de asistencias por partido del jugador
+	 * @return
+	 */
 	public double getAsistenciasPorPartido() {
 		double asis=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -286,7 +369,10 @@ public class Jugador implements Serializable {
 		}
 		return asis/lineapartidos.size();
 	}
-	
+	/**
+	 * Método que devuelve el número de faltas recibidas por 40 minutos del jugador
+	 * @return
+	 */
 	public double getFaltasRecibidasPorMinuto() {
 		double faltas=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -294,6 +380,21 @@ public class Jugador implements Serializable {
 		}
 		return faltas/getMinutos()*40;
 	}
+	/**
+	 * Método que devuelve el número de faltas recibidas por partido del jugador
+	 * @return
+	 */
+	public double getFaltasRecibidasPorPartido() {
+		double faltas=0;
+		for (int i = 0; i < lineapartidos.size(); i++) {
+			faltas+=lineapartidos.get(i).getFr();
+		}
+		return faltas/lineapartidos.size();
+	}
+	/**
+	 * Método que devuelve el porcentaje efectivo en tiros de campo del jugador
+	 * @return
+	 */
 	public double getPctgEfTC() {
 		double t2a=0, t3a=0, t3i=0, t2i=0;
 		for (int i = 0; i < lineapartidos.size(); i++) {
@@ -304,7 +405,10 @@ public class Jugador implements Serializable {
 		}
 		return (t2a+t3a*1.5)/(t2i+t3i)*100;
 	}
-	
+	/**
+	 * Método que devuelve el nombre del equipo del jugador
+	 * @return
+	 */
 	public String getNombreEquipo() {
 		return lineapartidos.size()>0?lineapartidos.get(0).getEquipo().getNombre():"";
 	}

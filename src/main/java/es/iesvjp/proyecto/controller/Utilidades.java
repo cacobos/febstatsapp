@@ -25,9 +25,18 @@ import es.iesvjp.proyecto.model.Equipo;
 import es.iesvjp.proyecto.model.Jugador;
 import es.iesvjp.proyecto.model.Partido;
 
+/**
+ * Clase que contiene métodos estáticos con utilizades para el programa
+ * @author Carlos Cobos
+ *
+ */
 public class Utilidades {
+	/**
+	 * Método que ordena una lista de equipos por su ritmo y la devuelve
+	 * @param equipos
+	 * @return
+	 */
 	public static List<Equipo> ordenarEquiposPorRitmo(List<Equipo> equipos) {
-
 		Collections.sort(equipos, (o1, o2) -> {
 
 			Double x1 = ((Equipo) o1).getRitmo();
@@ -44,7 +53,11 @@ public class Utilidades {
 		});
 		return equipos;
 	}
-
+	/**
+	 * Método que ordena una lista de equipos por su fecha y la devuelve
+	 * @param equipos
+	 * @return
+	 */
 	public static List<Partido> ordenarPartidosPorFecha(List<Partido> partidos) {
 
 		Collections.sort(partidos, (o1, o2) -> {
@@ -64,6 +77,11 @@ public class Utilidades {
 		return partidos;
 	}
 	
+	/**
+	 * Método que ordena una lista de jugadores por su media de mionutos y la devuelve
+	 * @param equipos
+	 * @return
+	 */
 	public static List<Jugador> ordenarJugadoresPorMinutos(List<Jugador> jugadores) {
 
 		Collections.sort(jugadores, (o1, o2) -> {
@@ -83,14 +101,18 @@ public class Utilidades {
 		return jugadores;
 	}
 
+	/**
+	 * Método que nos devuelve un objeto File con el fichero gráfico.png
+	 * @return
+	 * @throws FileNotFoundException
+	 */
 	public static File cargarGrafico() throws FileNotFoundException {
 		return ResourceUtils.getFile("classpath:static/grafico.png");
 	}
-	
-	public static File cargarGrafico2() throws FileNotFoundException {
-		return ResourceUtils.getFile("classpath:static/grafico.png");
-	}
 
+	/**
+	 * Método que dibuja un gráfico genérico
+	 */
 	public static void dibujarGrafico() {
 		DefaultXYDataset dataset = new DefaultXYDataset();
 		dataset.addSeries("firefox",
@@ -124,6 +146,10 @@ public class Utilidades {
 		}
 	}
 	
+	/**
+	 * Método que dibuja un gráfico con los rebotes defensivos y el resultado de los partidos de un equipo
+	 * @param e
+	 */
 	public static void dibujarGraficoRBDResultado(Equipo e) {
 		DefaultXYDataset dataset = new DefaultXYDataset();
 		double[][] datos=new double[2][e.getPartidos().size()];
@@ -355,7 +381,7 @@ public class Utilidades {
 		double max = 0;
 		List<Jugador> jugadores=new ArrayList<>();
 		for (int i = 0; i < equipos.size(); i++) {
-			jugadores.add(equipos.get(i).getJugadorMasEficienteT2());
+			jugadores.add(equipos.get(i).getJugadorMasEficienteT3());
 		}
 		for (int i = 0; i < jugadores.size(); i++) {
 			if(jugadores.get(i).getPuntosPorTiro3()>max && jugadores.get(i).getMinutosPorPartido()>10) {

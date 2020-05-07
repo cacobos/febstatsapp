@@ -54,7 +54,7 @@
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-database"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3">STATS APP</div>
+				<div class="sidebar-brand-text mx-3">BASKET STATS</div>
 			</a>
 
 			<!-- Divider -->
@@ -192,7 +192,17 @@
 					</div>
 				</div></li>
 
+<hr class="sidebar-divider">
 
+			<!-- Heading -->
+			<div class="sidebar-heading">Otros</div>
+
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link" href="/diccionario"> <i
+					class="fas fa-basketball-ball"></i> <span>DICCIONARIO</span>
+			</a>
+				
+				</li>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
@@ -215,6 +225,7 @@
 				<nav
 					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
+
 					<!-- Sidebar Toggle (Topbar) -->
 					<button id="sidebarToggleTop"
 						class="btn btn-link d-md-none rounded-circle mr-3">
@@ -231,7 +242,7 @@
 								th:action="@{/buscarJugador}" th:object="${searchJugador}">
 								<div class="input-group">
 									<input type="text" class="form-control bg-light border-0 small"
-										placeholder="Search for..." aria-label="Search"
+										placeholder="Buscar jugador por nombre..." aria-label="Search"
 										aria-describedby="basic-addon2" th:field="*{nombre}">
 									<div class="input-group-append">
 										<button class="btn btn-primary" type="submit">
@@ -416,26 +427,26 @@
 								<!-- Card Header - Dropdown -->
 								<div class="card-header py-3">
 									<h6 class="m-0 font-weight-bold text-primary">Más
-										eficiente</h6>
+										eficiente en tiros de 2</h6>
 								</div>
 								<!-- Card Body -->
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">
 										<div class="col no-gutters align-items-center">
 											<img class="img-thumbnail rounded mx-auto d-block"
-												th:src="${not (#strings.isEmpty(equipoModel.getJugadorMasEficiente().getUrlFoto()))} ? ${equipoModel.getJugadorMasEficiente().getUrlFoto()} : 'http://placehold.it/48x48'"
+												th:src="${not (#strings.isEmpty(equipoModel.getJugadorMasEficienteT2().getUrlFoto()))} ? ${equipoModel.getJugadorMasEficienteT2().getUrlFoto()} : 'http://placehold.it/48x48'"
 												style="height: 150px;" />
 										</div>
 										<div class="col">
 											<div>
 												<a
-													th:text="${equipoModel.getJugadorMasEficiente().getNombre()}"
-													th:href="@{/jugador(id=${equipoModel.getJugadorMasEficiente().id})}"></a>
+													th:text="${equipoModel.getJugadorMasEficienteT2().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getJugadorMasEficienteT2().id})}"></a>
 											</div>
 											<div class="">
 												<span
-													th:text="${#numbers.formatDecimal(equipoModel.getJugadorMasEficiente().getPuntosPorTiro(), 1, 2)}"></span>
-												puntos por tiro
+													th:text="${#numbers.formatDecimal(equipoModel.getJugadorMasEficienteT2().getPuntosPorTiro2(), 1, 2)}"></span>
+												puntos por tiro de 2
 											</div>
 										</div>
 									</div>
@@ -446,26 +457,26 @@
 							<div class="card shadow mb-4">
 								<!-- Card Header - Dropdown -->
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Mayor porcentaje efectivo TC</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Más eficiente en tiros de 3</h6>
 								</div>
 								<!-- Card Body -->
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">
 										<div class="col no-gutters align-items-center">
 											<img class="img-thumbnail rounded mx-auto d-block"
-												th:src="${not (#strings.isEmpty(equipoModel.getJugadorMejorPctgEf().getUrlFoto()))} ? ${equipoModel.getJugadorMejorPctgEf().getUrlFoto()} : 'http://placehold.it/48x48'"
+												th:src="${not (#strings.isEmpty(equipoModel.getJugadorMasEficienteT3().getUrlFoto()))} ? ${equipoModel.getJugadorMasEficienteT3().getUrlFoto()} : 'http://placehold.it/48x48'"
 												style="height: 150px;" />
 										</div>
 										<div class="col">
 											<div>
 												<a
-													th:text="${equipoModel.getJugadorMejorPctgEf().getNombre()}"
-													th:href="@{/jugador(id=${equipoModel.getJugadorMejorPctgEf().id})}"></a>
+													th:text="${equipoModel.getJugadorMasEficienteT3().getNombre()}"
+													th:href="@{/jugador(id=${equipoModel.getJugadorMasEficienteT3().id})}"></a>
 											</div>
 											<div class="">
 												<span
-													th:text="${#numbers.formatDecimal(equipoModel.getJugadorMejorPctgEf().getPctgEfTC(), 1, 2)}"></span>
-												% efectivo en TC
+													th:text="${#numbers.formatDecimal(equipoModel.getJugadorMasEficienteT3().getPuntosPorTiro3(), 1, 2)}"></span>
+												Puntos por tiro de 3
 											</div>
 										</div>
 									</div>
@@ -484,7 +495,7 @@
 									<div class="row no-gutters align-items-center">
 										<div class="col no-gutters align-items-center">
 											<img class="img-thumbnail rounded mx-auto d-block"
-												th:src="${not (#strings.isEmpty(equipoModel.getJugadorMasConsumo().getUrlFoto()))} ? ${equipoModel.getJugadorMasConsumo().getUrlFoto()} : 'http://placehold.it/48x48'"
+												th:src="${not (#strings.isEmpty(equipoModel.getJugadorMasConsumo().urlFoto))} ? ${equipoModel.getJugadorMasConsumo().urlFoto} : 'http://placehold.it/48x48'"
 												style="height: 150px;" />
 										</div>
 										<div class="col">
@@ -1005,7 +1016,7 @@
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Your Website 2019</span>
+						<span>Copyright &copy; BASKET STATS 2020</span>
 					</div>
 				</div>
 			</footer>

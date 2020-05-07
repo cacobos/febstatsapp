@@ -5,14 +5,15 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 /**
- * The persistent class for the partido database table.
+ * Clase que gestiona la persistencia de la tabla partido
  * 
+ * @author Carlos Cobos
+ *
  */
 @Entity
 @Table(name = "partido")
-@NamedQuery(name="Partido.findAll", query="SELECT p FROM Partido p")
+@NamedQuery(name = "Partido.findAll", query = "SELECT p FROM Partido p")
 public class Partido implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -111,18 +112,18 @@ public class Partido implements Serializable {
 
 	private int valVisit;
 
-	//bi-directional many-to-one association to Lineapartido
-	@OneToMany(mappedBy="partido")
+	// bi-directional many-to-one association to Lineapartido
+	@OneToMany(mappedBy = "partido")
 	private List<Lineapartido> lineapartidos;
 
-	//bi-directional many-to-one association to Equipo
+	// bi-directional many-to-one association to Equipo
 	@ManyToOne
-	@JoinColumn(name="equipovisitante")
+	@JoinColumn(name = "equipovisitante")
 	private Equipo equipo1;
 
-	//bi-directional many-to-one association to Equipo
+	// bi-directional many-to-one association to Equipo
 	@ManyToOne
-	@JoinColumn(name="fk_equipolocal")
+	@JoinColumn(name = "fk_equipolocal")
 	private Equipo equipo2;
 
 	public Partido() {
@@ -535,187 +536,313 @@ public class Partido implements Serializable {
 	}
 
 	public int getFgaLocal() {
-		return t2iLocal+t3iLocal;
-	}
-	
-	public int getFgaVisit() {
-		return t2iVisit+t3iVisit;
-	} 
-	
-	public int getFgmLocal() {
-		return t2aLocal+t3aLocal;
-	}
-	
-	public int getFgmVisit() {
-		return t2aVisit+t3aVisit;
-	} 
-	
-	public double getPosesionesLocal() {
-		return (double)getFgaLocal()-(double)rboLocal+(double)bpLocal+((double)tliLocal*0.4);
-	}
-	
-	public double getPosesionesVisit() {
-		return (double)getFgaVisit()-(double)rboVisit+(double)bpVisit+((double)tliVisit*0.4);
-	}
-	
-	public double getRitmoLocal() {
-		return (double)getPosesionesLocal()/(double)getMinutos();
-	}
-	
-	public double getRitmoVisit() {
-		return (double)getPosesionesVisit()/(double)getMinutos();
+		return t2iLocal + t3iLocal;
 	}
 
+	public int getFgaVisit() {
+		return t2iVisit + t3iVisit;
+	}
+
+	public int getFgmLocal() {
+		return t2aLocal + t3aLocal;
+	}
+
+	public int getFgmVisit() {
+		return t2aVisit + t3aVisit;
+	}
+
+	/**
+	 * Método que devuelve el número de posesiones del equipo local
+	 * 
+	 * @return
+	 */
+	public double getPosesionesLocal() {
+		return (double) getFgaLocal() - (double) rboLocal + (double) bpLocal + ((double) tliLocal * 0.4);
+	}
+
+	/**
+	 * Método que devuelve el número de posesiones del equipo visitante
+	 * 
+	 * @return
+	 */
+	public double getPosesionesVisit() {
+		return (double) getFgaVisit() - (double) rboVisit + (double) bpVisit + ((double) tliVisit * 0.4);
+	}
+
+	/**
+	 * Método que devuelve el ritmo del equipo local
+	 * 
+	 * @return
+	 */
+	public double getRitmoLocal() {
+		return (double) getPosesionesLocal() / (double) getMinutos();
+	}
+
+	/**
+	 * Método que devuelve el ritmo del equipo visitante
+	 * 
+	 * @return
+	 */
+	public double getRitmoVisit() {
+		return (double) getPosesionesVisit() / (double) getMinutos();
+	}
+
+	/**
+	 * Método que devuelve el número de minutos del partido
+	 * 
+	 * @return
+	 */
 	public int getMinutos() {
-		if(prorroga==4) {
+		if (prorroga == 4) {
 			return 40;
-		}else {
-			return 40+(prorroga-4)*5;
+		} else {
+			return 40 + (prorroga - 4) * 5;
 		}
 	}
-	
+
+	/**
+	 * Método que devuelve la eficiencia del equipo local
+	 * 
+	 * @return
+	 */
 	public double getEfficLocal() {
-		return (double)ptoLocal/(double)getPosesionesLocal()*100;
+		return (double) ptoLocal / (double) getPosesionesLocal() * 100;
 	}
-	
+
+	/**
+	 * Método que devuelve la eficiencia del equipo visitante
+	 * 
+	 * @return
+	 */
 	public double getEfficVisit() {
-		return (double)ptoVisit/(double)getPosesionesVisit()*100;
+		return (double) ptoVisit / (double) getPosesionesVisit() * 100;
 	}
-	
+
+	/**
+	 * Método que devuelve el porcentaje efectivo en tiros de campo del equipo local
+	 * 
+	 * @return
+	 */
 	public double pctgEffTcLocal() {
-		return ((double)getFgmLocal()+0.5*(double)t3aLocal)/(double)getFgaLocal();
+		return ((double) getFgmLocal() + 0.5 * (double) t3aLocal) / (double) getFgaLocal();
 	}
-	
+
+	/**
+	 * Método que devuelve el porcentaje efectivo en tiros de campo del equipo
+	 * visitante
+	 * 
+	 * @return
+	 */
 	public double pctgEffTcVisit() {
-		return ((double)getFgmVisit()+0.5*(double)t3aLocal)/(double)getFgaVisit();
+		return ((double) getFgmVisit() + 0.5 * (double) t3aLocal) / (double) getFgaVisit();
 	}
-	
+
+	/**
+	 * Método que devuelve el porcentaje de rebotes ofensivos del equipo local
+	 * 
+	 * @return
+	 */
 	public double pctgROfLocal() {
-		return ((double)rboLocal/((double)rboLocal+(double)rbdVisit))*100;
+		return ((double) rboLocal / ((double) rboLocal + (double) rbdVisit)) * 100;
 	}
-	
+
+	/**
+	 * Método que devuelve el porcentaje de rebotes ofensivos del equipo visitante
+	 * 
+	 * @return
+	 */
 	public double pctgROfVisit() {
-		return ((double)rboVisit/((double)rboVisit+(double)rbdLocal))*100;
+		return ((double) rboVisit / ((double) rboVisit + (double) rbdLocal)) * 100;
 	}
-	
+
+	/**
+	 * Método que devuelve el porcentaje de rebotes defensivos del equipo local
+	 * 
+	 * @return
+	 */
 	public double pctgRDefLocal() {
-		return ((double)rbdLocal/((double)rbdLocal+(double)rboVisit))*100;
+		return ((double) rbdLocal / ((double) rbdLocal + (double) rboVisit)) * 100;
 	}
-	
+
+	/**
+	 * Método que devuelve el porcentaje de rebotes defensivos del equipo visitante
+	 * 
+	 * @return
+	 */
 	public double pctgRDefVisit() {
-		return ((double)rbdVisit/((double)rbdVisit+(double)rboLocal))*100;
+		return ((double) rbdVisit / ((double) rbdVisit + (double) rboLocal)) * 100;
 	}
-	
+
+	/**
+	 * Método que devuelve el porcentaje de asistencias defensivos del equipo local
+	 * 
+	 * @return
+	 */
 	public double pctgAssLocal() {
-		return (double)asLocal/getPosesionesLocal()*100;
+		return (double) asLocal / getPosesionesLocal() * 100;
 	}
-	
+
+	/**
+	 * Método que devuelve el porcentaje de rebotes defensivos del equipo visitante
+	 * 
+	 * @return
+	 */
 	public double pctgAssVisit() {
-		return (double)asVisit/getPosesionesVisit()*100;
+		return (double) asVisit / getPosesionesVisit() * 100;
 	}
-	
+
+	/**
+	 * Método que devuelve el porcentaje de pérdidas del equipo local
+	 * 
+	 * @return
+	 */
 	public double pctgPerLocal() {
-		return (double)bpLocal/getPosesionesLocal()*100;
+		return (double) bpLocal / getPosesionesLocal() * 100;
 	}
-	
+
+	/**
+	 * Método que devuelve el porcentaje de pérdidas del equipo visitante
+	 * 
+	 * @return
+	 */
 	public double pctgPerVisit() {
-		return (double)bpVisit/getPosesionesVisit()*100;
+		return (double) bpVisit / getPosesionesVisit() * 100;
 	}
-	
+
+	/**
+	 * Método que devuelve si gana el equipo local
+	 * 
+	 * @return
+	 */
 	public boolean ganaLocal() {
-		return ptoLocal>ptoVisit;
+		return ptoLocal > ptoVisit;
 	}
-	
+
+	/**
+	 * Método que devuelve si gana el equipo visitante
+	 * 
+	 * @return
+	 */
 	public boolean ganaVisit() {
-		return ptoLocal<ptoVisit;
+		return ptoLocal < ptoVisit;
 	}
-	
+
+	/**
+	 * Método que devuelve el nombre del máximo anotador del partido
+	 * 
+	 * @return
+	 */
 	public String getMaxAnotador() {
-		int max=0;
-		String txt="", sep="";
+		int max = 0;
+		String txt = "", sep = "";
 		for (int i = 0; i < lineapartidos.size(); i++) {
-			if(lineapartidos.get(i).getPuntos()>max) {
-				max=lineapartidos.get(i).getPuntos();
+			if (lineapartidos.get(i).getPuntos() > max) {
+				max = lineapartidos.get(i).getPuntos();
 			}
 		}
 		for (int i = 0; i < lineapartidos.size(); i++) {
-			if(lineapartidos.get(i).getPuntos()==max) {
-				txt+=sep+lineapartidos.get(i).getJugador().getNombre().split(",")[0]+" ("+lineapartidos.get(i).getPuntos()+")";
-				sep=", ";
+			if (lineapartidos.get(i).getPuntos() == max) {
+				txt += sep + lineapartidos.get(i).getJugador().getNombre().split(",")[0] + " ("
+						+ lineapartidos.get(i).getPuntos() + ")";
+				sep = ", ";
 			}
 		}
 		return txt;
 	}
-	
+	/**
+	 * Método que devuelve el nombre del máximo reboteador del partido
+	 * 
+	 * @return
+	 */
 	public String getMaxReboteador() {
-		int max=0;
-		String txt="", sep="";
+		int max = 0;
+		String txt = "", sep = "";
 		for (int i = 0; i < lineapartidos.size(); i++) {
-			if(lineapartidos.get(i).getRebotes()>max) {
-				max=lineapartidos.get(i).getRebotes();
+			if (lineapartidos.get(i).getRebotes() > max) {
+				max = lineapartidos.get(i).getRebotes();
 			}
 		}
 		for (int i = 0; i < lineapartidos.size(); i++) {
-			if(lineapartidos.get(i).getRebotes()==max) {
-				txt+=sep+lineapartidos.get(i).getJugador().getNombre().split(",")[0]+" ("+lineapartidos.get(i).getRebotes()+")";
-				sep=", ";
+			if (lineapartidos.get(i).getRebotes() == max) {
+				txt += sep + lineapartidos.get(i).getJugador().getNombre().split(",")[0] + " ("
+						+ lineapartidos.get(i).getRebotes() + ")";
+				sep = ", ";
 			}
 		}
 		return txt;
 	}
-	
+	/**
+	 * Método que devuelve el nombre del máximo asistente del partido
+	 * 
+	 * @return
+	 */
 	public String getMaxAsistente() {
-		int max=0;
-		String txt="", sep="";
+		int max = 0;
+		String txt = "", sep = "";
 		for (int i = 0; i < lineapartidos.size(); i++) {
-			if(lineapartidos.get(i).getAsist()>max) {
-				max=lineapartidos.get(i).getAsist();
+			if (lineapartidos.get(i).getAsist() > max) {
+				max = lineapartidos.get(i).getAsist();
 			}
 		}
 		for (int i = 0; i < lineapartidos.size(); i++) {
-			if(lineapartidos.get(i).getAsist()==max) {
-				txt+=sep+lineapartidos.get(i).getJugador().getNombre().split(",")[0]+" ("+lineapartidos.get(i).getAsist()+")";
-				sep=", ";
+			if (lineapartidos.get(i).getAsist() == max) {
+				txt += sep + lineapartidos.get(i).getJugador().getNombre().split(",")[0] + " ("
+						+ lineapartidos.get(i).getAsist() + ")";
+				sep = ", ";
 			}
 		}
 		return txt;
 	}
-	
+	/**
+	 * Método que devuelve el nombre del más valorado del partido
+	 * 
+	 * @return
+	 */
 	public String getMaxVal() {
-		int max=0;
-		String txt="", sep="";
+		int max = 0;
+		String txt = "", sep = "";
 		for (int i = 0; i < lineapartidos.size(); i++) {
-			if(lineapartidos.get(i).getVal()>max) {
-				max=lineapartidos.get(i).getVal();
+			if (lineapartidos.get(i).getVal() > max) {
+				max = lineapartidos.get(i).getVal();
 			}
 		}
 		for (int i = 0; i < lineapartidos.size(); i++) {
-			if(lineapartidos.get(i).getVal()==max) {
-				txt+=sep+lineapartidos.get(i).getJugador().getNombre().split(",")[0]+" ("+lineapartidos.get(i).getVal()+")";
-				sep=", ";
+			if (lineapartidos.get(i).getVal() == max) {
+				txt += sep + lineapartidos.get(i).getJugador().getNombre().split(",")[0] + " ("
+						+ lineapartidos.get(i).getVal() + ")";
+				sep = ", ";
 			}
 		}
 		return txt;
 	}
-	
+	/**
+	 * Método que devuelve el nombre del jugador con mejor +/-del partido
+	 * 
+	 * @return
+	 */
 	public String getMaxMasMenos() {
-		int max=0;
-		String txt="", sep="";
+		int max = 0;
+		String txt = "", sep = "";
 		for (int i = 0; i < lineapartidos.size(); i++) {
-			if(lineapartidos.get(i).getMasMenos()>max) {
-				max=lineapartidos.get(i).getMasMenos();
+			if (lineapartidos.get(i).getMasMenos() > max) {
+				max = lineapartidos.get(i).getMasMenos();
 			}
 		}
 		for (int i = 0; i < lineapartidos.size(); i++) {
-			if(lineapartidos.get(i).getMasMenos()==max) {
-				txt+=sep+lineapartidos.get(i).getJugador().getNombre().split(",")[0]+" ("+lineapartidos.get(i).getMasMenos()+")";
-				sep=", ";
+			if (lineapartidos.get(i).getMasMenos() == max) {
+				txt += sep + lineapartidos.get(i).getJugador().getNombre().split(",")[0] + " ("
+						+ lineapartidos.get(i).getMasMenos() + ")";
+				sep = ", ";
 			}
 		}
 		return txt;
-	}	
-	
+	}
+	/**
+	 * Método que devuelve la los puntos del equipo local menos los del visitante
+	 * 
+	 * @return
+	 */
 	public int getValorResultado() {
-		return ptoLocal-ptoVisit;
+		return ptoLocal - ptoVisit;
 	}
 }

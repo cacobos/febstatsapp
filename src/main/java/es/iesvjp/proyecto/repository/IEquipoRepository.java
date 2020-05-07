@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 
 import es.iesvjp.proyecto.model.Equipo;
 
+/**
+ * Clase repositorio de objetos de la clase Equipo
+ * @author Carlos Cobos
+ *
+ */
 @Repository("equipoRepository")
 public interface IEquipoRepository extends JpaRepository<Equipo, Long> {
 	public Equipo findById(long id);

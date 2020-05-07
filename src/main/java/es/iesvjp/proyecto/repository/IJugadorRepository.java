@@ -7,7 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import es.iesvjp.proyecto.model.Jugador;
-
+/**
+ * Clase repositorio de objetos Jugador
+ * @author Carlos Cobos
+ *
+ */
 @Repository("jugadorRepository")
 public interface IJugadorRepository extends JpaRepository<Jugador, Long> {
 	public Jugador findById(long id);
